@@ -2,6 +2,8 @@ import 'package:cdp_app/Company/ui/screens/SignInScreen/signin_screen.dart';
 import 'package:cdp_app/Company/ui/screens/WelcomeScreen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'Company/ui/screens/SignUpScreen/signup_screen.dart';
+
 void main() {
   runApp(MyApp());
 }

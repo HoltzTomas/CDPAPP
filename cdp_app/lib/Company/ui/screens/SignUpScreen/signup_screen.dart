@@ -1,21 +1,20 @@
-import 'package:cdp_app/Company/ui/screens/SignInScreen/widgets/change_password_text.dart';
-import 'package:cdp_app/Company/ui/screens/SignInScreen/widgets/signup_text.dart';
+import 'package:cdp_app/Company/ui/screens/SignUpScreen/widgets/signin_text.dart';
+import 'package:cdp_app/Company/ui/screens/SignUpScreen/widgets/signup_screen_title.dart';
 import 'package:cdp_app/Company/ui/widgets/app_logo.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_button.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_input_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/signin_screen_title.dart';
 
-class SignInScreen extends StatefulWidget {
-  SignInScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -33,8 +32,13 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 AppLogo(),
                 const SizedBox(height: defaultPadding),
-                const SignInScreenTitle(),
+                const SignUpScreenTitle(),
                 const SizedBox(height: defaultPadding),
+                RoundedInputField(
+                  hintText: "Nombre de la empresa",
+                  icon: Icons.email,
+                  controller: emailController,
+                ),
                 RoundedInputField(
                   hintText: "Email",
                   icon: Icons.email,
@@ -47,8 +51,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 RoundedButton(text: "INICIAR SESION", press: () {}),
                 const Divider(thickness: 3),
-                const SignUpText(),
-                const ChangePasswordText(),
+                const SignInText(),
               ],
             ),
           ),
