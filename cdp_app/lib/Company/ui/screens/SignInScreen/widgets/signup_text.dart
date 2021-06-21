@@ -17,7 +17,7 @@ class SignUpText extends StatelessWidget {
             Navigator.push(
             context,
             PageTransition(
-              child: SignUpScreen(),
+              child: const SignUpScreen(),
               type: PageTransitionType.rightToLeft,
             ),
           );

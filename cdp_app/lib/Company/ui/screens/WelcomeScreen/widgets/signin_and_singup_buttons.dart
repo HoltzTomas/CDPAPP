@@ -10,33 +10,35 @@ class SignInAndSignUpButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      RoundedButton(
-        text: "INICIAR SESION",
-        press: () {
-          Navigator.push(
-            context,
-            PageTransition(
-              child: SignInScreen(),
-              type: PageTransitionType.rightToLeft,
-            ),
-          );
-        },
-      ),
-      RoundedButton(
-        text: "REGISTRARSE",
-        press: () {
-          Navigator.push(
-            context,
-            PageTransition(
-              child: SignUpScreen(),
-              type: PageTransitionType.rightToLeft,
-            ),
-          );
-        },
-        textColor: primaryColor,
-        color: whiteColor,
-      ),
-    ]);
+    return Column(
+      children: [
+        RoundedButton(
+          text: "INICIAR SESION",
+          press: () {
+            Navigator.push(
+              context,
+              PageTransition(
+                child: const SignInScreen(),
+                type: PageTransitionType.rightToLeft,
+              ),
+            );
+          },
+        ),
+        RoundedButton(
+          text: "REGISTRARSE",
+          press: () {
+            Navigator.push(
+              context,
+              PageTransition(
+                child: const SignUpScreen(),
+                type: PageTransitionType.rightToLeft,
+              ),
+            );
+          },
+          textColor: primaryColor,
+          color: whiteColor,
+        ),
+      ],
+    );
   }
 }

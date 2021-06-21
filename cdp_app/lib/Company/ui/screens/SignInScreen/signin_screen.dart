@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'widgets/signin_screen_title.dart';
 
 class SignInScreen extends StatefulWidget {
-  SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -33,6 +33,7 @@ class _SignInScreenState extends State<SignInScreen> {
             width: double.infinity,
             child: Column(
               children: [
+                const 
                 AppLogo(),
                 const SizedBox(height: defaultPadding),
                 const SignInScreenTitle(),

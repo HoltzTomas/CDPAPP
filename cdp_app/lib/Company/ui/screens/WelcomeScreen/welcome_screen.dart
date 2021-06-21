@@ -3,7 +3,6 @@ import 'package:cdp_app/Company/ui/screens/WelcomeScreen/widgets/welcome_screent
 import 'package:cdp_app/Company/ui/widgets/app_logo.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -18,14 +17,14 @@ class WelcomeScreen extends StatelessWidget {
           height: size.height,
           width: double.infinity,
           child: Column(
-            children: [
-              const Spacer(),
-              const AppLogo(),
-              const SizedBox(height: defaultPadding),
-              const WelcomeScreenTitle(),
-              const SizedBox(height: defaultPadding),
-              const SignInAndSignUpButtons(),
-              const Spacer(),
+            children: const [
+              Spacer(),
+              AppLogo(),
+              SizedBox(height: defaultPadding),
+              WelcomeScreenTitle(),
+              SizedBox(height: defaultPadding),
+              SignInAndSignUpButtons(),
+              Spacer(),
             ],
           ),
         ),

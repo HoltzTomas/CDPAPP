@@ -17,7 +17,7 @@ class SignInText extends StatelessWidget {
             Navigator.push(
             context,
             PageTransition(
-              child: SignInScreen(),
+              child: const SignInScreen(),
               type: PageTransitionType.bottomToTop,
             ),
           );
