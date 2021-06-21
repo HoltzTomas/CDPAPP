@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "988488590155",
+    "project_id": "cdpapp-0",
+    "storage_bucket": "cdpapp-0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988488590155:android:56d087f3217c80d22b3ece",
+        "android_client_info": {
+          "package_name": "com.cdpapp.cdpapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988488590155-oqoroaki6jvm774ghdlcppvfb9u2f3mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaEDWXscjG4Nv4t_LJRTcTgJXycEx9drI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988488590155-oqoroaki6jvm774ghdlcppvfb9u2f3mh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

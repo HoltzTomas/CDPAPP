@@ -1,4 +1,4 @@
-package com.example.cdp_app
+package com.cdpapp.cdpapp
 
 import io.flutter.embedding.android.FlutterActivity
 
