@@ -1,3 +1,4 @@
+import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Company/ui/screens/SignUpScreen/widgets/signin_text.dart';
 import 'package:cdp_app/Company/ui/screens/SignUpScreen/widgets/signup_screen_title.dart';
 import 'package:cdp_app/Company/ui/widgets/app_logo.dart';
@@ -5,7 +6,6 @@ import 'package:cdp_app/Company/ui/widgets/rounded_button.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_input_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
-
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -17,9 +17,11 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final AuthRepository authRepository = AuthRepository();
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -30,14 +32,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             width: double.infinity,
             child: Column(
               children: [
-                AppLogo(),
+                const AppLogo(),
                 const SizedBox(height: defaultPadding),
                 const SignUpScreenTitle(),
                 const SizedBox(height: defaultPadding),
                 RoundedInputField(
                   hintText: "Nombre de la empresa",
                   icon: Icons.email,
-                  controller: emailController,
+                  controller: nameController,
                 ),
                 RoundedInputField(
                   hintText: "Email",
@@ -49,7 +51,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   icon: Icons.lock,
                   controller: passwordController,
                 ),
-                RoundedButton(text: "INICIAR SESION", press: () {}),
+                RoundedButton(
+                  text: "INICIAR SESION",
+                  press: () {
+                    authRepository.signUpWithEmailAndPassword(
+                      context: context,
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                      name: nameController.text.trim()
+                    );
+                  },
+                ),
                 const Divider(thickness: 3),
                 const SignInText(),
               ],

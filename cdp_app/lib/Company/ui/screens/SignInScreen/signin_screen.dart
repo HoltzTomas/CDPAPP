@@ -1,3 +1,4 @@
+import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Company/ui/screens/SignInScreen/widgets/change_password_text.dart';
 import 'package:cdp_app/Company/ui/screens/SignInScreen/widgets/signup_text.dart';
 import 'package:cdp_app/Company/ui/widgets/app_logo.dart';
@@ -21,6 +22,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthRepository authRepository = AuthRepository();
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -45,7 +47,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   icon: Icons.lock,
                   controller: passwordController,
                 ),
-                RoundedButton(text: "INICIAR SESION", press: () {}),
+                RoundedButton(
+                  text: "INICIAR SESION",
+                  press: () {
+                    authRepository.signInWithEmailAndPassword(
+                      context: context,
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                    );
+                  },
+                ),
                 const Divider(thickness: 3),
                 const SignUpText(),
                 const ChangePasswordText(),
