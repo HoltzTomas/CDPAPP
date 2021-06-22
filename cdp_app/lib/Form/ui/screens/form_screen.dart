@@ -1,3 +1,4 @@
+import 'package:cdp_app/Form/ui/screens/TransferDataScreen/transfer_data_screen.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class FormScreen extends StatelessWidget {
       const Tab(text: "D.J"),
     ];
     final tabsPages = [
-      Container(),
+      const TransferDataScreen(),
       Container(),
       Container(),
       Container(),

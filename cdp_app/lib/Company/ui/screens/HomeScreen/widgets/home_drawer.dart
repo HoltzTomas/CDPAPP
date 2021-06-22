@@ -1,4 +1,5 @@
 import 'package:cdp_app/Company/repository/auth_repository.dart';
+import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,13 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.upload_file),
             title: const Text("Importar cartas de porte"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const FormScreen(),
+                      type: PageTransitionType.rightToLeft));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.logout),
