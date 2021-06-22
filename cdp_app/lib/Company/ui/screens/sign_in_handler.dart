@@ -17,16 +17,7 @@ class SignInHandler extends ConsumerWidget {
         if (!snapshot.hasData || snapshot.hasError) {
           return const WelcomeScreen();
         } else {
-          return Scaffold(
-            body: Center(
-              child: TextButton(
-                onPressed: () {
-                  authRepository.signOut();
-                },
-                child: const VerifyEmailHandler(),
-              ),
-            ),
-          );
+          return const VerifyEmailHandler();
         }
       },
     );

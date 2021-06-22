@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cdp_app/Company/repository/auth_repository.dart';
+import 'package:cdp_app/Company/ui/screens/HomeScreen/home_screen.dart';
 import 'package:cdp_app/Company/ui/screens/VerifyEmailScreen/verify_email_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -29,16 +30,7 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
       homeWidget = const VerifyEmailScreen();
       user.sendEmailVerification();
     } else {
-      homeWidget = Scaffold(
-          body: Center(
-            child: TextButton(
-              onPressed: () {
-                authRepository.signOut();
-              },
-              child: const VerifyEmailHandler(),
-            ),
-          ),
-        );
+      homeWidget = HomeScreen();
     }
     timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       checkEmailVerified();
@@ -60,20 +52,12 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
   Future<void> checkEmailVerified() async {
     final AuthRepository authRepository = AuthRepository();
     user = auth.currentUser!;
+    
     await user.reload();
     if (user.emailVerified) {
       timer.cancel();
       setState(() {
-        homeWidget = Scaffold(
-          body: Center(
-            child: TextButton(
-              onPressed: () {
-                authRepository.signOut();
-              },
-              child: const VerifyEmailHandler(),
-            ),
-          ),
-        );
+        homeWidget = HomeScreen();
       });
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Email verificado con exito')));

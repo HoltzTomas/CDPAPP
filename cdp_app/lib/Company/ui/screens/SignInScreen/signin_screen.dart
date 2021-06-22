@@ -33,8 +33,7 @@ class _SignInScreenState extends State<SignInScreen> {
             width: double.infinity,
             child: Column(
               children: [
-                const 
-                AppLogo(),
+                const AppLogo(),
                 const SizedBox(height: defaultPadding),
                 const SignInScreenTitle(),
                 const SizedBox(height: defaultPadding),
@@ -51,11 +50,17 @@ class _SignInScreenState extends State<SignInScreen> {
                 RoundedButton(
                   text: "INICIAR SESION",
                   press: () {
-                    authRepository.signInWithEmailAndPassword(
-                      context: context,
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim(),
-                    );
+                    if (emailController.text.trim().isNotEmpty &&
+                        passwordController.text.trim().isNotEmpty) {
+                      authRepository.signInWithEmailAndPassword(
+                        context: context,
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Completa todos los campos')));
+                    }
                   },
                 ),
                 const Divider(thickness: 3),

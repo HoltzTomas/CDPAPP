@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseAuthAPI {
-
   ///SignUp a new user using Firebase Email Authentication
   Future<User?> signUpWithEmailAndPassword(
       {required BuildContext context,
@@ -17,6 +16,7 @@ class FirebaseAuthAPI {
         //final CompanyBloc companyBloc = BlocProvider.of<CompanyBloc>(context);
         final UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
+        userCredential.user!.updateDisplayName(name);
         //companyBloc.createdCompanyCollection(email: email, name: name);
         Navigator.pop(context);
         return userCredential.user;
