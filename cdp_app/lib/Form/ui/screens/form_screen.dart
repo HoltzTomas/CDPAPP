@@ -1,5 +1,6 @@
 import 'package:cdp_app/Form/ui/screens/DestinationScreen/destination_screen.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/grain_data_screen.dart';
+import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/sworn_declaration_screen.dart';
 import 'package:cdp_app/Form/ui/screens/TransferDataScreen/transfer_data_screen.dart';
 import 'package:cdp_app/Form/ui/screens/TransportDataScreen/transport_data_screen.dart';
 import 'package:cdp_app/constants.dart';
@@ -24,7 +25,7 @@ class FormScreen extends StatelessWidget {
       const GrainDataScreen(),
       const DestinationScreen(),
       const TransportDataScreen(),
-      Container(),
+      const SwornDeclarationScreen(),
     ];
     return DefaultTabController(
       length: tabs.length,
