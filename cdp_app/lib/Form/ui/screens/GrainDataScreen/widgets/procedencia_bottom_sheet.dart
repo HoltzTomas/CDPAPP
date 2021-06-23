@@ -1,22 +1,25 @@
-import 'package:cdp_app/Form/model/transfer_data.dart';
-import 'package:cdp_app/Form/ui/screens/TransferDataScreen/widgets/add_transfer_data_dialog.dart';
+import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
+import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/procedencia_mercaderia_alert_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TransferDataBottomSheet extends StatelessWidget {
+class ProcedenciaBottomSheet extends StatelessWidget {
   final String? tipo;
   final String? text;
-  final StateProvider<TransferData?>? providerToChange;
+  final StateProvider<ProcedenciaMercaderia?>? providerToChange;
 
-  const TransferDataBottomSheet(
+  ///"Procedencia de la mercaderia" is an special fact [GrainDataForm].
+  ///
+  ///So, we use this instead of [GrainDataBottomSheet]
+  const ProcedenciaBottomSheet(
       {Key? key,
       @required this.text,
       @required this.tipo,
       this.providerToChange})
       : super(key: key);
 
-  Widget addTransferDataButton(BuildContext context) => Column(
+  Widget addProcedenciaButton(BuildContext context) => Column(
         children: [
           const SizedBox(
             height: defaultPadding,
@@ -25,17 +28,14 @@ class TransferDataBottomSheet extends StatelessWidget {
             width: double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
             decoration: const BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-            ),
+                color: primaryColor,
+                borderRadius: BorderRadius.all(Radius.circular(12))),
             child: TextButton(
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return AddTransferDataDialog(
+                    return ProcedenciaMercaderiaAlertDialog(
                       tipo: tipo,
                       text: text,
                     );
@@ -55,7 +55,7 @@ class TransferDataBottomSheet extends StatelessWidget {
         children: [],
       );
 
-  Widget title() => Container(
+  Widget title(BuildContext context) => Container(
         alignment: Alignment.center,
         child: Text(
           text!,
@@ -71,16 +71,18 @@ class TransferDataBottomSheet extends StatelessWidget {
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+        ),
         border: Border.all(),
       ),
       child: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: defaultPadding / 2),
-            title(),
+            title(context),
             dataList(),
-            addTransferDataButton(context)
+            addProcedenciaButton(context),
           ],
         ),
       ),
