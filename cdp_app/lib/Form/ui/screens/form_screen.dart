@@ -1,5 +1,5 @@
+import 'package:cdp_app/Form/ui/screens/DestinationScreen/destination_screen.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/grain_data_screen.dart';
-import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_form.dart';
 import 'package:cdp_app/Form/ui/screens/TransferDataScreen/transfer_data_screen.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class FormScreen extends StatelessWidget {
     final tabsPages = [
       const TransferDataScreen(),
       const GrainDataScreen(),
-      Container(),
+      const DestinationScreen(),
       Container(),
       Container(),
     ];
