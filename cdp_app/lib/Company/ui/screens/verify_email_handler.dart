@@ -26,15 +26,16 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
   void initState() {
     final AuthRepository authRepository = AuthRepository();
     user = auth.currentUser!;
+    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      checkEmailVerified();
+    });
     if (!user.emailVerified) {
       homeWidget = const VerifyEmailScreen();
       user.sendEmailVerification();
     } else {
+      timer.cancel();
       homeWidget = HomeScreen();
     }
-    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      checkEmailVerified();
-    });
     super.initState();
   }
 

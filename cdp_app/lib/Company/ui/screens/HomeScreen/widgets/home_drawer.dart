@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:cdp_app/Company/repository/auth_repository.dart';
+import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/upload_pdffile_dialog.dart';
 import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/constants.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,13 +31,19 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.upload_file),
-            title: const Text("Importar cartas de porte"),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      child: const FormScreen(),
-                      type: PageTransitionType.rightToLeft));
+            title: const Text("Subir cartas de porte"),
+            onTap: () async {
+              final FilePickerResult? result =
+                  await FilePicker.platform.pickFiles();
+              if (result != null) {
+                final File file = File(result.files.single.path!);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return UploadPdfFileDialog(userFile: file);
+                  },
+                );
+              }
             },
           ),
           ListTile(
