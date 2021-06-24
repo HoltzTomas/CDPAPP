@@ -1,4 +1,5 @@
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/home_drawer.dart';
+import 'package:cdp_app/PDF/ui/screens/PdfsScreen/pdfs_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       drawer: const HomeDrawer(),
-      body: Container(),
+      body: const PdfsScreen(),
     );
   }
 }
