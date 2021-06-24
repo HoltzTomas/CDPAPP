@@ -26,8 +26,8 @@ class PdfFirebaseStorageAPI {
     final PdfFile file = PdfFile(
       pdfUrl: "${auth.currentUser!.uid}/$fileName",
       pdfName: fileName,
-      disponibles: fileNumOfPages / 4,
-      emitidas: 0,
+      availableCDPs: fileNumOfPages / 4,
+      issuedCDPs: 0,
       time: Timestamp.now(),
     );
 

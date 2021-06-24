@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PdfFile{
@@ -12,14 +11,14 @@ class PdfFile{
   PdfFile({
     required this.pdfUrl,
     required this.pdfName,
-    required this.disponibles,
-    required this.emitidas,
+    required this.availableCDPs,
+    required this.issuedCDPs,
     required this.time,
   });
 
   final String pdfUrl;
   final String pdfName;
-  final double disponibles;
-  final double emitidas;
+  final double availableCDPs;
+  final double issuedCDPs;
   final Timestamp time;
 }

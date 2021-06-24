@@ -6,7 +6,7 @@ class GrainData {
   bool? trueOrFalse;
 
   GrainData({
-    @required this.tipo,
+     this.tipo,
      this.text,
      this.trueOrFalse,
   });

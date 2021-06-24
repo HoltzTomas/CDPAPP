@@ -1,3 +1,4 @@
+import 'package:cdp_app/CDP/repository/cdp_cloud_repository.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/emitir_cdp_fab.dart';
 import 'package:cdp_app/constants.dart';
@@ -12,6 +13,7 @@ class PdfScreen extends StatelessWidget {
   final PdfFile userFile;
 
   Widget emitedCdpsList() {
+    final CdpCloudRepository cdpCloudRepository = CdpCloudRepository();
     final User? currentUser = FirebaseAuth.instance.currentUser;
     return StreamBuilder(
       stream: FirebaseFirestore.instance
@@ -29,14 +31,19 @@ class PdfScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:
           case ConnectionState.done:
-            return Column(children: []);
+            return Column(
+              children: cdpCloudRepository.buildCDPs(
+                list: snapshot.data!.docs,
+                userFile: userFile,
+              ),
+            );
         }
       },
     );
   }
 
   Widget avaiblesText() => Text(
-        "Disponibles: ${userFile.disponibles.round()}",
+        "Disponibles: ${userFile.availableCDPs.round()}",
         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
       );
 

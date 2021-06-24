@@ -36,12 +36,12 @@ class _UploadPdfFileDialogState extends State<UploadPdfFileDialog> {
                   isLoading = false;
                 },
               );
+              Navigator.pop(context);
             },
           );
         },
-        child: isLoading
-            ? const CircularProgressIndicator()
-            : const Text("Subir"),
+        child:
+            isLoading ? const CircularProgressIndicator() : const Text("Subir"),
       );
 
   @override

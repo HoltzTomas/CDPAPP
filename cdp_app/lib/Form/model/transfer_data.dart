@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class TransferData {
   String? tipo;
   String? nombre;
@@ -8,9 +6,9 @@ class TransferData {
   String? acoplado;
 
   TransferData({
-    @required this.tipo,
-    @required this.nombre,
-    @required this.cuit,
+    this.tipo,
+    this.nombre,
+    this.cuit,
     this.camion,
     this.acoplado,
   });

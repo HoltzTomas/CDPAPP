@@ -17,8 +17,8 @@ class PdfFirebaseCloudApi {
       {
         'pdfUrl': "${currentUser!.uid}/${file.pdfName}",
         'pdfName': file.pdfName,
-        'disponibles': file.disponibles,
-        'emitidas': file.emitidas,
+        'availableCDPs': file.availableCDPs,
+        'issuedCDPs': file.issuedCDPs,
         'time': file.time,
       },
     );
@@ -33,8 +33,8 @@ class PdfFirebaseCloudApi {
           userFile: PdfFile(
             pdfUrl: pdf.get('pdfUrl') as String,
             pdfName: pdf.get('pdfName') as String,
-            disponibles: pdf.get('disponibles') as double,
-            emitidas: pdf.get('emitidas') as double,
+            availableCDPs: pdf.get('availableCDPs') as double,
+            issuedCDPs: pdf.get('issuedCDPs') as double,
             time: pdf.get('time') as Timestamp,
           ),
         ),
