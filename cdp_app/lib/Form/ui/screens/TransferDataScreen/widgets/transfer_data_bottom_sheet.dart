@@ -1,6 +1,9 @@
 import 'package:cdp_app/Form/model/transfer_data.dart';
+import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/Form/ui/screens/TransferDataScreen/widgets/add_transfer_data_dialog.dart';
 import 'package:cdp_app/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -51,9 +54,32 @@ class TransferDataBottomSheet extends StatelessWidget {
         ],
       );
 
-  Widget dataList() => Column(
-        children: [],
-      );
+  Widget dataList() {
+    final FormCloudRepository formCloudRepository = FormCloudRepository();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection(auth.currentUser!.uid)
+          .doc('userData')
+          .collection('destination')
+          .snapshots(),
+      builder: (BuildContext context,
+          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return const Center(child: CircularProgressIndicator());
+          case ConnectionState.active:
+          case ConnectionState.done:
+            return Column(
+              children: formCloudRepository.buildTransferData(
+                  list: snapshot.data!.docs,
+                  providerToChange: providerToChange),
+            );
+        }
+      },
+    );
+  }
 
   Widget title() => Container(
         alignment: Alignment.center,
