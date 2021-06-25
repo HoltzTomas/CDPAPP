@@ -61,7 +61,7 @@ class TransferDataBottomSheet extends StatelessWidget {
       stream: FirebaseFirestore.instance
           .collection(auth.currentUser!.uid)
           .doc('userData')
-          .collection('destination')
+          .collection('transferData')
           .snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

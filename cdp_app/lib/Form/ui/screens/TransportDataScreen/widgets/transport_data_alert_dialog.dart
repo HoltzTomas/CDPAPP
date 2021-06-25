@@ -1,3 +1,6 @@
+import 'package:cdp_app/Form/model/transfer_data.dart';
+import 'package:cdp_app/Form/model/transport_data.dart';
+import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +17,7 @@ class TransportDataAlertDialog extends StatefulWidget {
 }
 
 class _AddAlertDialogState extends State<TransportDataAlertDialog> {
-  String nameToUpload = "";
+  String textToUpload = "";
 
   Widget addDataButton(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width * 0.25,
@@ -23,7 +26,17 @@ class _AddAlertDialogState extends State<TransportDataAlertDialog> {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            final FormCloudRepository formCloudRepository =
+                FormCloudRepository();
+            formCloudRepository.uploadTransportData(
+              dataToUpload: TransportData(
+                text: textToUpload,
+                tipo: widget.tipo
+              ),
+              context: context,
+            );
+          },
           child: const Text(
             "Agregar",
             style: TextStyle(color: darkColor),
@@ -33,7 +46,7 @@ class _AddAlertDialogState extends State<TransportDataAlertDialog> {
 
   Widget textField() => TextField(
         onChanged: (value) {
-          nameToUpload = value;
+          textToUpload = value;
         },
         decoration: const InputDecoration(hintText: "Nombre"),
       );

@@ -1,3 +1,5 @@
+import 'package:cdp_app/Form/model/transfer_data.dart';
+import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class AddTransferDataDialog extends StatefulWidget {
 }
 
 class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
-  String nameToUpload = "";
+  String nombreToUpload = "";
   String cuitToUpload = "";
   String camionToUpload = "";
   String acopladoToUpload = "";
@@ -24,7 +26,7 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
       children: [
         TextField(
           onChanged: (value) {
-            nameToUpload = value;
+            nombreToUpload = value;
           },
           decoration: const InputDecoration(hintText: "Nombre"),
         ),
@@ -65,7 +67,20 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
           ),
         ),
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            final FormCloudRepository formCloudRepository =
+                FormCloudRepository();
+            formCloudRepository.uploadTransferData(
+              dataToUpload: TransferData(
+                nombre: nombreToUpload,
+                cuit: cuitToUpload,
+                camion: camionToUpload,
+                acoplado: acopladoToUpload,
+                tipo: widget.tipo
+              ),
+              context: context,
+            );
+          },
           child: const Text(
             "Agregar",
             style: TextStyle(color: darkColor),
@@ -88,6 +103,7 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
           children: [
             textFields(),
             const SizedBox(height: defaultPadding),
+            addDataTextButton()
           ],
         ),
       ),

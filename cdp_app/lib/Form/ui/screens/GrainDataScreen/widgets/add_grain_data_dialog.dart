@@ -1,3 +1,5 @@
+import 'package:cdp_app/Form/model/grain_data.dart';
+import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -36,16 +38,6 @@ class _AddGrainDataDialogState extends State<AddGrainDataDialog> {
               decoration: const InputDecoration(hintText: "Nombre"),
             ),
             const SizedBox(height: defaultPadding / 2),
-            if (widget.tipo == "chofer")
-              // TODO: Use a true or false field
-              TextField(
-                onChanged: (value) {
-                  //TODO:
-                  //trueOrFalseToUpload = value;
-                },
-                decoration: const InputDecoration(hintText: "Acoplado"),
-              ),
-            const SizedBox(height: defaultPadding),
             Container(
               width: MediaQuery.of(context).size.width * 0.25,
               decoration: const BoxDecoration(
@@ -53,7 +45,17 @@ class _AddGrainDataDialogState extends State<AddGrainDataDialog> {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  final FormCloudRepository formCloudRepository =
+                      FormCloudRepository();
+                  formCloudRepository.uploadGrainData(
+                    dataToUpload: GrainData(
+                        text: textToUpload,
+                        tipo: widget.tipo,
+                        trueOrFalse: trueOrFalseToUpload),
+                    context: context,
+                  );
+                },
                 child: const Text(
                   "Agregar",
                   style: TextStyle(color: darkColor),

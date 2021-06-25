@@ -1,3 +1,5 @@
+import 'package:cdp_app/Form/model/destination.dart';
+import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +53,18 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            final FormCloudRepository formCloudRepository =
+                FormCloudRepository();
+            formCloudRepository.uploadDestination(
+              dataToUpload: Destination(
+                direccion: direccionToUpload,
+                provincia: provinciaToUpload,
+                localidad: localidadToUpload,
+              ),
+              context: context,
+            );
+          },
           child: const Text(
             "Agregar",
             style: TextStyle(color: darkColor),
