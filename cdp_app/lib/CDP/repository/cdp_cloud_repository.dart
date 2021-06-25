@@ -13,10 +13,17 @@ class CdpCloudRepository {
           required CDP cdpData,
           required String cdpName,
           required BuildContext context}) =>
-      cdpFirebaseApi.emitCDP(file: file, cdpData: cdpData, cdpName: cdpName, context: context);
+      cdpFirebaseApi.emitCDP(
+          file: file, cdpData: cdpData, cdpName: cdpName, context: context);
 
   List<IssuedCdpListItem> buildCDPs(
           {required List<DocumentSnapshot<Map<String, dynamic>>> list,
           required PdfFile userFile}) =>
       cdpFirebaseApi.buildCDPs(list: list, userFile: userFile);
+
+  Future<void> editCDP(
+          {required PdfFile file,
+          required CDP cdpData,
+          required BuildContext context}) async =>
+      cdpFirebaseApi.editCDP(file: file, cdpData: cdpData, context: context);
 }

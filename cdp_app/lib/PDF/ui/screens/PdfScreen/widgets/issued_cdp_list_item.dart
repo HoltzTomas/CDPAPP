@@ -1,8 +1,14 @@
 import 'package:cdp_app/CDP/models/cdp.dart';
+import 'package:cdp_app/CDP/providers/cdp_providers.dart';
 import 'package:cdp_app/CDP/repository/cdp_api.dart';
+import 'package:cdp_app/CDP/repository/cdp_cloud_repository.dart';
+import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/sworn_declaration_screen.dart';
+import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:page_transition/page_transition.dart';
 
 class IssuedCdpListItem extends StatefulWidget {
   const IssuedCdpListItem({Key? key, required this.cdp, required this.userFile})
@@ -26,8 +32,9 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
       padding: const EdgeInsets.symmetric(
           horizontal: defaultPadding, vertical: defaultPadding / 4),
       decoration: BoxDecoration(
-          border: Border.all(color: primaryColor),
-          borderRadius: BorderRadius.circular(12)),
+        border: Border.all(color: primaryColor),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Row(
         children: [
           Text(
@@ -37,6 +44,22 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
                 decoration: TextDecoration.underline),
           ),
           const Spacer(),
+          IconButton(
+            onPressed: () {
+              context.read(isCdpBeingEdited).state = true;
+              context.read(cdpToEditsName).state = widget.cdp.cdpName;
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.rightToLeft,
+                  child: FormScreen(
+                    pdfFile: widget.userFile,
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(Icons.edit),
+          ),
           IconButton(
             onPressed: () {
               final CdpApi cdpApi = CdpApi();

@@ -217,4 +217,76 @@ class CdpFirebaseApi {
     }
     return listItems;
   }
+
+  Future<void> editCDP(
+      {required PdfFile file,
+      required CDP cdpData,
+      required BuildContext context}) async {
+    firebaseCloud
+        .collection(currentUser!.uid)
+        .doc('pdfs')
+        .collection('pdfFiles')
+        .doc(file.pdfName)
+        .collection('emitedCdps')
+        .doc(cdpData.cdpName)
+        .update(
+      {
+        'nombreTitularCartaDePorte': cdpData.titularCartaDePorte.nombre,
+        'cuitTitularCartaDePorte': cdpData.titularCartaDePorte.cuit,
+        'nombreIntermediario': cdpData.intermediario.nombre,
+        'cuitIntermediario': cdpData.intermediario.cuit,
+        'nombreRemitenteComercial': cdpData.remitenteComercial.nombre,
+        'cuitRemitenteComercial': cdpData.remitenteComercial.cuit,
+        'nombreCorredorComprador': cdpData.corredorComprador.nombre,
+        'cuitCorredorComprador': cdpData.corredorComprador.cuit,
+        'nombreMercadoATermino': cdpData.mercadoATermino.nombre,
+        'cuitMercadoATermino': cdpData.mercadoATermino.cuit,
+        'nombreCorredorVendedor': cdpData.corredorVendedor.nombre,
+        'cuitCorredorVendedor': cdpData.corredorVendedor.cuit,
+        'nombreRepresentanteEntregador': cdpData.representanteEntregador.nombre,
+        'cuitRepresentanteEntregador': cdpData.representanteEntregador.cuit,
+        'nombreDestinatario': cdpData.destinatario.nombre,
+        'cuitDestinatario': cdpData.destinatario.cuit,
+        'nombreDestino': cdpData.destino.nombre,
+        'cuitDestino': cdpData.destino.cuit,
+        'nombreIntermediarioDelFlete': cdpData.intermediarioDelFlete.nombre,
+        'cuitIntermediarioDelFlete': cdpData.intermediarioDelFlete.cuit,
+        'nombreTransportista': cdpData.transportista.nombre,
+        'cuitTransportista': cdpData.transportista.cuit,
+        'nombreChofer': cdpData.chofer.nombre,
+        'cuitChofer': cdpData.chofer.cuit,
+        'granoEspecie': cdpData.granoEspecie.text,
+        'tipo': cdpData.tipo.text,
+        'cosecha': cdpData.cosecha.text,
+        'contratoNro': cdpData.contratoNro.text,
+        'seraPesada': cdpData.seraPesada,
+        'kgsEstimados': cdpData.kgsEstimados,
+        'declaracionDeCalidad': cdpData.declaracionDeCalidad.text,
+        'pesoBruto': cdpData.pesoBruto.text,
+        'pesoTara': cdpData.pesoTara.text,
+        'pesoNeto': cdpData.pesoNeto.text,
+        'observaciones': cdpData.observaciones.text,
+        'direccionProcedenciaMercaderia':
+            cdpData.procedenciaMercaderia.direccion,
+        'provinciaProcedenciaMercaderia':
+            cdpData.procedenciaMercaderia.provincia,
+        'localidadProcedenciaMercaderia':
+            cdpData.procedenciaMercaderia.localidad,
+        'establecimientoProcedenciaMercaderia':
+            cdpData.procedenciaMercaderia.establecimiento,
+        'renspaProcedenciaMercaderia': cdpData.procedenciaMercaderia.renspa,
+        'direccionDestino': cdpData.destination.direccion,
+        'provinciaDestino': cdpData.destination.provincia,
+        'localidadDestino': cdpData.destination.localidad,
+        'camion': cdpData.camion,
+        'acoplado': cdpData.acoplado,
+        'kmARecorrer': cdpData.kmARecorrer,
+        'tarifaDeReferencia': cdpData.tarifaDeReferencia,
+        'tarifa': cdpData.tarifa,
+        'pagadorDelFlete': cdpData.pagadorDelFlete.text,
+        'aclaracion': cdpData.aclarcion,
+        'dni': cdpData.tarifa,
+      },
+    );
+  }
 }
