@@ -70,7 +70,14 @@ class FirebaseAuthAPI {
   }
 
   ///SignOut user using Firebase Authentication service
-  Future signOut() async {
-    await FirebaseAuth.instance.signOut();
+  Future signOut(BuildContext context) async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      await FirebaseAuth.instance.signOut();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No hay coneccion a internet')));
+    }
   }
 }

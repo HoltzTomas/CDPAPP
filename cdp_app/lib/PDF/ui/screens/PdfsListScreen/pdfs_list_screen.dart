@@ -11,21 +11,23 @@ class PdfsListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-  final PdfCloudRepository cloudRepository = PdfCloudRepository();
+    final PdfCloudRepository cloudRepository = PdfCloudRepository();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
       child: StreamBuilder(
         stream: watch(pdfsFirebaseCollectionProvider).state,
         builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot){
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
+              return const Center(child: Text("No hay coneccion a internet"));
             case ConnectionState.waiting:
               return const Center(child: CircularProgressIndicator());
             case ConnectionState.active:
             case ConnectionState.done:
               return ListView(
-                children: cloudRepository.buildUploadedFileItems(list: snapshot.data!.docs),
+                children: cloudRepository.buildUploadedFileItems(
+                    list: snapshot.data!.docs),
               );
           }
         },

@@ -14,7 +14,7 @@ class SignInText extends StatelessWidget {
         const Text("¿Ya tiene una cuenta?"),
         TextButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
             context,
             PageTransition(
               child: const SignInScreen(),

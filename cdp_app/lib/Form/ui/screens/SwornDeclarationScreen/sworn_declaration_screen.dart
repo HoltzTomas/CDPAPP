@@ -61,6 +61,7 @@ class _SwornDeclarationScreenState extends State<SwornDeclarationScreen> {
           onPressed: () {
             final CdpCloudRepository cdpCloudRepository = CdpCloudRepository();
             cdpCloudRepository.emitCDP(
+              context: context,
               file: widget.selectedFile,
               cdpName: fileNameController.text.trim(),
               cdpData: CDP(

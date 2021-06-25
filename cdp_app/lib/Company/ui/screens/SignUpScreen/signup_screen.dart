@@ -52,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: passwordController,
                 ),
                 RoundedButton(
-                  text: "INICIAR SESION",
+                  text: "REGISTRARSE",
                   press: () {
                     authRepository.signUpWithEmailAndPassword(
                       context: context,

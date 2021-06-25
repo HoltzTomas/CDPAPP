@@ -31,6 +31,6 @@ class PdfFirebaseStorageAPI {
       time: Timestamp.now(),
     );
 
-    cloudRepository.uploadPdfFile(file);
+    cloudRepository.uploadPdfFile(file, context);
   }
 }

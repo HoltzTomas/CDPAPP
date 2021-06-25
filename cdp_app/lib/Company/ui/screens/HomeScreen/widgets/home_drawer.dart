@@ -50,7 +50,7 @@ class HomeDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text("Cerrar Sesion"),
             onTap: () {
-              authRepository.signOut();
+              authRepository.signOut(context);
             },
           ),
         ],

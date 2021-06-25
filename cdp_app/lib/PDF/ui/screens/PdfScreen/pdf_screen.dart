@@ -27,6 +27,7 @@ class PdfScreen extends StatelessWidget {
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
+            return const Center(child: Text("No hay coneccion a internet"));
           case ConnectionState.waiting:
             return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:
