@@ -210,5 +210,4 @@ class CdpFirebaseApi {
     }
     return listItems;
   }
-
 }

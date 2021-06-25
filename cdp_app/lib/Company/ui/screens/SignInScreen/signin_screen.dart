@@ -19,6 +19,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +49,29 @@ class _SignInScreenState extends State<SignInScreen> {
                   controller: passwordController,
                 ),
                 RoundedButton(
-                  text: "INICIAR SESION",
+                  text: isLoading ? "CARGANDO..." : "INICIAR SESION" ,
                   press: () {
                     if (emailController.text.trim().isNotEmpty &&
                         passwordController.text.trim().isNotEmpty) {
-                      authRepository.signInWithEmailAndPassword(
+                      setState(
+                        () {
+                          isLoading = true;
+                        },
+                      );
+                      authRepository
+                          .signInWithEmailAndPassword(
                         context: context,
                         email: emailController.text.trim(),
                         password: passwordController.text.trim(),
+                      )
+                          .whenComplete(
+                        () {
+                          setState(
+                            () {
+                              isLoading = false;
+                            },
+                          );
+                        },
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

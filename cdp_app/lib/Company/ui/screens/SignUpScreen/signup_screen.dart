@@ -19,6 +19,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     final AuthRepository authRepository = AuthRepository();
@@ -52,14 +54,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: passwordController,
                 ),
                 RoundedButton(
-                  text: "REGISTRARSE",
+                  text: isLoading ? "REGISTRARSE" : "CARGANDO...",
                   press: () {
-                    authRepository.signUpWithEmailAndPassword(
-                      context: context,
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim(),
-                      name: nameController.text.trim()
-                    );
+                    if (emailController.text.trim().isNotEmpty &&
+                        passwordController.text.trim().isNotEmpty
+                        && nameController.text.trim().isNotEmpty) {
+                      setState(
+                        () {
+                          isLoading = true;
+                        },
+                      );
+                      authRepository
+                          .signUpWithEmailAndPassword(
+                        context: context,
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                        name: nameController.text.trim(),
+                      )
+                          .whenComplete(
+                        () {
+                          setState(
+                            () {
+                              isLoading = false;
+                            },
+                          );
+                        },
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Completa todos los campos')));
+                    }
                   },
                 ),
                 const Divider(thickness: 3),

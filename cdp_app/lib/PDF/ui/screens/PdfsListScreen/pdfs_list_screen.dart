@@ -15,9 +15,14 @@ class PdfsListScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
       child: StreamBuilder(
-        stream: watch(pdfsFirebaseCollectionProvider).state,
+        stream: FirebaseFirestore.instance
+            .collection(currentUser!.uid)
+            .doc('pdfs')
+            .collection('pdfFiles')
+            .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          print(currentUser);
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               return const Center(child: Text("No hay coneccion a internet"));

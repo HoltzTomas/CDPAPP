@@ -1,14 +1,22 @@
 import 'package:cdp_app/CDP/models/cdp.dart';
+import 'package:cdp_app/CDP/repository/cdp_api.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
-class IssuedCdpListItem extends StatelessWidget {
+class IssuedCdpListItem extends StatefulWidget {
   const IssuedCdpListItem({Key? key, required this.cdp, required this.userFile})
       : super(key: key);
 
   final CDP cdp;
   final PdfFile userFile;
+
+  @override
+  _IssuedCdpListItemState createState() => _IssuedCdpListItemState();
+}
+
+class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +31,7 @@ class IssuedCdpListItem extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            cdp.cdpName,
+            widget.cdp.cdpName,
             style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 decoration: TextDecoration.underline),
@@ -34,8 +42,21 @@ class IssuedCdpListItem extends StatelessWidget {
             icon: const Icon(Icons.edit),
           ),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.arrow_forward_ios),
+            onPressed: () {
+              final CdpApi cdpApi = CdpApi();
+              setState(() {
+                isLoading = true;
+              });
+              cdpApi
+                  .fillPdfFileWithCdpData(
+                      file: widget.userFile, cdp: widget.cdp)
+                  .whenComplete(() {
+                setState(() {
+                  isLoading = false;
+                });
+              });
+            },
+            icon: isLoading ? const CircularProgressIndicator() : const Icon(Icons.arrow_forward_ios),
           )
         ],
       ),
