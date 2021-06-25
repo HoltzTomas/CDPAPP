@@ -38,8 +38,12 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
           ),
           const Spacer(),
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.edit),
+            onPressed: () {
+              final CdpApi cdpApi = CdpApi();
+              cdpApi.copyCDP(context,
+                  pdfFile: widget.userFile, cdp: widget.cdp);
+            },
+            icon: const Icon(Icons.copy),
           ),
           IconButton(
             onPressed: () {
@@ -56,7 +60,9 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
                 });
               });
             },
-            icon: isLoading ? const CircularProgressIndicator() : const Icon(Icons.arrow_forward_ios),
+            icon: isLoading
+                ? const CircularProgressIndicator()
+                : const Icon(Icons.arrow_forward_ios),
           )
         ],
       ),

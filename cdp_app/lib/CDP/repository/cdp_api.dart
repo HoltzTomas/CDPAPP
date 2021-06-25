@@ -2,13 +2,137 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:cdp_app/CDP/models/cdp.dart';
+import 'package:cdp_app/Form/model/destination.dart';
+import 'package:cdp_app/Form/model/grain_data.dart';
+import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
+import 'package:cdp_app/Form/model/transfer_data.dart';
+import 'package:cdp_app/Form/model/transport_data.dart';
+import 'package:cdp_app/Form/providers/destination_providers.dart';
+import 'package:cdp_app/Form/providers/grain_data_providers.dart';
+import 'package:cdp_app/Form/providers/sworn_declaration_providers.dart';
+import 'package:cdp_app/Form/providers/transfer_data_providers.dart';
+import 'package:cdp_app/Form/providers/transport_data_providers.dart';
+import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CdpApi {
+
+  
+  ///User can copy data from a [CDP] that has been issued before and use that for a
+  ///new one.
+  ///
+  ///[IssuedCDPListItem] receives a [CDP] as a parameter. In this function,
+  ///we use this [CDP]'s data to modify the providers and fill the form.
+  void copyCDP(BuildContext context,
+      {required PdfFile pdfFile, required CDP cdp}) {
+    ///Modifing [TransferDataProviders]
+    context.read(titularCartaDePorteProvider).state = TransferData(
+        nombre: cdp.titularCartaDePorte.nombre,
+        cuit: cdp.titularCartaDePorte.cuit);
+    context.read(intermediarioProvider).state = TransferData(
+        nombre: cdp.intermediario.nombre,
+        cuit: cdp.intermediario.cuit);
+    context.read(remitenteComercialProvider).state = TransferData(
+        nombre: cdp.remitenteComercial.nombre,
+        cuit: cdp.remitenteComercial.cuit);
+    context.read(corredorCompradorProvider).state = TransferData(
+        nombre: cdp.corredorComprador.nombre,
+        cuit: cdp.corredorComprador.cuit);
+    context.read(mercadoATerminoProvider).state = TransferData(
+        nombre: cdp.mercadoATermino.nombre,
+        cuit: cdp.mercadoATermino.cuit);
+    context.read(corredorVendedorProvider).state = TransferData(
+        nombre: cdp.corredorComprador.nombre,
+        cuit: cdp.corredorComprador.cuit);
+    context.read(representanteEntregadorProvider).state = TransferData(
+        nombre: cdp.representanteEntregador.nombre,
+        cuit: cdp.representanteEntregador.cuit);
+    context.read(destinatarioProvider).state = TransferData(
+        nombre: cdp.destinatario.nombre,
+        cuit: cdp.destinatario.cuit);
+    context.read(destinoProvider).state = TransferData(
+        nombre: cdp.destino.nombre,
+        cuit: cdp.destino.cuit);
+    context.read(intermediarioDelFleteProvider).state = TransferData(
+        nombre: cdp.intermediarioDelFlete.nombre,
+        cuit: cdp.intermediarioDelFlete.cuit);
+    context.read(transportistaProvider).state = TransferData(
+        nombre: cdp.transportista.nombre,
+        cuit: cdp.transportista.cuit);
+    context.read(choferProvider).state = TransferData(
+        nombre: cdp.chofer.nombre,
+        cuit: cdp.chofer.cuit);
+
+    ///Modifing [GrainDataProviders]
+    context.read(granoEspecieProvider).state =
+        GrainData(text: cdp.granoEspecie.text);
+    context.read(tipoProvider).state =
+        GrainData(text: cdp.tipo.text);
+    context.read(cosechaProvider).state =
+        GrainData(text: cdp.cosecha.text);
+    context.read(contratoNroProvider).state =
+        GrainData(text: cdp.contratoNro.text);
+    context.read(seraPesadaProvider).state = cdp.seraPesada;
+    context.read(kgsEstimadosProvider).state = cdp.kgsEstimados;
+    context.read(declaracionDeCalidadProvider).state = GrainData(
+        tipo: cdp.declaracionDeCalidad.tipo,
+        text: cdp.declaracionDeCalidad.text);
+    context.read(pesoBrutoProvider).state =
+        GrainData(text: cdp.pesoBruto.text);
+    context.read(pesoTaraProvider).state =
+        GrainData(text: cdp.pesoTara.text);
+    context.read(pesoNetoProvider).state =
+        GrainData(text: cdp.pesoNeto.text);
+    context.read(observacionesProvider).state =
+        GrainData(text: cdp.observaciones.text);
+    context.read(procedenciaProvider).state = ProcedenciaMercaderia(
+      direccion: cdp.procedenciaMercaderia.direccion,
+      provincia: cdp.procedenciaMercaderia.provincia,
+      localidad: cdp.procedenciaMercaderia.localidad,
+      establecimiento: cdp.procedenciaMercaderia.establecimiento,
+      renspa: cdp.procedenciaMercaderia.renspa,
+    );
+
+    ///Modifing [DestinationProviders]
+    context.read(destinationProvider).state = Destination(
+        direccion: cdp.destination.direccion,
+        provincia: cdp.destination.provincia,
+        localidad: cdp.destination.localidad);
+
+    ///Modifing [TransportDataProviders]
+    context.read(camionProvider).state = cdp.camion;
+    context.read(acopladoProvider).state = cdp.acoplado;
+    context.read(kmARecorrerProvider).state = cdp.kmARecorrer;
+    context.read(tarifaDeReferenciaProvider).state = cdp.tarifaDeReferencia;
+    context.read(tarifaProvider).state = cdp.tarifa;
+    context.read(pagadorDelFleteProvider).state = TransportData(
+      text: cdp.pagadorDelFlete.text,
+    );
+
+    ///Modifing [SwornDeclarationProviders]
+    context.read(aclaracionProvider).state = cdp.aclarcion;
+    context.read(dniProvider).state = cdp.dni;
+    context.read(signatureImageProvider).state = cdp.signatureImage;
+
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: FormScreen(
+          pdfFile: pdfFile,
+        ),
+      ),
+    );
+  }
+  
+  ///This method use [CDP]'s data to fill [PdfFile]
   Future<void> fillPdfFileWithCdpData(
       {required PdfFile file, required CDP cdp}) async {
     final pdfReference = FirebaseStorage.instance.ref().child(file.pdfUrl);

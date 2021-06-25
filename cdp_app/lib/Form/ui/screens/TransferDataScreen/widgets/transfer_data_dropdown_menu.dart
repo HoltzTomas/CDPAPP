@@ -128,7 +128,7 @@ class TransferDataDropdownMenu extends ConsumerWidget {
                 }
               },
             ),
-            if (watch(providerToChange!).state!.tipo! == "chofer")
+            if (watch(providerToChange!).state!.tipo == "chofer")
               dataTextsIfChofer()
           ],
         ),

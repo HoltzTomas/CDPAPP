@@ -1,18 +1,25 @@
 import 'dart:typed_data';
 
 import 'package:cdp_app/CDP/models/cdp.dart';
-import 'package:cdp_app/CDP/repository/cdp_firebase_api.dart';
 import 'package:cdp_app/Form/model/destination.dart';
 import 'package:cdp_app/Form/model/grain_data.dart';
 import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
 import 'package:cdp_app/Form/model/transfer_data.dart';
 import 'package:cdp_app/Form/model/transport_data.dart';
+import 'package:cdp_app/Form/providers/destination_providers.dart';
+import 'package:cdp_app/Form/providers/grain_data_providers.dart';
+import 'package:cdp_app/Form/providers/sworn_declaration_providers.dart';
+import 'package:cdp_app/Form/providers/transfer_data_providers.dart';
+import 'package:cdp_app/Form/providers/transport_data_providers.dart';
+import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/issued_cdp_list_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CdpFirebaseApi {
   final FirebaseFirestore firebaseCloud = FirebaseFirestore.instance;
