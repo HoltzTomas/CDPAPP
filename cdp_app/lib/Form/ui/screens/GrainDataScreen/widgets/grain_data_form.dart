@@ -1,7 +1,6 @@
 import 'package:cdp_app/Form/providers/grain_data_providers.dart';
-import 'package:cdp_app/Form/providers/transfer_data_providers.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_dropdown_menu.dart';
-import 'package:cdp_app/Form/ui/screens/TransferDataScreen/widgets/transfer_data_dropdown_menu.dart';
+import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_switch_button.dart';
 import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -49,19 +48,19 @@ class GrainDataForm extends ConsumerWidget {
             FormTextField(
               dataWeWantReceive: "Contrato Nro",
               keyboardType: TextInputType.text,
-              onChanged: (value) {
+               onChanged: (value) {
                 watch(contratoNroProvider).state.text = value;
               },
             ),
 
             ///Sera Pesada en destino (Fifth fact of [GrainDataForm])
-            /*GrainDataSwitchButton(
+            GrainDataSwitchButton(
               dataWeWantReceive: "Sera pesada en destino",
               onChanged: (bool value) {
                 context.read(seraPesadaProvider).state = value;
               },
               providerToChange: seraPesadaProvider,
-            ),*/
+            ),
 
             ///Kgs Estimados (Sixth fact of [GrainDataForm])
             if (watch(seraPesadaProvider).state == true)
@@ -126,7 +125,6 @@ class GrainDataForm extends ConsumerWidget {
               text: "Procedencia de la Mercaderia",
               procedenciaProviderToChange: procedenciaProvider,
             ),
-
           ],
         ),
       ),

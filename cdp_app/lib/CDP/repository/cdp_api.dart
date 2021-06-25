@@ -77,8 +77,7 @@ class CdpApi {
         GrainData(text: cdp.tipo.text);
     context.read(cosechaProvider).state =
         GrainData(text: cdp.cosecha.text);
-    context.read(contratoNroProvider).state =
-        GrainData(text: cdp.contratoNro.text);
+    context.read(contratoNroProvider).state = cdp.contratoNro;
     context.read(seraPesadaProvider).state = cdp.seraPesada;
     context.read(kgsEstimadosProvider).state = cdp.kgsEstimados;
     context.read(declaracionDeCalidadProvider).state = GrainData(
