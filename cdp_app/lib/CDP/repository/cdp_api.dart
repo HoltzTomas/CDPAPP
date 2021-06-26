@@ -23,8 +23,6 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CdpApi {
-
-  
   ///User can copy data from a [CDP] that has been issued before and use that for a
   ///new one.
   ///
@@ -37,58 +35,45 @@ class CdpApi {
         nombre: cdp.titularCartaDePorte.nombre,
         cuit: cdp.titularCartaDePorte.cuit);
     context.read(intermediarioProvider).state = TransferData(
-        nombre: cdp.intermediario.nombre,
-        cuit: cdp.intermediario.cuit);
+        nombre: cdp.intermediario.nombre, cuit: cdp.intermediario.cuit);
     context.read(remitenteComercialProvider).state = TransferData(
         nombre: cdp.remitenteComercial.nombre,
         cuit: cdp.remitenteComercial.cuit);
     context.read(corredorCompradorProvider).state = TransferData(
-        nombre: cdp.corredorComprador.nombre,
-        cuit: cdp.corredorComprador.cuit);
+        nombre: cdp.corredorComprador.nombre, cuit: cdp.corredorComprador.cuit);
     context.read(mercadoATerminoProvider).state = TransferData(
-        nombre: cdp.mercadoATermino.nombre,
-        cuit: cdp.mercadoATermino.cuit);
+        nombre: cdp.mercadoATermino.nombre, cuit: cdp.mercadoATermino.cuit);
     context.read(corredorVendedorProvider).state = TransferData(
-        nombre: cdp.corredorComprador.nombre,
-        cuit: cdp.corredorComprador.cuit);
+        nombre: cdp.corredorComprador.nombre, cuit: cdp.corredorComprador.cuit);
     context.read(representanteEntregadorProvider).state = TransferData(
         nombre: cdp.representanteEntregador.nombre,
         cuit: cdp.representanteEntregador.cuit);
     context.read(destinatarioProvider).state = TransferData(
-        nombre: cdp.destinatario.nombre,
-        cuit: cdp.destinatario.cuit);
-    context.read(destinoProvider).state = TransferData(
-        nombre: cdp.destino.nombre,
-        cuit: cdp.destino.cuit);
+        nombre: cdp.destinatario.nombre, cuit: cdp.destinatario.cuit);
+    context.read(destinoProvider).state =
+        TransferData(nombre: cdp.destino.nombre, cuit: cdp.destino.cuit);
     context.read(intermediarioDelFleteProvider).state = TransferData(
         nombre: cdp.intermediarioDelFlete.nombre,
         cuit: cdp.intermediarioDelFlete.cuit);
     context.read(transportistaProvider).state = TransferData(
-        nombre: cdp.transportista.nombre,
-        cuit: cdp.transportista.cuit);
-    context.read(choferProvider).state = TransferData(
-        nombre: cdp.chofer.nombre,
-        cuit: cdp.chofer.cuit);
+        nombre: cdp.transportista.nombre, cuit: cdp.transportista.cuit);
+    context.read(choferProvider).state =
+        TransferData(nombre: cdp.chofer.nombre, cuit: cdp.chofer.cuit);
 
     ///Modifing [GrainDataProviders]
     context.read(granoEspecieProvider).state =
         GrainData(text: cdp.granoEspecie.text);
-    context.read(tipoProvider).state =
-        GrainData(text: cdp.tipo.text);
-    context.read(cosechaProvider).state =
-        GrainData(text: cdp.cosecha.text);
+    context.read(tipoProvider).state = GrainData(text: cdp.tipo.text);
+    context.read(cosechaProvider).state = GrainData(text: cdp.cosecha.text);
     context.read(contratoNroProvider).state = cdp.contratoNro;
     context.read(seraPesadaProvider).state = cdp.seraPesada;
     context.read(kgsEstimadosProvider).state = cdp.kgsEstimados;
     context.read(declaracionDeCalidadProvider).state = GrainData(
         tipo: cdp.declaracionDeCalidad.tipo,
         text: cdp.declaracionDeCalidad.text);
-    context.read(pesoBrutoProvider).state =
-        GrainData(text: cdp.pesoBruto.text);
-    context.read(pesoTaraProvider).state =
-        GrainData(text: cdp.pesoTara.text);
-    context.read(pesoNetoProvider).state =
-        GrainData(text: cdp.pesoNeto.text);
+    context.read(pesoBrutoProvider).state = GrainData(text: cdp.pesoBruto.text);
+    context.read(pesoTaraProvider).state = GrainData(text: cdp.pesoTara.text);
+    context.read(pesoNetoProvider).state = GrainData(text: cdp.pesoNeto.text);
     context.read(observacionesProvider).state =
         GrainData(text: cdp.observaciones.text);
     context.read(procedenciaProvider).state = ProcedenciaMercaderia(
@@ -130,7 +115,7 @@ class CdpApi {
       ),
     );
   }
-  
+
   ///This method use [CDP]'s data to fill [PdfFile]
   Future<void> fillPdfFileWithCdpData(
       {required PdfFile file, required CDP cdp}) async {
@@ -298,7 +283,7 @@ class CdpApi {
     if (cdpPdf.seraPesada == true) addPointInAllPages(cdpPages, 132, 402, 20);
 
     ///Adding Kgs Estimados [text]
-    addStringInAllPages(cdpPages, cdpPdf.kgsEstimados, 125, 422, 9);
+    addStringInAllPages(cdpPages, cdpPdf.kgsEstimados.text!, 125, 422, 9);
 
     ///Adding Declaracion de calidad [bool]
     if (cdpPdf.declaracionDeCalidad.text == "Conforme") {
@@ -309,16 +294,19 @@ class CdpApi {
     }
 
     ///Adding Peso Bruto [text]
-    if (cdpPdf.seraPesada == false)
+    if (cdpPdf.seraPesada == false) {
       addStringInAllPages(cdpPages, cdpPdf.pesoBruto.text!, 350, 386, 10);
+    }
 
     ///Adding Peso Tara [text]
-    if (cdpPdf.seraPesada == false)
+    if (cdpPdf.seraPesada == false) {
       addStringInAllPages(cdpPages, cdpPdf.pesoTara.text!, 350, 404, 10);
+    }
 
     ///Adding Peso Neto [text]
-    if (cdpPdf.seraPesada == false)
+    if (cdpPdf.seraPesada == false) {
       addStringInAllPages(cdpPages, cdpPdf.pesoNeto.text!, 350, 422, 10);
+    }
 
     ///Adding Observaciones [text]
     addStringInAllPages(cdpPages, cdpPdf.observaciones.text!, 410, 400, 9);
@@ -379,10 +367,9 @@ class CdpApi {
     ///Adding Pagador del flete [text]
     addStringInAllPages(cdpPages, cdpPdf.pagadorDelFlete.text!, 345, 522, 10);
   }
-  
+
   ///We are adding the data the we got in [SwornDeclarationForm] into the PDF
-  void fillSwornDeclarationForm(
-      {required PdfDocument document, CDP? cdpPdf}) {
+  void fillSwornDeclarationForm({required PdfDocument document, CDP? cdpPdf}) {
     final page1 = document.pages[0];
     final page2 = document.pages[1];
     final page3 = document.pages[2];

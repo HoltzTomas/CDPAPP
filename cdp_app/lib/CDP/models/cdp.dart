@@ -79,7 +79,7 @@ class CDP {
   final GrainData cosecha;
   final GrainData contratoNro;
   final bool seraPesada;
-  final String kgsEstimados;
+  final GrainData kgsEstimados;
   final GrainData declaracionDeCalidad;
   final GrainData pesoBruto;
   final GrainData pesoTara;

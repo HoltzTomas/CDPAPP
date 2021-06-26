@@ -41,9 +41,7 @@ class DestinationDropdownMenu extends StatelessWidget {
         flex: 2,
         child: Text(
           text!,
-          style: const TextStyle(
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w600),
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
       );
 

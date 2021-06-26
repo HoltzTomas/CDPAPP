@@ -2,13 +2,11 @@ import 'dart:io';
 
 import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/upload_pdffile_dialog.dart';
-import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:page_transition/page_transition.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({Key? key}) : super(key: key);
@@ -24,8 +22,8 @@ class HomeDrawer extends StatelessWidget {
             accountEmail: Text(auth.currentUser!.email!),
             accountName: Text(auth.currentUser!.displayName!),
             currentAccountPicture: SvgPicture.asset(
-              "assets/icons/iconoAgricultor.svg",
-              color: Colors.grey,
+              "assets/icons/iconoTractor.svg",
+              color: Colors.white,
             ),
             decoration: const BoxDecoration(color: primaryColor),
           ),

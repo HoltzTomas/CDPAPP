@@ -17,17 +17,17 @@ final StateProvider<GrainData> contratoNroProvider =
 final StateProvider<bool> seraPesadaProvider =
     StateProvider<bool>((ref) => false);
 
-final StateProvider<String> kgsEstimadosProvider =
-    StateProvider<String>((ref) => "");
+final StateProvider<GrainData> kgsEstimadosProvider =
+    StateProvider<GrainData>((ref) => GrainData(tipo: "", text: ""));
 
 final StateProvider<GrainData> declaracionDeCalidadProvider =
     StateProvider<GrainData>((ref) => GrainData(tipo: "", text: ""));
 
 final StateProvider<GrainData> pesoBrutoProvider =
-    StateProvider<GrainData>((ref) => GrainData(tipo: "", text: "0"));
+    StateProvider<GrainData>((ref) => GrainData(tipo: "", text: ""));
 
 final StateProvider<GrainData> pesoTaraProvider =
-    StateProvider<GrainData>((ref) => GrainData(tipo: "", text: "0"));
+    StateProvider<GrainData>((ref) => GrainData(tipo: "", text: ""));
 
 final StateProvider<GrainData> pesoNetoProvider =
     StateProvider<GrainData>((ref) => GrainData(tipo: "", text: ""));

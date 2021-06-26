@@ -1,20 +1,29 @@
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FormTextField extends StatelessWidget {
   ///Used in [FormScreen] to collect data
-  const FormTextField(
-      {Key? key,
-      @required this.dataWeWantReceive,
-      this.controller,
-      this.onChanged,
-      this.keyboardType})
-      : super(key: key);
+  const FormTextField({
+    Key? key,
+    @required this.dataWeWantReceive,
+    this.controller,
+    this.onChanged,
+    this.keyboardType,
+    this.maxLengthEnforcement,
+    this.maxLength,
+    this.maxLines,
+    this.helperText,
+  }) : super(key: key);
 
   final String? dataWeWantReceive;
+  final String? helperText;
   final TextEditingController? controller;
   final Function(String)? onChanged;
   final TextInputType? keyboardType;
+  final MaxLengthEnforcement? maxLengthEnforcement;
+  final int? maxLength;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +31,9 @@ class FormTextField extends StatelessWidget {
       margin: const EdgeInsets.all(defaultPadding / 2),
       child: Form(
         child: TextFormField(
-          maxLines: null,
+          maxLines: maxLines,
+          maxLength: maxLength,
+          maxLengthEnforcement: maxLengthEnforcement,
           keyboardType: keyboardType,
           controller: controller,
           cursorColor: primaryColor,
@@ -30,12 +41,12 @@ class FormTextField extends StatelessWidget {
             color: darkColor,
           ),
           decoration: InputDecoration(
+            helperText: helperText,
             labelText: dataWeWantReceive,
             labelStyle: const TextStyle(
               color: darkColor,
               fontWeight: FontWeight.w500,
               fontSize: 14,
-              decoration: TextDecoration.underline
             ),
             enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: primaryColor),

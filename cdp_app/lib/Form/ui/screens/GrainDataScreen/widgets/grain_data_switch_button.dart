@@ -30,7 +30,6 @@ class GrainDataSwitchButton extends ConsumerWidget {
           style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 14,
-            decoration: TextDecoration.underline
           ),
         ),
         value: watch(providerToChange).state,

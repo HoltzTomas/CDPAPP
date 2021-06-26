@@ -1,4 +1,5 @@
 import 'package:cdp_app/Form/providers/grain_data_providers.dart';
+import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_bottom_sheet_field.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_dropdown_menu.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_switch_button.dart';
 import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
@@ -45,12 +46,10 @@ class GrainDataForm extends ConsumerWidget {
             ),
 
             ///Contrato Nro (Fourth fact of [GrainDataForm])
-            FormTextField(
-              dataWeWantReceive: "Contrato Nro",
-              keyboardType: TextInputType.text,
-               onChanged: (value) {
-                watch(contratoNroProvider).state.text = value;
-              },
+            GrainDataDropdownMenu(
+              text: "Contrato Numero",
+              tipo: "contratoNro",
+              providerToChange: contratoNroProvider,
             ),
 
             ///Sera Pesada en destino (Fifth fact of [GrainDataForm])
@@ -64,12 +63,10 @@ class GrainDataForm extends ConsumerWidget {
 
             ///Kgs Estimados (Sixth fact of [GrainDataForm])
             if (watch(seraPesadaProvider).state == true)
-              FormTextField(
-                dataWeWantReceive: "Kgs Estimados",
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  watch(kgsEstimadosProvider).state = value;
-                },
+              GrainDataDropdownMenu(
+                text: "Kgs Estimados",
+                tipo: "kgsEstimados",
+                providerToChange: kgsEstimadosProvider,
               ),
 
             ///Declaracion de Calidad (Sixth fact of [GrainDataForm])
@@ -81,45 +78,36 @@ class GrainDataForm extends ConsumerWidget {
 
             ///Peso Bruto (Seventh fact of [GrainDataForm])
             if (watch(seraPesadaProvider).state == false)
-              FormTextField(
-                dataWeWantReceive: "Peso Bruto",
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  watch(pesoBrutoProvider).state.text = value;
-                },
+              GrainDataDropdownMenu(
+                text: "Peso Bruto",
+                tipo: "pesoBruto",
+                providerToChange: pesoBrutoProvider,
               ),
 
             ///Peso Tara (Eight fact of [GrainDataForm])
             if (watch(seraPesadaProvider).state == false)
-              FormTextField(
-                dataWeWantReceive: "Peso Tara",
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  watch(pesoTaraProvider).state.text = value;
-                },
+              GrainDataDropdownMenu(
+                text: "Peso Tara",
+                tipo: "pesoTara",
+                providerToChange: pesoTaraProvider,
               ),
 
             ///Peso Neto (Nineth fact of [GrainDataForm])
             if (watch(seraPesadaProvider).state == false)
-              FormTextField(
-                dataWeWantReceive: "Peso Neto",
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  watch(pesoNetoProvider).state.text = value;
-                },
+              GrainDataDropdownMenu(
+                text: "Peso Neto",
+                tipo: "pesoNeto",
+                providerToChange: pesoNetoProvider,
               ),
 
             ///Observaciones (Tenth fact of [GrainDataForm])
-            FormTextField(
-              dataWeWantReceive: "Observaciones",
-              keyboardType: TextInputType.multiline,
-              onChanged: (value) {
-                watch(observacionesProvider).state.text = value;
-              },
-            ),
+            GrainDataDropdownMenu(
+                text: "Observaciones",
+                tipo: "observaciones",
+                providerToChange: observacionesProvider,
+              ),
 
             ///Procedencia de la Mercaderia (Eleventh fact of [GrainDataForm])
-            // TODO
             GrainDataDropdownMenu(
               tipo: 'procedenciaMercaderia',
               text: "Procedencia de la Mercaderia",

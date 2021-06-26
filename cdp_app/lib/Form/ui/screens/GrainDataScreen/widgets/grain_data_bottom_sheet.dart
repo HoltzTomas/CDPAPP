@@ -81,6 +81,45 @@ class GrainDataBottomSheet extends StatelessWidget {
     );
   }
 
+  Widget dataListIfDeclaracionDeCalidad() {
+    return Column(
+      children: [
+        GrainDataBottomSheetItem(
+          data: GrainData(
+            text: "Conforme",
+            tipo: tipo,
+          ),
+          providerToChange: providerToChange,
+        ),
+        GrainDataBottomSheetItem(
+          data: GrainData(
+            text: "Condicional",
+            tipo: tipo,
+          ),
+          providerToChange: providerToChange,
+        )
+      ],
+    );
+  }
+
+  Widget dataListIfGranoEspecie() {
+    final List<GrainDataBottomSheetItem> list = [];
+    for (final grano in granoEspecieList) {
+      list.add(
+        GrainDataBottomSheetItem(
+          data: GrainData(
+            tipo: "granoEspecie",
+            text: grano,
+          ),
+          providerToChange: providerToChange,
+        ),
+      );
+    }
+    return Column(
+      children: list,
+    );
+  }
+
   Widget title() => Container(
         alignment: Alignment.center,
         child: Text(
@@ -106,8 +145,13 @@ class GrainDataBottomSheet extends StatelessWidget {
           children: [
             const SizedBox(height: defaultPadding / 2),
             title(),
-            dataList(),
-            addDataButton(context)
+            if (tipo != "declaracionDeCalidad" && tipo != "granoEspecie")
+              dataList(),
+            if (tipo == "declaracionDeCalidad")
+              dataListIfDeclaracionDeCalidad(),
+            if (tipo == "granoEspecie") dataListIfGranoEspecie(),
+            if (tipo != "declaracionDeCalidad" && tipo != "granoEspecie")
+              addDataButton(context)
           ],
         ),
       ),

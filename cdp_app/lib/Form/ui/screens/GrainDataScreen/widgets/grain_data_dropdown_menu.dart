@@ -1,6 +1,7 @@
 import 'package:cdp_app/Form/model/grain_data.dart';
 import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
 import 'package:cdp_app/Form/model/transfer_data.dart';
+import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_bottom_sheet_field.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_bottom_sheet.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/procedencia_bottom_sheet.dart';
 import 'package:cdp_app/Form/ui/screens/TransferDataScreen/widgets/transfer_data_bottom_sheet.dart';
@@ -26,9 +27,7 @@ class GrainDataDropdownMenu extends StatelessWidget {
         flex: 2,
         child: Text(
           text!,
-          style: const TextStyle(
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w600),
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
       );
 
@@ -46,6 +45,17 @@ class GrainDataDropdownMenu extends StatelessWidget {
                         text: text,
                         tipo: tipo,
                         providerToChange: procedenciaProviderToChange,
+                      );
+                    } else if (tipo == "contratoNro" ||
+                        tipo == "kgsEstimados" ||
+                        tipo == "pesoBruto" ||
+                        tipo == "pesoTara" ||
+                        tipo == "pesoNeto"||
+                        tipo == "observaciones") {
+                      return GrainBottomSheetField(
+                        text: text,
+                        tipo: tipo,
+                        providerToChange: providerToChange,
                       );
                     }
                     return GrainDataBottomSheet(

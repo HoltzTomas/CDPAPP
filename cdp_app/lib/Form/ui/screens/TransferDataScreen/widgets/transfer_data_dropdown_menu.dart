@@ -15,8 +15,7 @@ class TransferDataDropdownMenu extends ConsumerWidget {
 
   Widget dataNameText() => Text(
         text!,
-        style: const TextStyle(
-            decoration: TextDecoration.underline, fontWeight: FontWeight.w600),
+        style: const TextStyle( fontWeight: FontWeight.w600),
       );
 
   Widget arrowButton(BuildContext context) => Container(
@@ -102,35 +101,38 @@ class TransferDataDropdownMenu extends ConsumerWidget {
           border: Border.all(color: primaryColor),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: dataNameText(),
-                ),
-                Expanded(child: arrowButton(context)),
-                const SizedBox(height: defaultPadding / 2),
-              ],
-            ),
-            Consumer(
-              builder: (context, watch, child) {
-                if (watch(providerToChange!).state!.nombre!.isNotEmpty &&
-                    watch(providerToChange!).state!.cuit!.isNotEmpty &&
-                    watch(providerToChange!).state!.tipo! != "chofer") {
-                  return dataTexts();
-                } else {
-                  return const SizedBox(
-                    height: 0,
-                    width: 0,
-                  );
-                }
-              },
-            ),
-            if (watch(providerToChange!).state!.tipo == "chofer")
-              dataTextsIfChofer()
-          ],
+        child: Container(
+          padding: const EdgeInsets.all(5),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: dataNameText(),
+                  ),
+                  Expanded(child: arrowButton(context)),
+                  const SizedBox(height: defaultPadding / 2),
+                ],
+              ),
+              Consumer(
+                builder: (context, watch, child) {
+                  if (watch(providerToChange!).state!.nombre!.isNotEmpty &&
+                      watch(providerToChange!).state!.cuit!.isNotEmpty &&
+                      watch(providerToChange!).state!.tipo! != "chofer") {
+                    return dataTexts();
+                  } else {
+                    return const SizedBox(
+                      height: 0,
+                      width: 0,
+                    );
+                  }
+                },
+              ),
+              if (watch(providerToChange!).state!.tipo == "chofer")
+                dataTextsIfChofer()
+            ],
+          ),
         ),
       ),
     );
