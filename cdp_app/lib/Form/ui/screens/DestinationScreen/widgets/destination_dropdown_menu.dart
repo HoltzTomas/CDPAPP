@@ -48,6 +48,7 @@ class DestinationDropdownMenu extends StatelessWidget {
   Widget selectedDataTexts() => Consumer(
         builder: (context, watch, child) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (watch(providerToChange!).state!.direccion!.isNotEmpty)
                 Text(
@@ -100,9 +101,10 @@ class DestinationDropdownMenu extends StatelessWidget {
                 children: [
                   dataName(),
                   showBottomSheetButton(context),
-                  selectedDataTexts()
                 ],
               ),
+              const SizedBox(height: defaultPadding),
+              selectedDataTexts()
             ],
           ),
         ),

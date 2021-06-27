@@ -26,7 +26,7 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
   void initState() {
     final AuthRepository authRepository = AuthRepository();
     user = auth.currentUser!;
-    timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       checkEmailVerified();
     });
     if (!user.emailVerified) {

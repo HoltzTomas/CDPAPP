@@ -72,14 +72,14 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
                 FormCloudRepository();
             formCloudRepository.uploadTransferData(
               dataToUpload: TransferData(
-                nombre: nombreToUpload,
-                cuit: cuitToUpload,
-                camion: camionToUpload,
-                acoplado: acopladoToUpload,
-                tipo: widget.tipo
-              ),
+                  nombre: nombreToUpload,
+                  cuit: cuitToUpload,
+                  camion: camionToUpload,
+                  acoplado: acopladoToUpload,
+                  tipo: widget.tipo),
               context: context,
             );
+            Navigator.pop(context);
           },
           child: const Text(
             "Agregar",

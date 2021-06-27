@@ -64,6 +64,7 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
               ),
               context: context,
             );
+            Navigator.pop(context);
           },
           child: const Text(
             "Agregar",

@@ -1,3 +1,5 @@
+import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
+import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -73,7 +75,21 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
                 borderRadius: BorderRadius.all(Radius.circular(12)),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  final FormCloudRepository cloudRepository =
+                      FormCloudRepository();
+                  cloudRepository.uploadProcedenciaMercaderia(
+                    context: context,
+                    dataToUpload: ProcedenciaMercaderia(
+                      direccion: direccionToUpload,
+                      provincia: provinciaToUpload,
+                      localidad: localidadToUpload,
+                      establecimiento: establecimientoToUpload,
+                      renspa: renspaToUpload
+                    ),
+                  );
+                  Navigator.pop(context);
+                },
                 child: const Text(
                   "Agregar",
                   style: TextStyle(color: darkColor),

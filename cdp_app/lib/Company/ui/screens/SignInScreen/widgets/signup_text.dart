@@ -18,7 +18,7 @@ class SignUpText extends StatelessWidget {
             context,
             PageTransition(
               child: const SignUpScreen(),
-              type: PageTransitionType.rightToLeft,
+              type: PageTransitionType.bottomToTop,
             ),
           );
           },

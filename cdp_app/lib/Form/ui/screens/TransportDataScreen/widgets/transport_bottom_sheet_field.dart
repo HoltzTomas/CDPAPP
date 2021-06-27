@@ -1,4 +1,5 @@
 import 'package:cdp_app/Form/model/grain_data.dart';
+import 'package:cdp_app/Form/model/transport_data.dart';
 import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class TransportBottomSheetField extends StatefulWidget {
   final String? text;
   final String? tipo;
-  final StateProvider<GrainData?>? providerToChange;
+  final StateProvider<TransportData?>? providerToChange;
 
   const TransportBottomSheetField(
       {Key? key,
@@ -37,9 +38,9 @@ class _TransportBottomSheetFieldState extends State<TransportBottomSheetField> {
             child: TextButton(
               onPressed: () {
                 if (controller.text.trim().isNotEmpty) {
-                  context.read(widget.providerToChange!).state = GrainData(
+                  context.read(widget.providerToChange!).state = TransportData(
                     tipo: widget.tipo,
-                    text: controller.text.trim(),
+                    text: controller.text,
                   );
                   Navigator.pop(context);
                 } else {

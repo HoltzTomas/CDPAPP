@@ -55,6 +55,7 @@ class _AddGrainDataDialogState extends State<AddGrainDataDialog> {
                         trueOrFalse: trueOrFalseToUpload),
                     context: context,
                   );
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   "Agregar",

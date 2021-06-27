@@ -62,6 +62,7 @@ class TransferDataBottomSheet extends StatelessWidget {
           .collection(auth.currentUser!.uid)
           .doc('userData')
           .collection('transferData')
+          .where('tipo', isEqualTo: tipo)
           .snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
