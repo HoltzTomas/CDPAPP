@@ -5,6 +5,8 @@ import 'package:cdp_app/Company/ui/widgets/app_logo.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_button.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_input_field.dart';
 import 'package:cdp_app/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -54,32 +56,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: passwordController,
                 ),
                 RoundedButton(
-                  text: isLoading ? "REGISTRARSE" : "CARGANDO...",
+                  text: isLoading ? "CARGANDO..." : "REGISTRARSE",
                   press: () {
                     if (emailController.text.trim().isNotEmpty &&
-                        passwordController.text.trim().isNotEmpty
-                        && nameController.text.trim().isNotEmpty) {
+                        passwordController.text.trim().isNotEmpty &&
+                        nameController.text.trim().isNotEmpty) {
                       setState(
                         () {
                           isLoading = true;
                         },
                       );
-                      authRepository
-                          .signUpWithEmailAndPassword(
-                        context: context,
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
-                        name: nameController.text.trim(),
-                      )
-                          .whenComplete(
-                        () {
-                          setState(
-                            () {
-                              isLoading = false;
-                            },
-                          );
-                        },
-                      );
+                      FirebaseFirestore.instance.terminate();
+                      FirebaseFirestore.instance
+                          .clearPersistence()
+                          .then((value) => authRepository
+                                  .signUpWithEmailAndPassword(
+                                context: context,
+                                name: nameController.text,
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                              )
+                                  .whenComplete(
+                                () {
+                                  setState(
+                                    () {
+                                      isLoading = false;
+                                    },
+                                  );
+                                },
+                              ));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('Completa todos los campos')));
