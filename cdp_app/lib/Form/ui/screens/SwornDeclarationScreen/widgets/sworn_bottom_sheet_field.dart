@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class SwornBottomSheetField extends StatefulWidget {
   final String? text;
   final String? tipo;
-  final StateProvider<GrainData?>? providerToChange;
+  final StateProvider<String?>? providerToChange;
 
   const SwornBottomSheetField(
       {Key? key,
@@ -37,10 +37,8 @@ class _SwornBottomSheetFieldState extends State<SwornBottomSheetField> {
             child: TextButton(
               onPressed: () {
                 if (controller.text.trim().isNotEmpty) {
-                  context.read(widget.providerToChange!).state = GrainData(
-                    tipo: widget.tipo,
-                    text: controller.text.trim(),
-                  );
+                  context.read(widget.providerToChange!).state =
+                      controller.text;
                   Navigator.pop(context);
                 } else {
                   Navigator.pop(context);

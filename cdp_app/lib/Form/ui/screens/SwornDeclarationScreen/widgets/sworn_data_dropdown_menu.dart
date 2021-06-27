@@ -1,4 +1,5 @@
 import 'package:cdp_app/Form/model/transport_data.dart';
+import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/widgets/sworn_bottom_sheet_field.dart';
 import 'package:cdp_app/Form/ui/screens/TransportDataScreen/widgets/transport_bottom_sheet_field.dart';
 import 'package:cdp_app/Form/ui/screens/TransportDataScreen/widgets/transport_data_bottom_sheet.dart';
 import 'package:cdp_app/constants.dart';
@@ -15,7 +16,7 @@ class SwornDataDropdownMenu extends ConsumerWidget {
 
   final String? tipo;
   final String? text;
-  final StateProvider<TransportData>? providerToChange;
+  final StateProvider<String>? providerToChange;
 
   Widget showBottomSheetButton(BuildContext context) => Expanded(
         child: Container(
@@ -26,7 +27,11 @@ class SwornDataDropdownMenu extends ConsumerWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) {
-                    return SwornDataDropdownMenu(tipo: tipo, text: text);
+                    return SwornBottomSheetField(
+                      text: text,
+                      tipo: tipo,
+                      providerToChange: providerToChange,
+                    );
                   },
                 );
               },
@@ -44,8 +49,8 @@ class SwornDataDropdownMenu extends ConsumerWidget {
 
   Widget dataText() => Consumer(
         builder: (context, watch, child) {
-          if (watch(providerToChange!).state.text!.isNotEmpty) {
-            return Text(watch(providerToChange!).state.text!);
+          if (watch(providerToChange!).state.isNotEmpty) {
+            return Text(watch(providerToChange!).state);
           }
           return const SizedBox(height: 0, width: 0);
         },
@@ -59,7 +64,7 @@ class SwornDataDropdownMenu extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           context: context,
           builder: (context) {
-            return SwornDataDropdownMenu(
+            return SwornBottomSheetField(
               text: text,
               tipo: tipo,
               providerToChange: providerToChange,
@@ -73,6 +78,7 @@ class SwornDataDropdownMenu extends ConsumerWidget {
         alignment: Alignment.centerLeft,
         width: double.infinity,
         decoration: BoxDecoration(
+            color: whiteColor,
             border: Border.all(color: primaryColor),
             borderRadius: BorderRadius.circular(12)),
         child: Container(

@@ -1,5 +1,6 @@
 import 'package:cdp_app/Form/providers/sworn_declaration_providers.dart';
 import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/widgets/signature_container.dart';
+import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/widgets/sworn_data_dropdown_menu.dart';
 import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +21,17 @@ class SwornDeclarationForm extends ConsumerWidget {
         child: Column(
           children: [
             ///Aclaracion (First fact of [SwornDeclarationForm])
-            FormTextField(
-              dataWeWantReceive: "Acalaracion",
-              onChanged: (String value) {
-                watch(aclaracionProvider).state = value;
-              },
+            SwornDataDropdownMenu(
+              tipo: "aclaracion",
+              text: "Aclaracion",
+              providerToChange: aclaracionProvider
             ),
 
             ///D.N.I (Second fact of [SwornDeclarationForm])
-            FormTextField(
-              dataWeWantReceive: "D.N.I",
-              onChanged: (String value) {
-                watch(dniProvider).state = value;
-              },
+            SwornDataDropdownMenu(
+              tipo: "dni",
+              text: "D.N.I",
+              providerToChange: dniProvider
             ),
 
             ///Signature (Third fact of [SwornDeclarationForm])
@@ -43,4 +42,3 @@ class SwornDeclarationForm extends ConsumerWidget {
     );
   }
 }
-

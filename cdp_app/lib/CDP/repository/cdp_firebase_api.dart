@@ -110,7 +110,7 @@ class CdpFirebaseApi {
           'tarifa': cdpData.tarifa.text,
           'pagadorDelFlete': cdpData.pagadorDelFlete.text,
           'aclaracion': cdpData.aclarcion,
-          'dni': cdpData.tarifa,
+          'dni': cdpData.dni,
         },
       );
     } else {

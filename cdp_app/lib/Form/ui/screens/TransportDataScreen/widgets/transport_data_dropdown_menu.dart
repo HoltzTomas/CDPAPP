@@ -26,7 +26,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) {
-                    if (tipo != "pagadorDelFlete") {
+                    if (tipo == "pagadorDelFlete") {
                       return TransportDataBottomSheet(
                         text: text,
                         tipo: tipo,
@@ -67,7 +67,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           context: context,
           builder: (context) {
-            if (tipo != "pagadorDelFlete") {
+            if (tipo == "pagadorDelFlete") {
               return TransportDataBottomSheet(
                 text: text,
                 tipo: tipo,
