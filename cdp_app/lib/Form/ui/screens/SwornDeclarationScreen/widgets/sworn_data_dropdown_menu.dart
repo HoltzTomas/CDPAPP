@@ -5,8 +5,8 @@ import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TransportDataDropdownMenu extends ConsumerWidget {
-  const TransportDataDropdownMenu({
+class SwornDataDropdownMenu extends ConsumerWidget {
+  const SwornDataDropdownMenu({
     Key? key,
     required this.tipo,
     required this.text,
@@ -26,15 +26,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
                   backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) {
-                    if (tipo != "pagadorDelFlete") {
-                      return TransportDataBottomSheet(
-                        text: text,
-                        tipo: tipo,
-                        providerToChange: providerToChange,
-                      );
-                    } else {
-                      return TransportBottomSheetField(text: text, tipo: tipo);
-                    }
+                    return SwornDataDropdownMenu(tipo: tipo, text: text);
                   },
                 );
               },
@@ -67,15 +59,11 @@ class TransportDataDropdownMenu extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           context: context,
           builder: (context) {
-            if (tipo != "pagadorDelFlete") {
-              return TransportDataBottomSheet(
-                text: text,
-                tipo: tipo,
-                providerToChange: providerToChange,
-              );
-            } else {
-              return TransportBottomSheetField(text: text, tipo: tipo);
-            }
+            return SwornDataDropdownMenu(
+              text: text,
+              tipo: tipo,
+              providerToChange: providerToChange,
+            );
           },
         );
       },

@@ -350,19 +350,19 @@ class CdpApi {
     final List<PdfPage> cdpPages = [page1, page2, page3, page4];
 
     ///Adding Camion [text]
-    addStringInAllPages(cdpPages, cdpPdf!.camion, 95, 540, 10);
+    addStringInAllPages(cdpPages, cdpPdf!.camion.text!, 95, 540, 10);
 
     ///Adding Acoplado [text]
-    addStringInAllPages(cdpPages, cdpPdf.acoplado, 95, 557, 10);
+    addStringInAllPages(cdpPages, cdpPdf.acoplado.text!, 95, 557, 10);
 
     ///Adding Kms a recorrer [text]
-    addStringInAllPages(cdpPages, cdpPdf.kmARecorrer, 95, 574, 10);
+    addStringInAllPages(cdpPages, cdpPdf.kmARecorrer.text!, 95, 574, 10);
 
     ///Adding Tarifa de referencia [text]
-    addStringInAllPages(cdpPages, cdpPdf.tarifaDeReferencia, 240, 557, 10);
+    addStringInAllPages(cdpPages, cdpPdf.tarifaDeReferencia.text!, 240, 557, 10);
 
     ///Adding Tarifa [text]
-    addStringInAllPages(cdpPages, cdpPdf.tarifa, 240, 574, 10);
+    addStringInAllPages(cdpPages, cdpPdf.tarifa.text!, 240, 574, 10);
 
     ///Adding Pagador del flete [text]
     addStringInAllPages(cdpPages, cdpPdf.pagadorDelFlete.text!, 345, 522, 10);

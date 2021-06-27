@@ -91,11 +91,11 @@ class CDP {
   final Destination destination;
 
   //TransportData
-  final String camion;
-  final String acoplado;
-  final String kmARecorrer;
-  final String tarifaDeReferencia;
-  final String tarifa;
+  final TransportData camion;
+  final TransportData acoplado;
+  final TransportData kmARecorrer;
+  final TransportData tarifaDeReferencia;
+  final TransportData tarifa;
   final TransportData pagadorDelFlete;
 
   //SwornDeclaration

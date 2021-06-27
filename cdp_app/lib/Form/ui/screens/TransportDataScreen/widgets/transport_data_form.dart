@@ -20,43 +20,38 @@ class TransportDataForm extends ConsumerWidget {
         child: Column(
           children: [
             ///Camion (First fact of [TransportDataForm])
-            FormTextField(
-              dataWeWantReceive: "Camion",
-              onChanged: (String value) {
-                watch(camionProvider).state = value;
-              },
+            TransportDataDropdownMenu(
+              tipo: "camion",
+              text: "Camion",
+              providerToChange: camionProvider,
             ),
 
             ///Acoplado (Second fact of [TransportDataForm])
-            FormTextField(
-              dataWeWantReceive: "Acoplado",
-              onChanged: (String value) {
-                watch(acopladoProvider).state = value;
-              },
+            TransportDataDropdownMenu(
+              tipo: "acoplado",
+              text: "Acoplado",
+              providerToChange: acopladoProvider,
             ),
 
             ///Km a Recorrer (Third fact of [TransportDataForm])
-            FormTextField(
-              dataWeWantReceive: "Km a Recorrer",
-              onChanged: (String value) {
-                watch(kmARecorrerProvider).state = value;
-              },
+            TransportDataDropdownMenu(
+              tipo: "Km a Recorrer",
+              text: "kmARecorrer",
+              providerToChange: kmARecorrerProvider,
             ),
 
             ///Tarifa de referencia (Fourth fact of [TransportDataForm])
-            FormTextField(
-              dataWeWantReceive: "Tarifa de Referencia",
-              onChanged: (String value) {
-                watch(tarifaDeReferenciaProvider).state = value;
-              },
+            TransportDataDropdownMenu(
+              tipo: "tarifaDeReferencia",
+              text: "Tarifa de referencia",
+              providerToChange: tarifaDeReferenciaProvider,
             ),
 
             ///Tarifa (Fifth fact of [TransportDataForm])
-            FormTextField(
-              dataWeWantReceive: "Tarifa",
-              onChanged: (String value) {
-                watch(tarifaProvider).state = value;
-              },
+            TransportDataDropdownMenu(
+              tipo: "tarifa",
+              text: "Tarifa",
+              providerToChange: tarifaProvider,
             ),
 
             ///Pagador del flete (Sixth fact of [TransportDataForm])
