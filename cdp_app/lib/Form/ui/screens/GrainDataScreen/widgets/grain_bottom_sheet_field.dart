@@ -63,6 +63,8 @@ class _GrainBottomSheetFieldState extends State<GrainBottomSheetField> {
           widget.tipo == "pesoNeto" ||
           widget.tipo == "kgsEstimados") {
         return TextInputType.number;
+      } else if (widget.tipo == "observaciones") {
+        return TextInputType.multiline;
       } else {
         return TextInputType.text;
       }
@@ -73,6 +75,7 @@ class _GrainBottomSheetFieldState extends State<GrainBottomSheetField> {
           dataWeWantReceive: "${widget.text} (Escriba aqui)",
           controller: controller,
           maxLength: 60,
+          maxLines: widget.tipo == "observaciones" ? null : 1,
           keyboardType: selectInputType()),
     );
   }

@@ -33,7 +33,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
                         providerToChange: providerToChange,
                       );
                     } else {
-                      return TransportBottomSheetField(text: text, tipo: tipo);
+                      return TransportBottomSheetField(text: text, tipo: tipo, providerToChange: providerToChange,);
                     }
                   },
                 );
@@ -74,7 +74,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
                 providerToChange: providerToChange,
               );
             } else {
-              return TransportBottomSheetField(text: text, tipo: tipo);
+              return TransportBottomSheetField(text: text, tipo: tipo, providerToChange: providerToChange,);
             }
           },
         );
@@ -98,6 +98,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
                   showBottomSheetButton(context),
                 ],
               ),
+              dataText()
             ],
           ),
         ),

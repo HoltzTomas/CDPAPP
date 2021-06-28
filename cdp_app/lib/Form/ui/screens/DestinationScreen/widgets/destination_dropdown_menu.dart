@@ -103,7 +103,6 @@ class DestinationDropdownMenu extends StatelessWidget {
                   showBottomSheetButton(context),
                 ],
               ),
-              const SizedBox(height: defaultPadding),
               selectedDataTexts()
             ],
           ),

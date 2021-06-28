@@ -1,4 +1,3 @@
-import 'package:cdp_app/Form/model/transfer_data.dart';
 import 'package:cdp_app/Form/model/transport_data.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
@@ -30,12 +29,11 @@ class _AddAlertDialogState extends State<TransportDataAlertDialog> {
             final FormCloudRepository formCloudRepository =
                 FormCloudRepository();
             formCloudRepository.uploadTransportData(
-              dataToUpload: TransportData(
-                text: textToUpload,
-                tipo: widget.tipo
-              ),
+              dataToUpload:
+                  TransportData(text: textToUpload, tipo: widget.tipo),
               context: context,
             );
+            Navigator.pop(context);
           },
           child: const Text(
             "Agregar",

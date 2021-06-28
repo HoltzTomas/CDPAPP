@@ -104,6 +104,7 @@ class TransferDataDropdownMenu extends ConsumerWidget {
         child: Container(
           padding: const EdgeInsets.all(5),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [

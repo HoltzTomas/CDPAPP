@@ -80,6 +80,8 @@ class CdpFirebaseApi {
           'cuitTransportista': cdpData.transportista.cuit,
           'nombreChofer': cdpData.chofer.nombre,
           'cuitChofer': cdpData.chofer.cuit,
+          'camionChofer': cdpData.chofer.camion,
+          'acopladoChofer': cdpData.chofer.acoplado,
           'granoEspecie': cdpData.granoEspecie.text,
           'tipo': cdpData.tipo.text,
           'cosecha': cdpData.cosecha.text,
@@ -167,14 +169,17 @@ class CdpFirebaseApi {
                   nombre: cdp.get('nombreTransportista') as String,
                   cuit: cdp.get('cuitTransportista') as String),
               chofer: TransferData(
-                  nombre: cdp.get('nombreChofer') as String,
-                  cuit: cdp.get('cuitChofer') as String),
+                nombre: cdp.get('nombreChofer') as String,
+                cuit: cdp.get('cuitChofer') as String,
+                camion: cdp.get('camionChofer') as String,
+                acoplado: cdp.get('acopladoChofer') as String,
+              ),
               granoEspecie: GrainData(text: cdp.get('granoEspecie') as String),
               tipo: GrainData(text: cdp.get('tipo') as String),
               cosecha: GrainData(text: cdp.get('cosecha') as String),
               contratoNro: GrainData(text: cdp.get('contratoNro') as String),
               seraPesada: cdp.get('seraPesada') as bool,
-              kgsEstimados:  GrainData(text: cdp.get('kgsEstimados') as String),
+              kgsEstimados: GrainData(text: cdp.get('kgsEstimados') as String),
               declaracionDeCalidad:
                   GrainData(text: cdp.get('declaracionDeCalidad') as String),
               pesoBruto: GrainData(text: cdp.get('pesoBruto') as String),
@@ -197,8 +202,10 @@ class CdpFirebaseApi {
               ),
               camion: TransportData(text: cdp.get('camion') as String),
               acoplado: TransportData(text: cdp.get('acoplado') as String),
-              kmARecorrer: TransportData(text: cdp.get('kmARecorrer') as String),
-              tarifaDeReferencia: TransportData(text: cdp.get('tarifaDeReferencia') as String),
+              kmARecorrer:
+                  TransportData(text: cdp.get('kmARecorrer') as String),
+              tarifaDeReferencia:
+                  TransportData(text: cdp.get('tarifaDeReferencia') as String),
               tarifa: TransportData(text: cdp.get('tarifa') as String),
               pagadorDelFlete:
                   TransportData(text: cdp.get('pagadorDelFlete') as String),
@@ -250,6 +257,8 @@ class CdpFirebaseApi {
         'cuitTransportista': cdpData.transportista.cuit,
         'nombreChofer': cdpData.chofer.nombre,
         'cuitChofer': cdpData.chofer.cuit,
+        'camionChofer': cdpData.chofer.camion,
+        'acopladoChofer': cdpData.chofer.acoplado,
         'granoEspecie': cdpData.granoEspecie.text,
         'tipo': cdpData.tipo.text,
         'cosecha': cdpData.cosecha.text,
@@ -280,7 +289,7 @@ class CdpFirebaseApi {
         'tarifa': cdpData.tarifa.text,
         'pagadorDelFlete': cdpData.pagadorDelFlete.text,
         'aclaracion': cdpData.aclarcion,
-        'dni': cdpData.tarifa,
+        'dni': cdpData.dni,
       },
     );
   }

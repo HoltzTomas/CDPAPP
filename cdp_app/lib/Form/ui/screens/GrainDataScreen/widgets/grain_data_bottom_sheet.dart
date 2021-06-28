@@ -62,7 +62,7 @@ class GrainDataBottomSheet extends StatelessWidget {
           .collection(auth.currentUser!.uid)
           .doc('userData')
           .collection('grainData')
-          .where('tipo', isEqualTo: 'tipo')
+          .where('tipo', isEqualTo: tipo)
           .snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

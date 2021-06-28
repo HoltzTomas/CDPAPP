@@ -18,7 +18,8 @@ class TransportBottomSheetField extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TransportBottomSheetFieldState createState() => _TransportBottomSheetFieldState();
+  _TransportBottomSheetFieldState createState() =>
+      _TransportBottomSheetFieldState();
 }
 
 class _TransportBottomSheetFieldState extends State<TransportBottomSheetField> {
@@ -58,14 +59,11 @@ class _TransportBottomSheetFieldState extends State<TransportBottomSheetField> {
       );
 
   Widget textField() {
-
-    return Container(
-      child: FormTextField(
-          dataWeWantReceive: "${widget.text} (Escriba aqui)",
-          controller: controller,
-          maxLength: 60,
-          keyboardType: TextInputType.number),
-    );
+    return FormTextField(
+        dataWeWantReceive: "${widget.text} (Escriba aqui)",
+        controller: controller,
+        maxLength: 60,
+        keyboardType: TextInputType.number);
   }
 
   Widget title() => Container(

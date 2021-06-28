@@ -5,8 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'Company/ui/screens/sign_in_handler.dart';
 
-
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await disableLandscapeMode();
@@ -14,13 +13,18 @@ void main() async {
 
 Future<void> disableLandscapeMode() async {
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(const ProviderScope(child: CartAPPorte()));
-  });
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then(
+    (_) {
+      runApp(
+        const ProviderScope(
+          child: CartAPPorte(),
+        ),
+      );
+    },
+  );
 }
 
 class CartAPPorte extends StatelessWidget {
-
   const CartAPPorte({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -31,8 +35,7 @@ class CartAPPorte extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: const SignInHandler()
+      home: const SignInHandler(),
     );
   }
 }
-

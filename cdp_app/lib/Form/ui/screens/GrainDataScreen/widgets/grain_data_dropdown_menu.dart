@@ -50,7 +50,7 @@ class GrainDataDropdownMenu extends StatelessWidget {
                         tipo == "kgsEstimados" ||
                         tipo == "pesoBruto" ||
                         tipo == "pesoTara" ||
-                        tipo == "pesoNeto"||
+                        tipo == "pesoNeto" ||
                         tipo == "observaciones") {
                       return GrainBottomSheetField(
                         text: text,
@@ -93,6 +93,7 @@ class GrainDataDropdownMenu extends StatelessWidget {
         builder: (context, watch, child) {
           if (watch(procedenciaProviderToChange!).state.direccion!.isNotEmpty) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -102,6 +103,7 @@ class GrainDataDropdownMenu extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: defaultPadding / 2),
                 Row(
                   children: [
                     Expanded(
@@ -112,7 +114,7 @@ class GrainDataDropdownMenu extends StatelessWidget {
                 ),
                 const SizedBox(height: defaultPadding / 2),
                 Text(
-                  "RENSPA: ${watch(procedenciaProviderToChange!).state.provincia!}",
+                  "RENSPA: ${watch(procedenciaProviderToChange!).state.renspa!}",
                 ),
               ],
             );
@@ -133,6 +135,24 @@ class GrainDataDropdownMenu extends StatelessWidget {
           backgroundColor: Colors.transparent,
           context: context,
           builder: (context) {
+            if (tipo == "procedenciaMercaderia") {
+              return ProcedenciaBottomSheet(
+                text: text,
+                tipo: tipo,
+                providerToChange: procedenciaProviderToChange,
+              );
+            } else if (tipo == "contratoNro" ||
+                tipo == "kgsEstimados" ||
+                tipo == "pesoBruto" ||
+                tipo == "pesoTara" ||
+                tipo == "pesoNeto" ||
+                tipo == "observaciones") {
+              return GrainBottomSheetField(
+                text: text,
+                tipo: tipo,
+                providerToChange: providerToChange,
+              );
+            }
             return GrainDataBottomSheet(
               text: text,
               tipo: tipo,

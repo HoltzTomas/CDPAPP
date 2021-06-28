@@ -35,7 +35,11 @@ class _AddGrainDataDialogState extends State<AddGrainDataDialog> {
               onChanged: (value) {
                 textToUpload = value;
               },
-              decoration: const InputDecoration(hintText: "Nombre"),
+              maxLength: widget.tipo == "cosecha" ? 10 : null,
+              decoration: InputDecoration(
+                hintText: hintText(),
+                helperText: widget.tipo == "cosecha" ? "Ejemplo: 2020-2021" : "",
+              ),
             ),
             const SizedBox(height: defaultPadding / 2),
             Container(
@@ -67,5 +71,13 @@ class _AddGrainDataDialogState extends State<AddGrainDataDialog> {
         ),
       ),
     );
+  }
+
+  String hintText() {
+    if (widget.tipo == "cosecha") {
+      return "Cosecha";
+    } else {
+      return "Nombre";
+    }
   }
 }
