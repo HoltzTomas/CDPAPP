@@ -2,6 +2,7 @@ import 'package:cdp_app/Form/model/transport_data.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TransportDataAlertDialog extends StatefulWidget {
   final String? tipo;
@@ -46,6 +47,11 @@ class _AddAlertDialogState extends State<TransportDataAlertDialog> {
         onChanged: (value) {
           textToUpload = value;
         },
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.deny(
+            RegExp(r'[/\\]'),
+          ),
+        ],
         decoration: const InputDecoration(hintText: "Nombre"),
       );
 

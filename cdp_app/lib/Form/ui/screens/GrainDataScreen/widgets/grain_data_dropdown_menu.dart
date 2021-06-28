@@ -183,8 +183,6 @@ class GrainDataDropdownMenu extends StatelessWidget {
               if (tipo != "procedenciaMercaderia") dataTexts(),
               if (tipo == "procedenciaMercaderia")
                 dataTextsIfProcedenciaMercaderia(),
-              if (tipo == "procedenciaMercaderia")
-                const SizedBox(height: defaultPadding / 2),
             ],
           ),
         ),

@@ -38,7 +38,6 @@ class GrainDataForm extends ConsumerWidget {
             ),
 
             ///Cosecha (Third fact of [GrainDataForm])
-            // TODO: USE DATE SELECTOR OR LIST
             GrainDataDropdownMenu(
               tipo: 'cosecha',
               text: "Cosecha",
@@ -50,6 +49,27 @@ class GrainDataForm extends ConsumerWidget {
               text: "Contrato Numero",
               tipo: "contratoNro",
               providerToChange: contratoNroProvider,
+            ),
+
+            ///Declaracion de Calidad (Sixth fact of [GrainDataForm])
+            GrainDataDropdownMenu(
+              tipo: 'declaracionDeCalidad',
+              text: "Declaracion de calidad",
+              providerToChange: declaracionDeCalidadProvider,
+            ),
+
+            ///Observaciones (Tenth fact of [GrainDataForm])
+            GrainDataDropdownMenu(
+                text: "Observaciones",
+                tipo: "observaciones",
+                providerToChange: observacionesProvider,
+              ),
+
+            ///Procedencia de la Mercaderia (Eleventh fact of [GrainDataForm])
+            GrainDataDropdownMenu(
+              tipo: 'procedenciaMercaderia',
+              text: "Procedencia de la Mercaderia",
+              procedenciaProviderToChange: procedenciaProvider,
             ),
 
             ///Sera Pesada en destino (Fifth fact of [GrainDataForm])
@@ -68,13 +88,6 @@ class GrainDataForm extends ConsumerWidget {
                 tipo: "kgsEstimados",
                 providerToChange: kgsEstimadosProvider,
               ),
-
-            ///Declaracion de Calidad (Sixth fact of [GrainDataForm])
-            GrainDataDropdownMenu(
-              tipo: 'declaracionDeCalidad',
-              text: "Declaracion de calidad",
-              providerToChange: declaracionDeCalidadProvider,
-            ),
 
             ///Peso Bruto (Seventh fact of [GrainDataForm])
             if (watch(seraPesadaProvider).state == false)
@@ -99,20 +112,6 @@ class GrainDataForm extends ConsumerWidget {
                 tipo: "pesoNeto",
                 providerToChange: pesoNetoProvider,
               ),
-
-            ///Observaciones (Tenth fact of [GrainDataForm])
-            GrainDataDropdownMenu(
-                text: "Observaciones",
-                tipo: "observaciones",
-                providerToChange: observacionesProvider,
-              ),
-
-            ///Procedencia de la Mercaderia (Eleventh fact of [GrainDataForm])
-            GrainDataDropdownMenu(
-              tipo: 'procedenciaMercaderia',
-              text: "Procedencia de la Mercaderia",
-              procedenciaProviderToChange: procedenciaProvider,
-            ),
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:cdp_app/PDF/repository/pdf_cloud_repository.dart';
 import 'package:cdp_app/PDF/repository/pdf_storage_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class UploadPdfFileDialog extends StatefulWidget {
   const UploadPdfFileDialog({Key? key, required this.userFile})
@@ -59,6 +60,9 @@ class _UploadPdfFileDialogState extends State<UploadPdfFileDialog> {
               onChanged: (value) {
                 fileName = value;
               },
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ],
               decoration: const InputDecoration(hintText: "Nombre"),
             ),
           ],

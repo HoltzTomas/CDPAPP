@@ -2,6 +2,7 @@ import 'package:cdp_app/Form/model/destination.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DestinationAlertDialog extends StatefulWidget {
   final String? tipo;
@@ -26,6 +27,9 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
             onChanged: (value) {
               direccionToUpload = value;
             },
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+            ],
             decoration: const InputDecoration(hintText: "Direccion"),
           ),
           const SizedBox(height: defaultPadding / 2),
@@ -33,15 +37,20 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
             onChanged: (value) {
               provinciaToUpload = value;
             },
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+            ],
             decoration: const InputDecoration(hintText: "Provincia"),
           ),
           const SizedBox(height: defaultPadding / 2),
           TextField(
-            onChanged: (value) {
-              localidadToUpload = value;
-            },
-            decoration: const InputDecoration(hintText: "Localidad"),
-          ),
+              onChanged: (value) {
+                localidadToUpload = value;
+              },
+              decoration: const InputDecoration(hintText: "Localidad"),
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ]),
           const SizedBox(height: defaultPadding / 2),
         ],
       );

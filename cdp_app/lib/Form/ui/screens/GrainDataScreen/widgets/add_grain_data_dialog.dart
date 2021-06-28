@@ -2,6 +2,7 @@ import 'package:cdp_app/Form/model/grain_data.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddGrainDataDialog extends StatefulWidget {
   final String? tipo;
@@ -38,8 +39,12 @@ class _AddGrainDataDialogState extends State<AddGrainDataDialog> {
               maxLength: widget.tipo == "cosecha" ? 10 : null,
               decoration: InputDecoration(
                 hintText: hintText(),
-                helperText: widget.tipo == "cosecha" ? "Ejemplo: 2020-2021" : "",
+                helperText:
+                    widget.tipo == "cosecha" ? "Ejemplo: 2020-2021" : "",
               ),
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ],
             ),
             const SizedBox(height: defaultPadding / 2),
             Container(

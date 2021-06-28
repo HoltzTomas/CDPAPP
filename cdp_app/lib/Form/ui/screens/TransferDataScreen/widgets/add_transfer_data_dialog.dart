@@ -2,6 +2,7 @@ import 'package:cdp_app/Form/model/transfer_data.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddTransferDataDialog extends StatefulWidget {
   final String? tipo;
@@ -28,6 +29,9 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
           onChanged: (value) {
             nombreToUpload = value;
           },
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+          ],
           decoration: const InputDecoration(hintText: "Nombre"),
         ),
         const SizedBox(height: defaultPadding / 2),
@@ -35,6 +39,9 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
           onChanged: (value) {
             cuitToUpload = value;
           },
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+          ],
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(hintText: "Cuit"),
         ),
@@ -44,6 +51,9 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             onChanged: (value) {
               camionToUpload = value;
             },
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+            ],
             decoration: const InputDecoration(hintText: "Camion"),
           ),
         if (widget.tipo == "chofer") const SizedBox(height: defaultPadding / 2),
@@ -52,6 +62,9 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             onChanged: (value) {
               acopladoToUpload = value;
             },
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+            ],
             decoration: const InputDecoration(hintText: "Acoplado"),
           ),
       ],

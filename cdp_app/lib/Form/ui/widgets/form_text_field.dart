@@ -56,6 +56,9 @@ class FormTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12)),
           ),
           onChanged: onChanged,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+          ],
         ),
       ),
     );

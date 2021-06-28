@@ -2,6 +2,7 @@ import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ProcedenciaMercaderiaAlertDialog extends StatefulWidget {
   final String? tipo;
@@ -38,12 +39,18 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
                 direccionToUpload = value;
               },
               decoration: const InputDecoration(hintText: "Direccion"),
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ],
             ),
             const SizedBox(height: defaultPadding / 2),
             TextField(
               onChanged: (value) {
                 provinciaToUpload = value;
               },
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ],
               decoration: const InputDecoration(hintText: "Provincia"),
             ),
             const SizedBox(height: defaultPadding / 2),
@@ -51,6 +58,9 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
               onChanged: (value) {
                 localidadToUpload = value;
               },
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ],
               decoration: const InputDecoration(hintText: "Localidad"),
             ),
             const SizedBox(height: defaultPadding / 2),
@@ -58,6 +68,9 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
               onChanged: (value) {
                 establecimientoToUpload = value;
               },
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ],
               decoration: const InputDecoration(hintText: "Establecimiento"),
             ),
             const SizedBox(height: defaultPadding / 2),
@@ -65,6 +78,9 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
               onChanged: (value) {
                 renspaToUpload = value;
               },
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+              ],
               decoration: const InputDecoration(hintText: "RENSPA"),
             ),
             const SizedBox(height: defaultPadding),
