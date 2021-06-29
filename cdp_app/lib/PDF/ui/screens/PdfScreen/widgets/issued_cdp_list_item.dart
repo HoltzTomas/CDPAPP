@@ -37,58 +37,84 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
       ),
       child: Row(
         children: [
-          Text(
-            widget.cdp.cdpName,
-            style: const TextStyle(
+          Expanded(
+            child: Text(
+              widget.cdp.cdpName,
+              overflow: TextOverflow.fade,
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
-                decoration: TextDecoration.underline),
+              ),
+            ),
           ),
-          const Spacer(),
-          IconButton(
-            onPressed: () {
-              context.read(isCdpBeingEdited).state = true;
-              context.read(cdpToEditsName).state = widget.cdp.cdpName;
-              Navigator.push(
-                context,
-                PageTransition(
-                  type: PageTransitionType.rightToLeft,
-                  child: FormScreen(
-                    pdfFile: widget.userFile,
-                  ),
-                ),
-              );
-            },
-            icon: const Icon(Icons.edit),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(child: editCdpButton(context)),
+                Expanded(child: copyCdpButton(context)),
+                Expanded(child: viewCdpButton()),
+              ],
+            ),
           ),
-          IconButton(
-            onPressed: () {
-              final CdpApi cdpApi = CdpApi();
-              cdpApi.copyCDP(context,
-                  pdfFile: widget.userFile, cdp: widget.cdp);
-            },
-            icon: const Icon(Icons.copy),
-          ),
-          IconButton(
-            onPressed: () {
-              final CdpApi cdpApi = CdpApi();
-              setState(() {
-                isLoading = true;
-              });
-              cdpApi
-                  .fillPdfFileWithCdpData(
-                      file: widget.userFile, cdp: widget.cdp)
-                  .whenComplete(() {
-                setState(() {
-                  isLoading = false;
-                });
-              });
-            },
-            icon: isLoading
-                ? const CircularProgressIndicator()
-                : const Icon(Icons.arrow_forward_ios),
-          )
         ],
       ),
+    );
+  }
+
+  ///Let's the user edits this CDP's data
+  Widget editCdpButton(BuildContext context) {
+    return 
+        IconButton(
+          onPressed: () {
+            context.read(isCdpBeingEdited).state = true;
+            context.read(cdpToEditsName).state = widget.cdp.cdpName;
+            Navigator.push(
+              context,
+              PageTransition(
+                type: PageTransitionType.rightToLeft,
+                child: FormScreen(
+                  pdfFile: widget.userFile,
+                ),
+              ),
+            );
+          },
+          icon: const Icon(Icons.edit),
+    );
+  }
+
+  ///Let's the user copy this CDP's data yo create a new one
+  Widget copyCdpButton(BuildContext context) {
+    return Column(
+      children: [
+        IconButton(
+          onPressed: () {
+            final CdpApi cdpApi = CdpApi();
+            cdpApi.copyCDP(context, pdfFile: widget.userFile, cdp: widget.cdp);
+          },
+          icon: const Icon(Icons.copy),
+        ),
+      ],
+    );
+  }
+
+  ///Let's the user see this CDP's in a PDF
+  Widget viewCdpButton() {
+    return IconButton(
+      onPressed: () {
+        final CdpApi cdpApi = CdpApi();
+        setState(() {
+          isLoading = true;
+        });
+        cdpApi
+            .fillPdfFileWithCdpData(file: widget.userFile, cdp: widget.cdp)
+            .whenComplete(() {
+          setState(() {
+            isLoading = false;
+          });
+        });
+      },
+      icon: isLoading
+          ? const CircularProgressIndicator()
+          : const Icon(Icons.picture_as_pdf),
     );
   }
 }

@@ -24,7 +24,6 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
 
   @override
   void initState() {
-    final AuthRepository authRepository = AuthRepository();
     user = auth.currentUser!;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       checkEmailVerified();
@@ -34,7 +33,7 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
       user.sendEmailVerification();
     } else {
       timer.cancel();
-      homeWidget = HomeScreen();
+      homeWidget = const HomeScreen();
     }
     super.initState();
   }
@@ -51,17 +50,19 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
   }
 
   Future<void> checkEmailVerified() async {
-    final AuthRepository authRepository = AuthRepository();
     user = auth.currentUser!;
-    
+
     await user.reload();
     if (user.emailVerified) {
       timer.cancel();
       setState(() {
-        homeWidget = HomeScreen();
+        homeWidget = const HomeScreen();
       });
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Email verificado con exito')));
+        const SnackBar(
+          content: Text('Email verificado con exito'),
+        ),
+      );
     }
   }
 }

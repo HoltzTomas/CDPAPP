@@ -1,6 +1,7 @@
 import 'package:cdp_app/CDP/repository/cdp_cloud_repository.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/emitir_cdp_fab.dart';
+import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/icons_references.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,10 +33,12 @@ class PdfScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:
           case ConnectionState.done:
-            return Column(
-              children: cdpCloudRepository.buildCDPs(
-                list: snapshot.data!.docs,
-                userFile: userFile,
+            return SingleChildScrollView(
+              child: Column(
+                children: cdpCloudRepository.buildCDPs(
+                  list: snapshot.data!.docs,
+                  userFile: userFile,
+                ),
               ),
             );
         }
@@ -51,25 +54,35 @@ class PdfScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        title: Text(userFile.pdfName),
-      ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: defaultPadding),
-              child: avaiblesText(),
-            ),
-            emitedCdpsList(),
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          title: Text(userFile.pdfName),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.help),
+              onPressed: () {
+                showDialog(
+                    context: context, builder: (context) => const HelpDialog());
+              },
+            )
           ],
         ),
-      ),
-      floatingActionButton: EmitirCdpFAB(
-        selectedFile: userFile,
-      ),
-    );
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: defaultPadding),
+                child: avaiblesText(),
+              ),
+              emitedCdpsList(),
+            ],
+          ),
+        ),
+        floatingActionButton: userFile.availableCDPs > 0
+            ? EmitirCdpFAB(
+                selectedFile: userFile,
+              )
+            : null);
   }
 }

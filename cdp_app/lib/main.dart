@@ -32,8 +32,9 @@ class CartAPPorte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CDP APP',
       theme: ThemeData(
+        primaryColor: Colors.white,
         primarySwatch: Colors.grey,
       ),
       home: const SplashScreenPage(),

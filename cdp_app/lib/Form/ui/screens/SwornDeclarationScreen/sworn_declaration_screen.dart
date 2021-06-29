@@ -1,11 +1,4 @@
-import 'package:cdp_app/CDP/models/cdp.dart';
 import 'package:cdp_app/CDP/providers/cdp_providers.dart';
-import 'package:cdp_app/CDP/repository/cdp_cloud_repository.dart';
-import 'package:cdp_app/Form/providers/destination_providers.dart';
-import 'package:cdp_app/Form/providers/grain_data_providers.dart';
-import 'package:cdp_app/Form/providers/sworn_declaration_providers.dart';
-import 'package:cdp_app/Form/providers/transfer_data_providers.dart';
-import 'package:cdp_app/Form/providers/transport_data_providers.dart';
 import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/widgets/sworn_declaration_form.dart';
 import 'package:cdp_app/Form/ui/widgets/edit_cdp_button.dart';
 import 'package:cdp_app/Form/ui/widgets/emit_cdp_button.dart';
@@ -17,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final StateProvider<String> cdpToEditsName = StateProvider<String>((ref) => "");
+final StateProvider<String> cdpToEmitsName = StateProvider<String>((ref) => "");
 
 class SwornDeclarationScreen extends ConsumerWidget {
   ///The PDF needs four different types of data.
@@ -30,13 +24,17 @@ class SwornDeclarationScreen extends ConsumerWidget {
 
   final TextEditingController cdpNameController = TextEditingController();
 
-  Widget filesNameTextField() => Container(
+  Widget filesNameTextField(BuildContext context) => Container(
         margin: const EdgeInsets.symmetric(
           horizontal: defaultPadding,
         ),
         child: FormTextField(
           dataWeWantReceive: "Nombre de la Carta de Porte",
           controller: cdpNameController,
+          maxLength: 20,
+          onChanged: (value){
+            context.read(cdpToEmitsName).state = value;
+          },
         ),
       );
 
@@ -50,14 +48,14 @@ class SwornDeclarationScreen extends ConsumerWidget {
             const SizedBox(height: defaultPadding),
             const SwornDeclarationForm(),
             const SizedBox(height: defaultPadding),
-            if (!watch(isCdpBeingEdited).state) filesNameTextField(),
+            if (!watch(isCdpBeingEdited).state) filesNameTextField(context),
             const SizedBox(height: defaultPadding / 2),
             Row(
               children: [
                 const Spacer(),
                 if (!watch(isCdpBeingEdited).state)
                   EmitCdpButton(
-                      cdpName: cdpNameController.text,
+                      cdpName: watch(cdpToEmitsName).state,
                       selectedFile: selectedFile),
                 if (watch(isCdpBeingEdited).state)
                   EditCdpButton(selectedFile: selectedFile),

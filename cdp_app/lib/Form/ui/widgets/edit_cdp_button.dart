@@ -9,6 +9,7 @@ import 'package:cdp_app/Form/providers/transport_data_providers.dart';
 import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/sworn_declaration_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,7 +28,7 @@ class EditCdpButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(9),
           ),
           child: TextButton(
-            onPressed: () {
+            onPressed: () async {
               final CdpCloudRepository cdpCloudRepository =
                   CdpCloudRepository();
               cdpCloudRepository.editCDP(
@@ -89,7 +90,7 @@ class EditCdpButton extends StatelessWidget {
                   content: Text('La carta de porte fue editada con exito'),
                 ),
               );
-              Navigator.pop(context);
+              await FirebaseFirestore.instance.clearPersistence();
               Navigator.pop(context);
             },
             child: const Text(
