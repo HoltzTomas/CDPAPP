@@ -1,5 +1,6 @@
 import 'package:cdp_app/Form/model/transfer_data.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
+import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +22,7 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
   String cuitToUpload = "";
   String camionToUpload = "";
   String acopladoToUpload = "";
+  bool isValidate = true;
 
   Widget textFields() {
     return Column(
@@ -32,7 +34,12 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
-          decoration: const InputDecoration(hintText: "Nombre"),
+          decoration: InputDecoration(
+            hintText: "Nombre",
+            errorText: !isValidate && nombreToUpload.isEmpty
+                ? "Completa el campo"
+                : null,
+          ),
         ),
         const SizedBox(height: defaultPadding / 2),
         TextField(
@@ -43,7 +50,12 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(hintText: "Cuit"),
+          decoration: InputDecoration(
+            hintText: "Cuit",
+            errorText: !isValidate && cuitToUpload.isEmpty
+                ? "Completa el campo"
+                : null,
+          ),
         ),
         const SizedBox(height: defaultPadding / 2),
         if (widget.tipo == "chofer")
@@ -54,7 +66,12 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
-            decoration: const InputDecoration(hintText: "Camion"),
+            decoration: InputDecoration(
+              hintText: "Camion",
+              errorText: !isValidate && camionToUpload.isEmpty
+                  ? "Completa el campo"
+                  : null,
+            ),
           ),
         if (widget.tipo == "chofer") const SizedBox(height: defaultPadding / 2),
         if (widget.tipo == "chofer")
@@ -65,7 +82,12 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
-            decoration: const InputDecoration(hintText: "Acoplado"),
+            decoration: InputDecoration(
+              hintText: "Acoplado",
+              errorText: !isValidate && acopladoToUpload.isEmpty
+                  ? "Completa el campo"
+                  : null,
+            ),
           ),
       ],
     );
@@ -81,18 +103,27 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
         ),
         child: TextButton(
           onPressed: () {
-            final FormCloudRepository formCloudRepository =
-                FormCloudRepository();
-            formCloudRepository.uploadTransferData(
-              dataToUpload: TransferData(
-                  nombre: nombreToUpload,
-                  cuit: cuitToUpload,
-                  camion: camionToUpload,
-                  acoplado: acopladoToUpload,
-                  tipo: widget.tipo),
-              context: context,
-            );
-            Navigator.pop(context);
+            if (nombreToUpload.isNotEmpty &&
+                cuitToUpload.isNotEmpty &&
+                camionToUpload.isNotEmpty &&
+                acopladoToUpload.isNotEmpty) {
+              final FormCloudRepository formCloudRepository =
+                  FormCloudRepository();
+              formCloudRepository.uploadTransferData(
+                dataToUpload: TransferData(
+                    nombre: nombreToUpload,
+                    cuit: cuitToUpload,
+                    camion: camionToUpload,
+                    acoplado: acopladoToUpload,
+                    tipo: widget.tipo),
+                context: context,
+              );
+              Navigator.pop(context);
+            } else {
+              setState(() {
+                isValidate = false;
+              });
+            }
           },
           child: const Text(
             "Agregar",
@@ -103,23 +134,28 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        "Agregar ${widget.text}",
-        style: const TextStyle(color: primaryColor),
-      ),
-      content: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: MediaQuery.of(context).size.height * 0.5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            textFields(),
-            const SizedBox(height: defaultPadding),
-            addDataTextButton()
-          ],
+    return Center(
+      child: SingleChildScrollView(
+            child: CustomDialog(
+          button: addDataTextButton(),
+          child: contentBox(),
         ),
       ),
+    );
+  }
+
+  Widget contentBox() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Agregar ${widget.text}",
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: defaultPadding / 2),
+        textFields(),
+        const SizedBox(height: defaultPadding),
+      ],
     );
   }
 }

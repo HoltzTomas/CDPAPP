@@ -36,7 +36,7 @@ class TransferDataForm extends ConsumerWidget {
             ///Corredor comprador (Fourth fact of [TransferData])
             TransferDataDropdownMenu(
               tipo: 'corredorComprador',
-              text: "Corredor Cmprador",
+              text: "Corredor Comprador",
               providerToChange: corredorCompradorProvider,
             ),
 

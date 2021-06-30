@@ -1,5 +1,6 @@
 import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
+import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,97 +23,142 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
   String localidadToUpload = "";
   String establecimientoToUpload = "";
   String renspaToUpload = "";
+  bool isValidate = true;
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Agregar ${widget.text}",
-          style: const TextStyle(color: primaryColor)),
-      content: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: MediaQuery.of(context).size.height * 0.5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              onChanged: (value) {
-                direccionToUpload = value;
-              },
-              decoration: const InputDecoration(hintText: "Direccion"),
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
-              ],
-            ),
-            const SizedBox(height: defaultPadding / 2),
-            TextField(
-              onChanged: (value) {
-                provinciaToUpload = value;
-              },
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
-              ],
-              decoration: const InputDecoration(hintText: "Provincia"),
-            ),
-            const SizedBox(height: defaultPadding / 2),
-            TextField(
-              onChanged: (value) {
-                localidadToUpload = value;
-              },
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
-              ],
-              decoration: const InputDecoration(hintText: "Localidad"),
-            ),
-            const SizedBox(height: defaultPadding / 2),
-            TextField(
-              onChanged: (value) {
-                establecimientoToUpload = value;
-              },
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
-              ],
-              decoration: const InputDecoration(hintText: "Establecimiento"),
-            ),
-            const SizedBox(height: defaultPadding / 2),
-            TextField(
-              onChanged: (value) {
-                renspaToUpload = value;
-              },
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
-              ],
-              decoration: const InputDecoration(hintText: "RENSPA"),
-            ),
-            const SizedBox(height: defaultPadding),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.25,
-              decoration: const BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  final FormCloudRepository cloudRepository =
-                      FormCloudRepository();
-                  cloudRepository.uploadProcedenciaMercaderia(
-                    context: context,
-                    dataToUpload: ProcedenciaMercaderia(
-                      direccion: direccionToUpload,
-                      provincia: provinciaToUpload,
-                      localidad: localidadToUpload,
-                      establecimiento: establecimientoToUpload,
-                      renspa: renspaToUpload
-                    ),
-                  );
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  "Agregar",
-                  style: TextStyle(color: darkColor),
-                ),
-              ),
-            ),
+    return Center(
+      child: SingleChildScrollView(
+            child: CustomDialog(
+          button: addButton(context),
+          child: contentBox(context),
+        ),
+      ),
+    );
+  }
+
+  Widget contentBox(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          "Agregar ${widget.text}",
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: defaultPadding),
+        TextField(
+          onChanged: (value) {
+            direccionToUpload = value;
+          },
+          decoration: InputDecoration(
+            hintText: "Direccion",
+            errorText: !isValidate && direccionToUpload.isEmpty
+                ? "Completa el campo"
+                : null,
+          ),
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
+        ),
+        const SizedBox(height: defaultPadding / 2),
+        TextField(
+          onChanged: (value) {
+            provinciaToUpload = value;
+          },
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+          ],
+          decoration: InputDecoration(
+            hintText: "Provincia",
+            errorText: !isValidate && provinciaToUpload.isEmpty
+                ? "Completa el campo"
+                : null,
+          ),
+        ),
+        const SizedBox(height: defaultPadding / 2),
+        TextField(
+          onChanged: (value) {
+            localidadToUpload = value;
+          },
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+          ],
+          decoration: InputDecoration(
+            hintText: "Localidad",
+            errorText: !isValidate && localidadToUpload.isEmpty
+                ? "Completa el campo"
+                : null,
+          ),
+        ),
+        const SizedBox(height: defaultPadding / 2),
+        TextField(
+          onChanged: (value) {
+            establecimientoToUpload = value;
+          },
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+          ],
+          decoration: InputDecoration(
+            hintText: "Establecimiento",
+            errorText: !isValidate && establecimientoToUpload.isEmpty
+                ? "Completa el campo"
+                : null,
+          ),
+        ),
+        const SizedBox(height: defaultPadding / 2),
+        TextField(
+          onChanged: (value) {
+            renspaToUpload = value;
+          },
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+          ],
+          decoration: InputDecoration(
+            hintText: "RENSPA",
+            errorText: !isValidate && renspaToUpload.isEmpty
+                ? "Completa el campo"
+                : null,
+          ),
+        ),
+        const SizedBox(height: defaultPadding / 2),
+      ],
+    );
+  }
+
+  Widget addButton(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.25,
+      decoration: const BoxDecoration(
+        color: primaryColor,
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      child: TextButton(
+        onPressed: () {
+          if (direccionToUpload.isNotEmpty &&
+              localidadToUpload.isNotEmpty &&
+              provinciaToUpload.isNotEmpty &&
+              establecimientoToUpload.isNotEmpty &&
+              renspaToUpload.isNotEmpty) {
+            final FormCloudRepository cloudRepository = FormCloudRepository();
+            cloudRepository.uploadProcedenciaMercaderia(
+              context: context,
+              dataToUpload: ProcedenciaMercaderia(
+                  direccion: direccionToUpload,
+                  provincia: provinciaToUpload,
+                  localidad: localidadToUpload,
+                  establecimiento: establecimientoToUpload,
+                  renspa: renspaToUpload),
+            );
+            Navigator.pop(context);
+          } else {
+            setState(() {
+              isValidate = false;
+            });
+          }
+        },
+        child: const Text(
+          "Agregar",
+          style: TextStyle(color: darkColor),
         ),
       ),
     );

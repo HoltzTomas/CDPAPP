@@ -1,5 +1,6 @@
 import 'package:cdp_app/Form/model/transport_data.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
+import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +19,7 @@ class TransportDataAlertDialog extends StatefulWidget {
 
 class _AddAlertDialogState extends State<TransportDataAlertDialog> {
   String textToUpload = "";
+  bool isValidate = true;
 
   Widget addDataButton(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width * 0.25,
@@ -27,14 +29,20 @@ class _AddAlertDialogState extends State<TransportDataAlertDialog> {
         ),
         child: TextButton(
           onPressed: () {
-            final FormCloudRepository formCloudRepository =
-                FormCloudRepository();
-            formCloudRepository.uploadTransportData(
-              dataToUpload:
-                  TransportData(text: textToUpload, tipo: widget.tipo),
-              context: context,
-            );
-            Navigator.pop(context);
+            if (textToUpload.isNotEmpty) {
+              final FormCloudRepository formCloudRepository =
+                  FormCloudRepository();
+              formCloudRepository.uploadTransportData(
+                dataToUpload:
+                    TransportData(text: textToUpload, tipo: widget.tipo),
+                context: context,
+              );
+              Navigator.pop(context);
+            } else {
+              setState(() {
+                isValidate = false;
+              });
+            }
           },
           child: const Text(
             "Agregar",
@@ -52,26 +60,37 @@ class _AddAlertDialogState extends State<TransportDataAlertDialog> {
             RegExp(r'[/\\]'),
           ),
         ],
-        decoration: const InputDecoration(hintText: "Nombre"),
+        decoration: InputDecoration(
+            hintText: "Nombre",
+            errorText: !isValidate && textToUpload.isEmpty
+                ? "Complete el campo"
+                : null),
       );
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Agregar ${widget.text}",
-          style: const TextStyle(color: primaryColor)),
-      content: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: MediaQuery.of(context).size.height * 0.5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            textField(),
-            const SizedBox(height: defaultPadding),
-            addDataButton(context),
-          ],
+    return Center(
+      child: SingleChildScrollView(
+        child: CustomDialog(
+          button: addDataButton(context),
+          child: contentBox(context),
         ),
       ),
+    );
+  }
+
+  Widget contentBox(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Agregar ${widget.text}",
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: defaultPadding / 2),
+        textField(),
+        const SizedBox(height: defaultPadding),
+      ],
     );
   }
 }

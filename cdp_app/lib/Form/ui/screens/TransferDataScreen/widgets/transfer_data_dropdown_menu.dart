@@ -68,7 +68,8 @@ class TransferDataDropdownMenu extends ConsumerWidget {
                 const SizedBox(height: defaultPadding / 2),
               if (watch(providerToChange!).state!.camion!.isNotEmpty)
                 Text("Camion: ${watch(providerToChange!).state!.camion!}"),
-              const SizedBox(height: defaultPadding / 2),
+              if (watch(providerToChange!).state!.camion!.isNotEmpty)
+                const SizedBox(height: defaultPadding / 2),
               if (watch(providerToChange!).state!.acoplado!.isNotEmpty)
                 Text("Acoplado: ${watch(providerToChange!).state!.acoplado!}"),
             ],

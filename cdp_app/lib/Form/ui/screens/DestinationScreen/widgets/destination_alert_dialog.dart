@@ -1,5 +1,6 @@
 import 'package:cdp_app/Form/model/destination.dart';
 import 'package:cdp_app/Form/repository/form_cloud_repository.dart';
+import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +21,7 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
   String direccionToUpload = "";
   String provinciaToUpload = "";
   String localidadToUpload = "";
+  bool isValidate = true;
 
   Widget textFields() => Column(
         children: [
@@ -30,7 +32,10 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
-            decoration: const InputDecoration(hintText: "Direccion"),
+            decoration: InputDecoration(
+                hintText: "Direccion",
+                errorText:
+                    !isValidate && direccionToUpload.isEmpty ? "Complete la direccion" : null),
           ),
           const SizedBox(height: defaultPadding / 2),
           TextField(
@@ -40,14 +45,21 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
-            decoration: const InputDecoration(hintText: "Provincia"),
+            decoration: InputDecoration(
+                hintText: "Provincia",
+                errorText:
+                    !isValidate && provinciaToUpload.isEmpty ? "Complete la provincia" : null),
           ),
           const SizedBox(height: defaultPadding / 2),
           TextField(
               onChanged: (value) {
                 localidadToUpload = value;
               },
-              decoration: const InputDecoration(hintText: "Localidad"),
+              decoration: InputDecoration(
+                  hintText: "Localidad",
+                  errorText: !isValidate && localidadToUpload.isEmpty
+                      ? "Complete la localidad"
+                      : null),
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
               ]),
@@ -63,17 +75,25 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
         ),
         child: TextButton(
           onPressed: () {
-            final FormCloudRepository formCloudRepository =
-                FormCloudRepository();
-            formCloudRepository.uploadDestination(
-              dataToUpload: Destination(
-                direccion: direccionToUpload,
-                provincia: provinciaToUpload,
-                localidad: localidadToUpload,
-              ),
-              context: context,
-            );
-            Navigator.pop(context);
+            if (direccionToUpload.isNotEmpty &&
+                localidadToUpload.isNotEmpty &&
+                provinciaToUpload.isNotEmpty) {
+              final FormCloudRepository formCloudRepository =
+                  FormCloudRepository();
+              formCloudRepository.uploadDestination(
+                dataToUpload: Destination(
+                  direccion: direccionToUpload,
+                  provincia: provinciaToUpload,
+                  localidad: localidadToUpload,
+                ),
+                context: context,
+              );
+              Navigator.pop(context);
+            } else {
+              setState(() {
+                isValidate = false;
+              });
+            }
           },
           child: const Text(
             "Agregar",
@@ -84,21 +104,29 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Agregar ${widget.text}",
-          style: const TextStyle(color: primaryColor)),
-      content: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.75,
-        height: MediaQuery.of(context).size.height * 0.5,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            textFields(),
-            const SizedBox(height: defaultPadding),
-            addDestinationButton(context),
-          ],
+    return Center(
+      child: SingleChildScrollView(
+            child: CustomDialog(
+          button: addDestinationButton(context),
+          child: boxContent(context),
         ),
       ),
+    );
+  }
+
+  Widget boxContent(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "Agregar ${widget.text}",
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: defaultPadding),
+        textFields(),
+        const SizedBox(height: defaultPadding),
+      ],
     );
   }
 }

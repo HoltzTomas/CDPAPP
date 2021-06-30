@@ -1,12 +1,11 @@
 import 'package:cdp_app/CDP/repository/cdp_cloud_repository.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/emitir_cdp_fab.dart';
-import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/icons_references.dart';
+import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/icons_references_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PdfScreen extends StatelessWidget {
   const PdfScreen({Key? key, required this.userFile}) : super(key: key);
@@ -62,7 +61,7 @@ class PdfScreen extends StatelessWidget {
               icon: Icon(Icons.help),
               onPressed: () {
                 showDialog(
-                    context: context, builder: (context) => const HelpDialog());
+                    context: context, builder: (context) => const IconReferencesDialog());
               },
             )
           ],

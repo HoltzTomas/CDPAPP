@@ -1,13 +1,17 @@
+import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 
-class HelpDialog extends StatefulWidget {
-  const HelpDialog({Key? key}) : super(key: key);
+class CustomDialog extends StatefulWidget {
+  const CustomDialog({Key? key, this.child, this.button}) : super(key: key);
+
+  final Widget? child;
+  final Widget? button;
 
   @override
-  _HelpDialogState createState() => _HelpDialogState();
+  _CustomDialogState createState() => _CustomDialogState();
 }
 
-class _HelpDialogState extends State<HelpDialog> {
+class _CustomDialogState extends State<CustomDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -31,24 +35,17 @@ class _HelpDialogState extends State<HelpDialog> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [
-              BoxShadow(
-                  color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+              BoxShadow(offset: Offset(0, 10), blurRadius: 10),
             ],
           ),
-          child: Column(
+          child: widget.button == null ? widget.child : Column(
             mainAxisSize: MainAxisSize.min,
-            children: const <Widget>[
-              Text(
-                "Referencias",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "Una vez emitida la carta de porte, tienes diferentes opciones",
-                style: TextStyle(fontSize: 14),
-                textAlign: TextAlign.center,
+            children: [
+              widget.child!,
+              const SizedBox(height: defaultPadding),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: widget.button
               ),
             ],
           ),
