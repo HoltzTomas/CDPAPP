@@ -39,22 +39,33 @@ class EmitirCdpFAB extends StatelessWidget {
               ),
               child: TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.rightToLeft,
-                      child: FormScreen(
-                        pdfFile: PdfFile(
-                          pdfUrl: snapshot.data!.get('pdfUrl') as String,
-                          pdfName: snapshot.data!.get('pdfName') as String,
-                          availableCDPs: snapshot.data!.get('availableCDPs') as double,
-                          issuedCDPs: snapshot.data!.get('issuedCDPs') as double,
-                          time: snapshot.data!.get('time') as Timestamp
+                  if (snapshot.data!.get('availableCDPs') as double > 0) {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        child: FormScreen(
+                          pdfFile: PdfFile(
+                              pdfUrl: snapshot.data!.get('pdfUrl') as String,
+                              pdfName: snapshot.data!.get('pdfName') as String,
+                              availableCDPs:
+                                  snapshot.data!.get('availableCDPs') as double,
+                              issuedCDPs:
+                                  snapshot.data!.get('issuedCDPs') as double,
+                              time: snapshot.data!.get('time') as Timestamp),
                         ),
                       ),
-                    ),
-                  );
-                  context.read(isCdpBeingEdited).state = false;
+                    );
+                    context.read(isCdpBeingEdited).state = false;
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "No hay cartas de porte disponibles en este archivo",
+                        ),
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
                   "Emitir carta de porte",

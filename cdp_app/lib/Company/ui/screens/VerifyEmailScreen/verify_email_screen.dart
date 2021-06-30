@@ -22,7 +22,7 @@ class VerifyEmailScreen extends StatelessWidget {
           child: Column(
             children: [
               const Text(
-                "¡Bienvenido a CDPApp!",
+                "¡Verifica tu direccion de correo!!",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -30,14 +30,11 @@ class VerifyEmailScreen extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding / 2),
               Text(
-                "Verifica el correo electronico que enviamos a ${auth.currentUser!.email!} para continuar.",
+                "Presiona el link que te enviamos a ${auth.currentUser!.email!} para continuar.",
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: defaultPadding / 2),
-              const Text(
-                " Al verificar tu direccion de correo electronico esta pantalla se actualizara automaticamente.",
-                textAlign: TextAlign.center,
-              ),
+              const CircularProgressIndicator(),
               const SizedBox(height: defaultPadding * 2),
               const ResendEmailButton(),
             ],

@@ -33,12 +33,13 @@ class PdfScreen extends StatelessWidget {
           case ConnectionState.active:
           case ConnectionState.done:
             return SingleChildScrollView(
-              child: Column(
-                children: cdpCloudRepository.buildCDPs(
+              child: Column(children: [
+                ...cdpCloudRepository.buildCDPs(
                   list: snapshot.data!.docs,
                   userFile: userFile,
                 ),
-              ),
+                const SizedBox(height: defaultPadding * 2),
+              ]),
             );
         }
       },
@@ -63,7 +64,10 @@ class PdfScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:
           case ConnectionState.done:
-            return Text("Disponibles: ${snapshot.data!.get('availableCDPs').toString()}");
+            return Text(
+              "Disponibles: ${snapshot.data!.get('availableCDPs').toString()}",
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            );
         }
       },
     );
@@ -86,18 +90,29 @@ class PdfScreen extends StatelessWidget {
             )
           ],
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: defaultPadding),
-                child: avaiblesText(),
-              ),
-              emitedCdpsList(),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: defaultPadding),
+                  child: avaiblesText(),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: defaultPadding, vertical: defaultPadding / 2),
+                  child: const Text(
+                    "Tip: Al copiar una carta de porte debera volver a colocar su firma.",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                emitedCdpsList(),
+              ],
+            ),
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: userFile.availableCDPs > 0
             ? EmitirCdpFAB(
                 selectedFile: userFile,
