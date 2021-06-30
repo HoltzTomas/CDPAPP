@@ -45,10 +45,29 @@ class PdfScreen extends StatelessWidget {
     );
   }
 
-  Widget avaiblesText() => Text(
-        "Disponibles: ${userFile.availableCDPs.round()}",
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-      );
+  Widget avaiblesText() {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection(currentUser!.uid)
+          .doc('pdfs')
+          .collection('pdfFiles')
+          .doc(userFile.pdfName)
+          .snapshots(),
+      builder: (BuildContext context,
+          AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return const Center(child: Text("No hay coneccion a internet"));
+          case ConnectionState.waiting:
+            return const Center(child: CircularProgressIndicator());
+          case ConnectionState.active:
+          case ConnectionState.done:
+            return Text("Disponibles: ${snapshot.data!.get('availableCDPs').toString()}");
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +80,8 @@ class PdfScreen extends StatelessWidget {
               icon: Icon(Icons.help),
               onPressed: () {
                 showDialog(
-                    context: context, builder: (context) => const IconReferencesDialog());
+                    context: context,
+                    builder: (context) => const IconReferencesDialog());
               },
             )
           ],

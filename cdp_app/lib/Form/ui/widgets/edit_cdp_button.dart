@@ -90,7 +90,6 @@ class EditCdpButton extends StatelessWidget {
                   content: Text('La carta de porte fue editada con exito'),
                 ),
               );
-              await FirebaseFirestore.instance.clearPersistence();
               Navigator.pop(context);
             },
             child: const Text(
