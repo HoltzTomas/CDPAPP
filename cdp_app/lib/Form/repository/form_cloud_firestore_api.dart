@@ -208,7 +208,6 @@ class FormCloudFirestoreApi {
           data: GrainData(
             tipo: item.get('tipo') as String,
             text: item.get('text') as String,
-            trueOrFalse: item.get('trueOrFalse') as bool,
           ),
           providerToChange: providerToChange,
         ),

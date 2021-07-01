@@ -59,11 +59,20 @@ class _TransportBottomSheetFieldState extends State<TransportBottomSheetField> {
       );
 
   Widget textField() {
+
+    int maxLenght() {
+      if (widget.tipo == "camion" || widget.tipo == "acoplado") {
+        return 7;
+      } else {
+        return 10;
+      }
+    }
+
     return FormTextField(
         dataWeWantReceive: "${widget.text} (Escriba aqui)",
         controller: controller,
-        maxLength: 60,
-        keyboardType: TextInputType.number);
+        maxLength: maxLenght(),
+        keyboardType: TextInputType.text);
   }
 
   Widget title() => Container(

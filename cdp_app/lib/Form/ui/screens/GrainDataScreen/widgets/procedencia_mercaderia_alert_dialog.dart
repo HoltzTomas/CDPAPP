@@ -24,12 +24,13 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
   String establecimientoToUpload = "";
   String renspaToUpload = "";
   bool isValidate = true;
+  int maxLength = 25;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
-            child: CustomDialog(
+        child: CustomDialog(
           button: addButton(context),
           child: contentBox(context),
         ),
@@ -50,6 +51,7 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           onChanged: (value) {
             direccionToUpload = value;
           },
+          maxLength: maxLength,
           decoration: InputDecoration(
             hintText: "Direccion",
             errorText: !isValidate && direccionToUpload.isEmpty
@@ -65,6 +67,7 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           onChanged: (value) {
             provinciaToUpload = value;
           },
+          maxLength: maxLength,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
@@ -80,6 +83,7 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           onChanged: (value) {
             localidadToUpload = value;
           },
+          maxLength:maxLength,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
@@ -95,6 +99,7 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           onChanged: (value) {
             establecimientoToUpload = value;
           },
+          maxLength: maxLength,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
@@ -110,6 +115,7 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           onChanged: (value) {
             renspaToUpload = value;
           },
+          maxLength: maxLength,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],

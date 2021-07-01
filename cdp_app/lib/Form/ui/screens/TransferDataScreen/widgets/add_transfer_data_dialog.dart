@@ -31,6 +31,7 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
           onChanged: (value) {
             nombreToUpload = value;
           },
+          maxLength: 30,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
@@ -41,17 +42,19 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
                 : null,
           ),
         ),
-        const SizedBox(height: defaultPadding / 2),
         TextField(
           onChanged: (value) {
             cuitToUpload = value;
           },
+          maxLength: 11,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
+            FilteringTextInputFormatter.deny(RegExp('-')),
           ],
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
-            hintText: "Cuit",
+            hintText: "CUIT",
+            helperText: "No incluya guiones en el CUIT (-)",
             errorText: !isValidate && cuitToUpload.isEmpty
                 ? "Completa el campo"
                 : null,

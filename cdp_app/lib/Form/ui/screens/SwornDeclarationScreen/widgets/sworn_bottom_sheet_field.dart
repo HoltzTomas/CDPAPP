@@ -63,12 +63,19 @@ class _SwornBottomSheetFieldState extends State<SwornBottomSheetField> {
       }
     }
 
-    return Container(
-      child: FormTextField(
-          dataWeWantReceive: "${widget.text} (Escriba aqui)",
-          controller: controller,
-          maxLength: 60,
-          keyboardType: selectInputType()),
+    int maxLenght() {
+      if (widget.tipo == "dni") {
+        return 10;
+      } else {
+        return 25;
+      }
+    }
+
+    return FormTextField(
+      dataWeWantReceive: "${widget.text} (Escriba aqui)",
+      controller: controller,
+      maxLength: maxLenght(),
+      keyboardType: selectInputType(),
     );
   }
 

@@ -55,6 +55,7 @@ class _AddAlertDialogState extends State<TransportDataAlertDialog> {
         onChanged: (value) {
           textToUpload = value;
         },
+        maxLength: 30,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.deny(
             RegExp(r'[/\\]'),

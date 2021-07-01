@@ -70,11 +70,24 @@ class _GrainBottomSheetFieldState extends State<GrainBottomSheetField> {
       }
     }
 
+    int selectMaxLenght() {
+      if (widget.tipo == "pesoBruto" ||
+          widget.tipo == "pesoTara" ||
+          widget.tipo == "pesoNeto" ||
+          widget.tipo == "kgsEstimados") {
+        return 10;
+      } else if (widget.tipo == "observaciones") {
+        return 60;
+      } else {
+        return 20;
+      }
+    }
+
     return Container(
       child: FormTextField(
           dataWeWantReceive: "${widget.text} (Escriba aqui)",
           controller: controller,
-          maxLength: 60,
+          maxLength: selectMaxLenght(),
           maxLines: widget.tipo == "observaciones" ? null : 1,
           keyboardType: selectInputType()),
     );

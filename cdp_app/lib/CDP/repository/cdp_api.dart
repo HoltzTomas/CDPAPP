@@ -308,10 +308,10 @@ class CdpApi {
     addStringInAllPages(cdpPages, cdpPdf!.granoEspecie.text!, 130, 370, 12);
 
     ///Adding Tipo [text]
-    addStringInAllPages(cdpPages, cdpPdf.tipo.text!, 230, 370, 12);
+    addStringInAllPages(cdpPages, cdpPdf.tipo.text!, 230, 372, 8);
 
     ///Adding ContratoNro [text]
-    addStringInAllPages(cdpPages, cdpPdf.contratoNro.text!, 490, 370, 12);
+    addStringInAllPages(cdpPages, cdpPdf.contratoNro.text!, 490, 370, 10);
 
     ///Adding Cosecha [text]
     addStringInAllPages(cdpPages, cdpPdf.cosecha.text!, 360, 370, 12);
@@ -353,11 +353,11 @@ class CdpApi {
     addStringInAllPages(
         cdpPages, cdpPdf.procedenciaMercaderia.direccion!, 110, 455, 15);
     addStringInAllPages(
-        cdpPages, cdpPdf.procedenciaMercaderia.establecimiento!, 425, 439, 10);
+        cdpPages, cdpPdf.procedenciaMercaderia.establecimiento!, 425, 439, 7.5);
     addStringInAllPages(
-        cdpPages, cdpPdf.procedenciaMercaderia.localidad!, 425, 452, 10);
+        cdpPages, cdpPdf.procedenciaMercaderia.localidad!, 425, 452, 7.5);
     addStringInAllPages(
-        cdpPages, cdpPdf.procedenciaMercaderia.provincia!, 425, 467, 10);
+        cdpPages, cdpPdf.procedenciaMercaderia.provincia!, 425, 467, 7.5);
   }
 
   ///We are adding the data the we got in [DestinationForm] into the PDF

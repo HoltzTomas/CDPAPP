@@ -29,6 +29,7 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
             onChanged: (value) {
               direccionToUpload = value;
             },
+            maxLength: 30,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
@@ -42,6 +43,7 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
             onChanged: (value) {
               provinciaToUpload = value;
             },
+            maxLength: 30,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
@@ -55,6 +57,7 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
               onChanged: (value) {
                 localidadToUpload = value;
               },
+              maxLength: 30,
               decoration: InputDecoration(
                   hintText: "Localidad",
                   errorText: !isValidate && localidadToUpload.isEmpty

@@ -45,7 +45,7 @@ class _AddGrainDataDialogState extends State<AddGrainDataDialog> {
           onChanged: (value) {
             textToUpload = value;
           },
-          maxLength: widget.tipo == "cosecha" ? 10 : null,
+          maxLength: widget.tipo == "cosecha" ? 9 : 12,
           decoration: InputDecoration(
             hintText: hintText(),
             errorText: !isValidate && textToUpload.isEmpty
