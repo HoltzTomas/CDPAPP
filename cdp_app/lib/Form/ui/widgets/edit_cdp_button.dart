@@ -38,6 +38,7 @@ class EditCdpButton extends StatelessWidget {
                     numOfEmitionInsideTheFile:
                         (selectedFile.issuedCDPs).round(),
                     cdpName: watch(cdpToEditsName).state,
+                    timeWhenItWasIssued: Timestamp.now(),
                     titularCartaDePorte:
                         context.read(titularCartaDePorteProvider).state,
                     intermediario: context.read(intermediarioProvider).state,

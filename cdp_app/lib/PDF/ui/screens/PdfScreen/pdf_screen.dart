@@ -22,6 +22,7 @@ class PdfScreen extends StatelessWidget {
           .collection('pdfFiles')
           .doc(userFile.pdfName)
           .collection('emitedCdps')
+          .orderBy('timeWhenItWasIssued', descending: false)
           .snapshots(),
       builder: (BuildContext context,
           AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

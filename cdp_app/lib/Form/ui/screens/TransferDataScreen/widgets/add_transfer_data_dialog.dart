@@ -66,9 +66,11 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             onChanged: (value) {
               camionToUpload = value;
             },
+            maxLength: 7,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
+            textCapitalization: TextCapitalization.characters,
             decoration: InputDecoration(
               hintText: "Camion",
               errorText: !isValidate && camionToUpload.isEmpty
@@ -82,9 +84,11 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             onChanged: (value) {
               acopladoToUpload = value;
             },
+            maxLength: 7,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
+            textCapitalization: TextCapitalization.characters,
             decoration: InputDecoration(
               hintText: "Acoplado",
               errorText: !isValidate && acopladoToUpload.isEmpty
@@ -106,26 +110,47 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
         ),
         child: TextButton(
           onPressed: () {
-            if (nombreToUpload.isNotEmpty &&
-                cuitToUpload.isNotEmpty &&
-                camionToUpload.isNotEmpty &&
-                acopladoToUpload.isNotEmpty) {
-              final FormCloudRepository formCloudRepository =
-                  FormCloudRepository();
-              formCloudRepository.uploadTransferData(
-                dataToUpload: TransferData(
-                    nombre: nombreToUpload,
-                    cuit: cuitToUpload,
-                    camion: camionToUpload,
-                    acoplado: acopladoToUpload,
-                    tipo: widget.tipo),
-                context: context,
-              );
-              Navigator.pop(context);
+            if (widget.tipo != 'chofer') {
+              if (nombreToUpload.isNotEmpty && cuitToUpload.isNotEmpty) {
+                final FormCloudRepository formCloudRepository =
+                    FormCloudRepository();
+                formCloudRepository.uploadTransferData(
+                  dataToUpload: TransferData(
+                      nombre: nombreToUpload,
+                      cuit: cuitToUpload,
+                      camion: camionToUpload,
+                      acoplado: acopladoToUpload,
+                      tipo: widget.tipo),
+                  context: context,
+                );
+                Navigator.pop(context);
+              } else {
+                setState(() {
+                  isValidate = false;
+                });
+              }
             } else {
-              setState(() {
-                isValidate = false;
-              });
+              if (nombreToUpload.isNotEmpty &&
+                  cuitToUpload.isNotEmpty &&
+                  camionToUpload.isNotEmpty &&
+                  acopladoToUpload.isNotEmpty) {
+                final FormCloudRepository formCloudRepository =
+                    FormCloudRepository();
+                formCloudRepository.uploadTransferData(
+                  dataToUpload: TransferData(
+                      nombre: nombreToUpload,
+                      cuit: cuitToUpload,
+                      camion: camionToUpload,
+                      acoplado: acopladoToUpload,
+                      tipo: widget.tipo),
+                  context: context,
+                );
+                Navigator.pop(context);
+              } else {
+                setState(() {
+                  isValidate = false;
+                });
+              }
             }
           },
           child: const Text(
@@ -139,7 +164,7 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
   Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
-            child: CustomDialog(
+        child: CustomDialog(
           button: addDataTextButton(),
           child: contentBox(),
         ),

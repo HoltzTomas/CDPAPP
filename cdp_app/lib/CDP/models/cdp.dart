@@ -5,6 +5,7 @@ import 'package:cdp_app/Form/model/grain_data.dart';
 import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
 import 'package:cdp_app/Form/model/transfer_data.dart';
 import 'package:cdp_app/Form/model/transport_data.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CDP {
   ///CDP is the abreviation of Carta de Porte,
@@ -20,6 +21,7 @@ class CDP {
   CDP({
     required this.cdpName,
     required this.numOfEmitionInsideTheFile,
+    required this.timeWhenItWasIssued,
     required this.titularCartaDePorte,
     required this.intermediario,
     required this.remitenteComercial,
@@ -58,6 +60,7 @@ class CDP {
 
   final String cdpName;
   final int numOfEmitionInsideTheFile;
+  final Timestamp timeWhenItWasIssued;
 
   //TransferData
   final TransferData titularCartaDePorte;

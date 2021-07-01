@@ -33,6 +33,7 @@ class _PdfsListScreenState extends State<PdfsListScreen> {
             .collection(currentUser!.uid)
             .doc('pdfs')
             .collection('pdfFiles')
+            .orderBy('time', descending: false)
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

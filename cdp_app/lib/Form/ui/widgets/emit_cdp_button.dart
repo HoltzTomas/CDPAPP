@@ -7,6 +7,7 @@ import 'package:cdp_app/Form/providers/transfer_data_providers.dart';
 import 'package:cdp_app/Form/providers/transport_data_providers.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,6 +37,7 @@ class EmitCdpButton extends StatelessWidget {
               cdpData: CDP(
                   numOfEmitionInsideTheFile: (selectedFile.issuedCDPs).round(),
                   cdpName: cdpName,
+                  timeWhenItWasIssued: Timestamp.now(),
                   titularCartaDePorte:
                       context.read(titularCartaDePorteProvider).state,
                   intermediario: context.read(intermediarioProvider).state,

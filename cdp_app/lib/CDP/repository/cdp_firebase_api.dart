@@ -56,6 +56,7 @@ class CdpFirebaseApi {
           'numOfEmitionInsideTheFile': file.issuedCDPs.round() + 1,
           'cdpName': cdpData.cdpName,
           'nombreTitularCartaDePorte': cdpData.titularCartaDePorte.nombre,
+          'timeWhenItWasIssued': cdpData.timeWhenItWasIssued,
           'cuitTitularCartaDePorte': cdpData.titularCartaDePorte.cuit,
           'nombreIntermediario': cdpData.intermediario.nombre,
           'cuitIntermediario': cdpData.intermediario.cuit,
@@ -138,6 +139,7 @@ class CdpFirebaseApi {
               numOfEmitionInsideTheFile:
                   cdp.get('numOfEmitionInsideTheFile') as int,
               cdpName: cdp.get('cdpName') as String,
+              timeWhenItWasIssued: cdp.get('timeWhenItWasIssued') as Timestamp,
               titularCartaDePorte: TransferData(
                   nombre: cdp.get('nombreTitularCartaDePorte') as String,
                   cuit: cdp.get('cuitTitularCartaDePorte') as String),
