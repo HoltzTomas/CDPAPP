@@ -6,6 +6,8 @@ import 'package:cdp_app/Company/ui/screens/VerifyEmailScreen/verify_email_screen
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'VerifyEmailScreen/widgets/email_verified_dialog.dart';
+
 class VerifyEmailHandler extends StatefulWidget {
   const VerifyEmailHandler({Key? key}) : super(key: key);
 
@@ -55,9 +57,17 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
     await user.reload();
     if (user.emailVerified) {
       timer.cancel();
-      setState(() {
-        homeWidget = const HomeScreen();
-      });
+      await showDialog(
+          context: context,
+          builder: (context) {
+            Future.delayed(const Duration(seconds: 3), () {
+              Navigator.of(context).pop(true);
+              setState(() {
+                homeWidget = const HomeScreen();
+              });
+            });
+            return const EmailVerifiedDialog();
+          });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Email verificado con exito'),
