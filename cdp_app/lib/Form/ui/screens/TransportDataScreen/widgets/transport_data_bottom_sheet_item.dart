@@ -16,7 +16,7 @@ class TransportDataBottomSheetItem extends ConsumerWidget {
           context.read(providerToChange!).state = data;
           Navigator.pop(context);
         },
-        child: const Text("Seleccionar"),
+        child: const Text("Seleccionar", style: TextStyle(color: darkColor),),
       );
 
   Widget title() => Text(

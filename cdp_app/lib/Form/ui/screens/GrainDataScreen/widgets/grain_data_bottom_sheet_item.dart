@@ -1,5 +1,4 @@
 import 'package:cdp_app/Form/model/grain_data.dart';
-import 'package:cdp_app/Form/model/transfer_data.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +16,10 @@ class GrainDataBottomSheetItem extends ConsumerWidget {
           context.read(providerToChange!).state = data;
           Navigator.pop(context);
         },
-        child: const Text("Seleccionar"),
+        child: const Text(
+          "Seleccionar",
+          style: TextStyle(color: primaryColor),
+        ),
       );
 
   Text dataName() => Text(

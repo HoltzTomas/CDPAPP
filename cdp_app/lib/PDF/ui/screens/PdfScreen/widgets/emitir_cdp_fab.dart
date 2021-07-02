@@ -91,7 +91,7 @@ class EmitirCdpFAB extends StatelessWidget {
     );
   }
 
-  formProvidersToInitialValue(BuildContext context) {
+  void formProvidersToInitialValue(BuildContext context) {
     context.read(titularCartaDePorteProvider).state = TransferData(
         nombre: "",
         cuit: "",

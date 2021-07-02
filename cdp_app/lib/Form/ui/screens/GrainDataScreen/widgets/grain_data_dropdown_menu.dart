@@ -1,15 +1,13 @@
 import 'package:cdp_app/Form/model/grain_data.dart';
 import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';
-import 'package:cdp_app/Form/model/transfer_data.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_bottom_sheet_field.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_bottom_sheet.dart';
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/procedencia_bottom_sheet.dart';
-import 'package:cdp_app/Form/ui/screens/TransferDataScreen/widgets/transfer_data_bottom_sheet.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class GrainDataDropdownMenu extends StatelessWidget {
+class GrainDataDropdownMenu extends ConsumerWidget {
   const GrainDataDropdownMenu(
       {Key? key,
       required this.tipo,
@@ -70,6 +68,29 @@ class GrainDataDropdownMenu extends StatelessWidget {
         ),
       );
 
+  Widget deleteButton(BuildContext context) => Container(
+        alignment: Alignment.centerRight,
+        child: IconButton(
+          onPressed: () {
+            if (tipo != "procedenciaMercaderia") {
+              context.read(providerToChange!).state = GrainData(
+                text: "",
+                tipo: tipo,
+              );
+            } else {
+              context.read(procedenciaProviderToChange!).state =
+                  ProcedenciaMercaderia(
+                      direccion: "",
+                      provincia: "",
+                      localidad: "",
+                      establecimiento: "",
+                      renspa: "");
+            }
+          },
+          icon: const Icon(Icons.delete),
+        ),
+      );
+
   Widget dataTexts() => Consumer(
         builder: (context, watch, child) {
           if (watch(providerToChange!).state!.text!.isNotEmpty) {
@@ -127,39 +148,71 @@ class GrainDataDropdownMenu extends StatelessWidget {
         },
       );
 
+  Widget selectButton() {
+    return Consumer(
+      builder: (context, watch, child) {
+        if (tipo != 'procedenciaMercaderia') {
+          if (watch(providerToChange!).state!.text!.isNotEmpty) {
+            return deleteButton(context);
+          } else {
+            return showBottomSheetButton(context);
+          }
+        } else {
+          if (watch(procedenciaProviderToChange!).state.direccion!.isNotEmpty) {
+            return deleteButton(context);
+          } else {
+            return showBottomSheetButton(context);
+          }
+        }
+      },
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return GestureDetector(
       onTap: () {
-        showModalBottomSheet(
-          backgroundColor: Colors.transparent,
-          context: context,
-          builder: (context) {
-            if (tipo == "procedenciaMercaderia") {
-              return ProcedenciaBottomSheet(
-                text: text,
-                tipo: tipo,
-                providerToChange: procedenciaProviderToChange,
-              );
-            } else if (tipo == "contratoNro" ||
-                tipo == "kgsEstimados" ||
-                tipo == "pesoBruto" ||
-                tipo == "pesoTara" ||
-                tipo == "pesoNeto" ||
-                tipo == "observaciones") {
-              return GrainBottomSheetField(
+        if (watch(providerToChange!).state!.text!.isEmpty &&
+            tipo != "procedenciaMercaderia") {
+          showModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              if (tipo == "contratoNro" ||
+                  tipo == "kgsEstimados" ||
+                  tipo == "pesoBruto" ||
+                  tipo == "pesoTara" ||
+                  tipo == "pesoNeto" ||
+                  tipo == "observaciones") {
+                return GrainBottomSheetField(
+                  text: text,
+                  tipo: tipo,
+                  providerToChange: providerToChange,
+                );
+              }
+              return GrainDataBottomSheet(
                 text: text,
                 tipo: tipo,
                 providerToChange: providerToChange,
               );
-            }
-            return GrainDataBottomSheet(
-              text: text,
-              tipo: tipo,
-              providerToChange: providerToChange,
-            );
-          },
-        );
+            },
+          );
+        } else if (watch(procedenciaProviderToChange!)
+                .state
+                .direccion!
+                .isEmpty &&
+            tipo == "procedenciaMercaderia") {
+          showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) {
+                return ProcedenciaBottomSheet(
+                  text: text,
+                  tipo: tipo,
+                  providerToChange: procedenciaProviderToChange,
+                );
+              },);
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
@@ -176,7 +229,7 @@ class GrainDataDropdownMenu extends StatelessWidget {
               Row(
                 children: [
                   dataName(),
-                  showBottomSheetButton(context),
+                  selectButton(),
                   const SizedBox(height: defaultPadding / 2),
                 ],
               ),

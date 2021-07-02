@@ -15,7 +15,7 @@ class TransferDataDropdownMenu extends ConsumerWidget {
 
   Widget dataNameText() => Text(
         text!,
-        style: const TextStyle( fontWeight: FontWeight.w600),
+        style: const TextStyle(fontWeight: FontWeight.w600),
       );
 
   Widget arrowButton(BuildContext context) => Container(
@@ -38,16 +38,30 @@ class TransferDataDropdownMenu extends ConsumerWidget {
         ),
       );
 
+  Widget deleteButton(BuildContext context) => Container(
+        alignment: Alignment.centerRight,
+        child: IconButton(
+          onPressed: () {
+            context.read(providerToChange!).state = TransferData(
+              nombre: "",
+              cuit: "",
+              acoplado: "",
+              camion: "",
+              tipo: tipo,
+            );
+          },
+          icon: const Icon(Icons.delete),
+        ),
+      );
+
   Widget dataTexts() => Consumer(
         builder: (context, watch, child) {
-          return Row(
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Text(watch(providerToChange!).state!.nombre!),
-              ),
-              Expanded(
-                child: Text("CUIT: ${watch(providerToChange!).state!.cuit!}"),
-              ),
+              Text(watch(providerToChange!).state!.nombre!),
+              const SizedBox(height: defaultPadding / 4),
+              Text("CUIT: ${watch(providerToChange!).state!.cuit!}"),
             ],
           );
         },
@@ -77,21 +91,37 @@ class TransferDataDropdownMenu extends ConsumerWidget {
         },
       );
 
+  Widget selectButton() {
+    return Consumer(
+      builder: (context, watch, child) {
+        if (watch(providerToChange!).state!.nombre!.isNotEmpty &&
+            watch(providerToChange!).state!.cuit!.isNotEmpty) {
+          return deleteButton(context);
+        } else {
+          return arrowButton(context);
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return GestureDetector(
       onTap: () {
-        showModalBottomSheet(
-          context: context,
-          backgroundColor: Colors.transparent,
-          builder: (context) {
-            return TransferDataBottomSheet(
-              tipo: tipo,
-              text: text,
-              providerToChange: providerToChange,
-            );
-          },
-        );
+        if (watch(providerToChange!).state!.nombre!.isEmpty &&
+            watch(providerToChange!).state!.cuit!.isEmpty) {
+          showModalBottomSheet(
+            context: context,
+            backgroundColor: Colors.transparent,
+            builder: (context) {
+              return TransferDataBottomSheet(
+                tipo: tipo,
+                text: text,
+                providerToChange: providerToChange,
+              );
+            },
+          );
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
@@ -113,7 +143,7 @@ class TransferDataDropdownMenu extends ConsumerWidget {
                     flex: 2,
                     child: dataNameText(),
                   ),
-                  Expanded(child: arrowButton(context)),
+                  Expanded(child: selectButton()),
                   const SizedBox(height: defaultPadding / 2),
                 ],
               ),

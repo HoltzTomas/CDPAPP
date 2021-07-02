@@ -4,7 +4,7 @@ import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DestinationDropdownMenu extends StatelessWidget {
+class DestinationDropdownMenu extends ConsumerWidget {
   const DestinationDropdownMenu({
     Key? key,
     required this.tipo,
@@ -34,6 +34,20 @@ class DestinationDropdownMenu extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.arrow_drop_down)),
+        ),
+      );
+
+  Widget deleteButton(BuildContext context) => Container(
+        alignment: Alignment.centerRight,
+        child: IconButton(
+          onPressed: () {
+            context.read(providerToChange!).state = Destination(
+              direccion: "",
+              provincia: "",
+              localidad: "",
+            );
+          },
+          icon: const Icon(Icons.delete),
         ),
       );
 
@@ -68,21 +82,35 @@ class DestinationDropdownMenu extends StatelessWidget {
         },
       );
 
+  Widget selectButton() {
+    return Consumer(
+      builder: (context, watch, child) {
+        if (watch(providerToChange!).state!.direccion!.isNotEmpty) {
+          return deleteButton(context);
+        } else {
+          return showBottomSheetButton(context);
+        }
+      },
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     return GestureDetector(
       onTap: () {
-        showModalBottomSheet(
-          backgroundColor: Colors.transparent,
-          context: context,
-          builder: (context) {
-            return DestinationBottomSheet(
-              text: text,
-              tipo: tipo,
-              providerToChange: providerToChange,
-            );
-          },
-        );
+        if (watch(providerToChange!).state!.direccion!.isEmpty) {
+          showModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return DestinationBottomSheet(
+                text: text,
+                tipo: tipo,
+                providerToChange: providerToChange,
+              );
+            },
+          );
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
@@ -100,7 +128,7 @@ class DestinationDropdownMenu extends StatelessWidget {
               Row(
                 children: [
                   dataName(),
-                  showBottomSheetButton(context),
+                  selectButton()
                 ],
               ),
               selectedDataTexts()

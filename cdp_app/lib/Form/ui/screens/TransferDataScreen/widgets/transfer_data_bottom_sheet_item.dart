@@ -21,7 +21,10 @@ class TransferDataBottomSheetItem extends ConsumerWidget {
           context.read(providerToChange!).state = data;
           Navigator.pop(context);
         },
-        child: const Text("Seleccionar"),
+        child: const Text(
+          "Seleccionar",
+          style: TextStyle(color: primaryColor),
+        ),
       );
 
   @override

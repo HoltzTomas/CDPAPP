@@ -1,7 +1,4 @@
-import 'package:cdp_app/Form/model/transport_data.dart';
 import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/widgets/sworn_bottom_sheet_field.dart';
-import 'package:cdp_app/Form/ui/screens/TransportDataScreen/widgets/transport_bottom_sheet_field.dart';
-import 'package:cdp_app/Form/ui/screens/TransportDataScreen/widgets/transport_data_bottom_sheet.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,6 +36,16 @@ class SwornDataDropdownMenu extends ConsumerWidget {
         ),
       );
 
+  Widget deleteButton(BuildContext context) => Container(
+        alignment: Alignment.centerRight,
+        child: IconButton(
+          onPressed: () {
+            context.read(providerToChange!).state = "";
+          },
+          icon: const Icon(Icons.delete),
+        ),
+      );
+
   Widget dataName() => Expanded(
         flex: 2,
         child: Text(
@@ -56,21 +63,35 @@ class SwornDataDropdownMenu extends ConsumerWidget {
         },
       );
 
+  Widget selectButton() {
+    return Consumer(
+      builder: (context, watch, child) {
+        if (watch(providerToChange!).state.isNotEmpty) {
+          return deleteButton(context);
+        } else {
+          return showBottomSheetButton(context);
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return GestureDetector(
       onTap: () {
-        showModalBottomSheet(
-          backgroundColor: Colors.transparent,
-          context: context,
-          builder: (context) {
-            return SwornBottomSheetField(
-              text: text,
-              tipo: tipo,
-              providerToChange: providerToChange,
-            );
-          },
-        );
+        if (watch(providerToChange!).state.isEmpty) {
+          showModalBottomSheet(
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return SwornBottomSheetField(
+                text: text,
+                tipo: tipo,
+                providerToChange: providerToChange,
+              );
+            },
+          );
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
@@ -89,7 +110,7 @@ class SwornDataDropdownMenu extends ConsumerWidget {
               Row(
                 children: [
                   dataName(),
-                  showBottomSheetButton(context),
+                  selectButton(),
                 ],
               ),
               dataText(),
