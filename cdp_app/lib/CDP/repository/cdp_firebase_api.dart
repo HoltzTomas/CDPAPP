@@ -119,7 +119,7 @@ class CdpFirebaseApi {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No hay coneccion a internet'),
+          content: Text('No hay conexión a internet'),
         ),
       );
     }

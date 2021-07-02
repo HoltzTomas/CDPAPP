@@ -23,7 +23,7 @@ class SwornDeclarationForm extends ConsumerWidget {
             ///Aclaracion (First fact of [SwornDeclarationForm])
             SwornDataDropdownMenu(
               tipo: "aclaracion",
-              text: "Aclaracion",
+              text: "Aclaración",
               providerToChange: aclaracionProvider
             ),
 

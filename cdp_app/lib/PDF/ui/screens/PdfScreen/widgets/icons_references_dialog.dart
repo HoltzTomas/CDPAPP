@@ -27,7 +27,7 @@ class _IconReferencesDialogState extends State<IconReferencesDialog> {
         ),
         const SizedBox(height: defaultPadding),
         const Text(
-          "Una vez emitida la carta de porte, tienes diferentes opciones",
+          "Una vez emitida la carta de porte, usted tiene diferentes opciones.",
           style: TextStyle(fontSize: 14),
           textAlign: TextAlign.center,
         ),

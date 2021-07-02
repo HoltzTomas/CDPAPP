@@ -22,7 +22,7 @@ class TransportDataForm extends ConsumerWidget {
             ///Camion (First fact of [TransportDataForm])
             TransportDataDropdownMenu(
               tipo: "camion",
-              text: "Camion",
+              text: "Camión",
               providerToChange: camionProvider,
             ),
 

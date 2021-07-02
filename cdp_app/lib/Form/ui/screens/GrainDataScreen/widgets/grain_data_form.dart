@@ -54,7 +54,7 @@ class GrainDataForm extends ConsumerWidget {
             ///Declaracion de Calidad (Sixth fact of [GrainDataForm])
             GrainDataDropdownMenu(
               tipo: 'declaracionDeCalidad',
-              text: "Declaracion de calidad",
+              text: "Declaración de calidad",
               providerToChange: declaracionDeCalidadProvider,
             ),
 
@@ -74,7 +74,7 @@ class GrainDataForm extends ConsumerWidget {
 
             ///Sera Pesada en destino (Fifth fact of [GrainDataForm])
             GrainDataSwitchButton(
-              dataWeWantReceive: "Sera pesada en destino",
+              dataWeWantReceive: "Será pesada en destino",
               onChanged: (bool value) {
                 context.read(seraPesadaProvider).state = value;
               },

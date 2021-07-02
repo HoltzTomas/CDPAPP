@@ -39,7 +39,7 @@ class EmitirCdpFAB extends StatelessWidget {
           AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
-            return const Center(child: Text("No hay coneccion a internet"));
+            return const Center(child: Text("No hay conexión a internet"));
           case ConnectionState.waiting:
             return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:

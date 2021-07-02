@@ -78,7 +78,7 @@ class _UploadPdfFileDialogState extends State<UploadPdfFileDialog> {
       mainAxisSize: MainAxisSize.min,
       children: [
         const Text(
-          "Ponle nombre el archivo que importaste",
+          "Ponle nombre al archivo que subiste",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: defaultPadding),

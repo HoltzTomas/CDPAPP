@@ -1,3 +1,4 @@
+import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:connectivity/connectivity.dart';
@@ -57,26 +58,17 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         color: primaryColor,
         child: TextButton(
           onPressed: () async {
-            final FirebaseAuth auth = FirebaseAuth.instance;
             final connectivityResult = await Connectivity().checkConnectivity();
             if (connectivityResult == ConnectivityResult.mobile ||
                 connectivityResult == ConnectivityResult.wifi) {
-              auth
-                  .sendPasswordResetEmail(email: emailController.text)
-                  .whenComplete(
-                    () => ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Email enviado a ${emailController.text}',
-                        ),
-                      ),
-                    ),
-                  );
+              final AuthRepository authRepository = AuthRepository();
+              authRepository.changeUserPassword(
+                  email: emailController.text.trim(), context: context);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text(
-                    'No hay conneccion a internet',
+                    'No hay conexión a internet',
                   ),
                 ),
               );

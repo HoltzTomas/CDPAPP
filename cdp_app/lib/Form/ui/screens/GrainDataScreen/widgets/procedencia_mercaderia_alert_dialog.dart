@@ -53,7 +53,7 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           },
           maxLength: maxLength,
           decoration: InputDecoration(
-            hintText: "Direccion",
+            hintText: "Dirección",
             errorText: !isValidate && direccionToUpload.isEmpty
                 ? "Completa el campo"
                 : null,

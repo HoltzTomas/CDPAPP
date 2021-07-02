@@ -34,9 +34,9 @@ class _AddAlertDialogState extends State<DestinationAlertDialog> {
               FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
             ],
             decoration: InputDecoration(
-                hintText: "Direccion",
+                hintText: "Dirección",
                 errorText:
-                    !isValidate && direccionToUpload.isEmpty ? "Complete la direccion" : null),
+                    !isValidate && direccionToUpload.isEmpty ? "Complete la dirección" : null),
           ),
           const SizedBox(height: defaultPadding / 2),
           TextField(

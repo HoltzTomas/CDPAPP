@@ -11,7 +11,7 @@ class SignInScreenTitle extends StatelessWidget {
     return Column(
       children: const [
         Text(
-          "Iniciar Sesion",
+          "Iniciar sesión",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,

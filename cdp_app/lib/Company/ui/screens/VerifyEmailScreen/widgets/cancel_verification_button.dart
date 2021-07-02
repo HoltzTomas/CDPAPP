@@ -15,7 +15,7 @@ class CancelVerificationButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "¿Seguro que quiere cancelar la creacion de su cuenta?",
+            "¿Seguro que quiere cancelar la creación de su cuenta?",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),

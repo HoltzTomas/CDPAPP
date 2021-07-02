@@ -23,7 +23,7 @@ class SignUpText extends StatelessWidget {
           );
           },
           child: const Text(
-            "Registarse",
+            "Crear cuenta",
             style: TextStyle(color: darkColor),
           ),
         )

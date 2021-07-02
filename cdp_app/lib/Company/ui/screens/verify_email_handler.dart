@@ -70,7 +70,7 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
           });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Email verificado con exito'),
+          content: Text('Email verificado con éxito'),
         ),
       );
     }

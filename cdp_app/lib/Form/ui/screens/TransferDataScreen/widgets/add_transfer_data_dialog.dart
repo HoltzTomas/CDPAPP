@@ -72,7 +72,7 @@ class _AddTransferDataDialogState extends State<AddTransferDataDialog> {
             ],
             textCapitalization: TextCapitalization.characters,
             decoration: InputDecoration(
-              hintText: "Camion",
+              hintText: "Camión",
               errorText: !isValidate && camionToUpload.isEmpty
                   ? "Completa el campo"
                   : null,

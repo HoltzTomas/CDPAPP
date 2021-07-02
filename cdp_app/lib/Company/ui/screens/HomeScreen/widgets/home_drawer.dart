@@ -30,12 +30,12 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.help_center_outlined),
-            title: const Text("¿Como usar CDP APP?"),
+            title: const Text("¿Cómo usar CDP App?"),
             onTap: () {},
           ),
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text("Cerrar Sesion"),
+            title: const Text("Cerrar sesión"),
             onTap: () {
               authRepository.signOut(context);
             },

@@ -6,8 +6,6 @@ import 'package:cdp_app/Company/ui/widgets/rounded_button.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_input_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/signin_screen_title.dart';
@@ -52,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   controller: passwordController,
                 ),
                 RoundedButton(
-                  text: isLoading ? "CARGANDO..." : "INICIAR SESION",
+                  text: isLoading ? "CARGANDO..." : "INICIAR SESIÓN",
                   press: () async {
                     if (emailController.text.trim().isNotEmpty &&
                         passwordController.text.trim().isNotEmpty) {

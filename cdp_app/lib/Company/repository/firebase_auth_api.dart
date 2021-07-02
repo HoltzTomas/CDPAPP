@@ -34,7 +34,7 @@ class FirebaseAuthAPI {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No hay coneccion a internet')));
+          const SnackBar(content: Text('No hay conexión a internet')));
     }
   }
 
@@ -58,6 +58,9 @@ class FirebaseAuthAPI {
         } else if (e.code == 'wrong-password') {
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Contraseña equivocada')));
+        } else if (e.code == 'invalid-email') {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('La dirección de e-mail no es valida')));
         }
       } catch (e) {
         ScaffoldMessenger.of(context)
@@ -65,7 +68,7 @@ class FirebaseAuthAPI {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No hay coneccion a internet')));
+          const SnackBar(content: Text('No hay conexión a internet')));
     }
   }
 
@@ -77,7 +80,34 @@ class FirebaseAuthAPI {
       await FirebaseAuth.instance.signOut();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No hay coneccion a internet')));
+          const SnackBar(content: Text('No hay conexión a internet')));
+    }
+  }
+
+  ///Changes user password
+  Future<void> changeUserPassword(
+      {required String email, required BuildContext context}) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Email enviado a $email'),
+      ));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('No existe la cuenta $email')));
+      } else if (e.code == 'invalid-email') {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('La dirección de e-mail no es valida')));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Ocurrió un error')));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Ocurrió un error')));
     }
   }
 }

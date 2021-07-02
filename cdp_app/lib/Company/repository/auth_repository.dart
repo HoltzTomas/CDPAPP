@@ -23,5 +23,10 @@ class AuthRepository {
           context: context, email: email, password: password);
 
   ///SignOut user using Firebase Authentication service
-  Future signOut(BuildContext context) async => _firebaseAuthAPI.signOut(context);
+  Future signOut(BuildContext context) async =>
+      _firebaseAuthAPI.signOut(context);
+
+  Future<void> changeUserPassword(
+      {required String email, required BuildContext context}) async=>
+      _firebaseAuthAPI.changeUserPassword(email: email, context: context);
 }

@@ -23,7 +23,7 @@ class ChangePasswordText extends StatelessWidget {
           );
           },
           child: const Text(
-            "Cambiar contraseña",
+            "Recuperar contraseña",
             style: TextStyle(color: darkColor),
           ),
         )

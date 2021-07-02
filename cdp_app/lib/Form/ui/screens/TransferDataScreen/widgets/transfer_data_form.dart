@@ -43,7 +43,7 @@ class TransferDataForm extends ConsumerWidget {
             ///Mercado a Termino (Fifth fact of [TransferData])
             TransferDataDropdownMenu(
               tipo: 'mercadoATermino',
-              text: "Mercado a Termino",
+              text: "Mercado a Término",
               providerToChange: mercadoATerminoProvider,
             ),
 

@@ -23,7 +23,7 @@ class SignInText extends StatelessWidget {
           );
           },
           child: const Text(
-            "Inicie sesion",
+            "Inicie sesión",
             style: TextStyle(color: darkColor),
           ),
         )

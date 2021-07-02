@@ -26,7 +26,7 @@ class ResendEmailButton extends StatelessWidget {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('No hay conneccion a internet'),
+                content: Text('No hay conexión a internet'),
               ),
             );
           }

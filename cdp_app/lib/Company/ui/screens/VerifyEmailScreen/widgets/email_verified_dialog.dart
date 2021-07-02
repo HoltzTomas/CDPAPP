@@ -11,7 +11,7 @@ class EmailVerifiedDialog extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const Text(
-          "¡Email verificado con exito!",
+          "¡Email verificado con éxito!",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: defaultPadding),

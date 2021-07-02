@@ -21,7 +21,7 @@ class WelcomeScreenTitle extends StatelessWidget {
         ),
         SizedBox(height: defaultPadding / 2),
         Text(
-          "La manera mas sencialla de hacer tus cartas de porte!",
+          "¡La manera más sencilla de hacer tus cartas de porte!",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 16,

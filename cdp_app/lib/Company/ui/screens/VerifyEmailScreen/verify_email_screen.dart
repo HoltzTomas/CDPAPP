@@ -22,7 +22,7 @@ class VerifyEmailScreen extends StatelessWidget {
           child: Column(
             children: [
               const Text(
-                "¡Verifica tu direccion de correo!!",
+                "¡Verifica tu dirección de correo!",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

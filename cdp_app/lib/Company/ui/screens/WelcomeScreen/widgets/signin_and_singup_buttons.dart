@@ -13,7 +13,7 @@ class SignInAndSignUpButtons extends StatelessWidget {
     return Column(
       children: [
         RoundedButton(
-          text: "INICIAR SESION",
+          text: "INICIAR SESIÓN",
           press: () {
             Navigator.push(
               context,

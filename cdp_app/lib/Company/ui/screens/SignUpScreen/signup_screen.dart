@@ -6,7 +6,6 @@ import 'package:cdp_app/Company/ui/widgets/rounded_button.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_input_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -87,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('Completa todos los campos')));
+                          content: Text('Complete todos los campos')));
                     }
                   },
                 ),

@@ -1,7 +1,6 @@
 import 'package:cdp_app/CDP/models/cdp.dart';
 import 'package:cdp_app/CDP/providers/cdp_providers.dart';
 import 'package:cdp_app/CDP/repository/cdp_api.dart';
-import 'package:cdp_app/CDP/repository/cdp_cloud_repository.dart';
 import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/sworn_declaration_screen.dart';
 import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
