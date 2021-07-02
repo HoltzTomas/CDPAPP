@@ -33,7 +33,7 @@ class _IconReferencesDialogState extends State<IconReferencesDialog> {
         ),
         const SizedBox(height: defaultPadding * 2),
         Row(
-          mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: const [
             Icon(Icons.edit),
             Text("Editar carta de porte"),
@@ -41,7 +41,7 @@ class _IconReferencesDialogState extends State<IconReferencesDialog> {
         ),
         const SizedBox(height: defaultPadding * 2),
         Row(
-          mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: const [
             Icon(Icons.copy),
             Text("Copiar carta de porte"),
@@ -49,12 +49,14 @@ class _IconReferencesDialogState extends State<IconReferencesDialog> {
         ),
         const SizedBox(height: defaultPadding * 2),
         Row(
-          mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: const [
             Icon(Icons.picture_as_pdf),
             Text("Visualizar carta de porte"),
           ],
-        )
+        ),
+        const SizedBox(height: defaultPadding),
+        
       ],
     );
   }

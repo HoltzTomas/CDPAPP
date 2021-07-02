@@ -42,7 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: defaultPadding),
                 RoundedInputField(
                   hintText: "Nombre de la empresa",
-                  icon: Icons.email,
+                  icon: Icons.business_sharp,
                   controller: nameController,
                 ),
                 RoundedInputField(

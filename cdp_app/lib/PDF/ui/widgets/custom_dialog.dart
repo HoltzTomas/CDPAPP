@@ -38,16 +38,26 @@ class _CustomDialogState extends State<CustomDialog> {
               BoxShadow(offset: Offset(0, 10), blurRadius: 10),
             ],
           ),
-          child: widget.button == null ? widget.child : Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              widget.child!,
-              const SizedBox(height: defaultPadding),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: widget.button
-              ),
-            ],
+          child: widget.button == null
+              ? widget.child
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    widget.child!,
+                    const SizedBox(height: defaultPadding),
+                    Align(
+                        alignment: Alignment.bottomRight, child: widget.button),
+                  ],
+                ),
+        ),
+        Positioned(
+          right: 7,
+          top: 20,
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.close),
           ),
         ),
         Positioned(

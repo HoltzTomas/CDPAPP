@@ -33,15 +33,40 @@ class PdfScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:
           case ConnectionState.done:
-            return SingleChildScrollView(
-              child: Column(children: [
-                ...cdpCloudRepository.buildCDPs(
-                  list: snapshot.data!.docs,
-                  userFile: userFile,
+            if (snapshot.data!.docs.isEmpty) {
+              return Column(
+                children: [
+                  const SizedBox(height: defaultPadding),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                        "¡No emitiste ninguna carta de porte desde este archivo!"),
+                  ),
+                ],
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: defaultPadding,
+                        vertical: defaultPadding / 2,
+                      ),
+                      child: const Text(
+                        "Tip: Al copiar o editar una carta de porte debera volver a colocar su firma.",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    ...cdpCloudRepository.buildCDPs(
+                      list: snapshot.data!.docs,
+                      userFile: userFile,
+                    ),
+                    const SizedBox(height: defaultPadding * 2),
+                  ],
                 ),
-                const SizedBox(height: defaultPadding * 2),
-              ]),
-            );
+              );
+            }
         }
       },
     );
@@ -99,14 +124,6 @@ class PdfScreen extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(top: defaultPadding),
                   child: avaiblesText(),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: defaultPadding, vertical: defaultPadding / 2),
-                  child: const Text(
-                    "Tip: Al copiar una carta de porte debera volver a colocar su firma.",
-                    textAlign: TextAlign.center,
-                  ),
                 ),
                 emitedCdpsList(),
               ],

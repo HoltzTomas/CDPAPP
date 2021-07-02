@@ -1,5 +1,6 @@
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/home_drawer.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfsListScreen/pdfs_list_screen.dart';
+import 'package:cdp_app/PDF/ui/screens/PdfsListScreen/widgets/upload_cdps_fab.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,6 +20,8 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: const HomeDrawer(),
       body: const PdfsListScreen(),
+      floatingActionButton: const UploadCdpsFAB(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

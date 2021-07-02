@@ -1,11 +1,9 @@
-import 'package:cdp_app/Company/ui/screens/VerifyEmailScreen/verify_email_screen.dart';
 import 'package:cdp_app/splashscreen_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'Company/ui/screens/sign_in_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +31,7 @@ class CartAPPorte extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'CDP APP',
       theme: ThemeData(
         primaryColor: Colors.white,

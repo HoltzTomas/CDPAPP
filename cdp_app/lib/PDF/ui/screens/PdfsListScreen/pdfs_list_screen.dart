@@ -45,10 +45,32 @@ class _PdfsListScreenState extends State<PdfsListScreen> {
               return const Center(child: CircularProgressIndicator());
             case ConnectionState.active:
             case ConnectionState.done:
-              return ListView(
-                children: cloudRepository.buildUploadedFileItems(
-                    list: snapshot.data!.docs),
-              );
+              if (snapshot.data!.docs.isEmpty) {
+                return Column(
+                  children: [
+                    const SizedBox(height: defaultPadding / 2),
+                    Container(
+                      alignment: Alignment.topCenter,
+                      margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+                      child: const Text(
+                        "¡No subiste ningun archivo con cartes de porte aun!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return ListView(
+                  children: [
+                    ...cloudRepository.buildUploadedFileItems(
+                        list: snapshot.data!.docs),
+                    const SizedBox(height: defaultPadding * 2),
+                  ],
+                );
+              }
           }
         },
       ),
