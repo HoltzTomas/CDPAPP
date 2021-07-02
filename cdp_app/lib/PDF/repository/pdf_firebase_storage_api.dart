@@ -16,7 +16,7 @@ class PdfFirebaseStorageAPI {
   Future<void> uploadFile(
       String fileName, File userFile, BuildContext context) async {
     final UploadTask uploadTask =
-        reference.child("${auth.currentUser!.uid}/$fileName").putFile(userFile);
+        reference.child("${auth.currentUser!.uid}/$fileName (${DateTime.now()})").putFile(userFile);
 
     final taskSnapshot = await uploadTask;
 
@@ -24,7 +24,7 @@ class PdfFirebaseStorageAPI {
         PdfDocument(inputBytes: userFile.readAsBytesSync()).pages.count;
 
     final PdfFile file = PdfFile(
-      pdfUrl: "${auth.currentUser!.uid}/$fileName",
+      pdfUrl: "${auth.currentUser!.uid}/$fileName (${DateTime.now()})",
       pdfName: fileName,
       availableCDPs: fileNumOfPages / 4,
       issuedCDPs: 0,

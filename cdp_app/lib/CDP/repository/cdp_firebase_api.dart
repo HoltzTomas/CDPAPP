@@ -50,11 +50,11 @@ class CdpFirebaseApi {
           .collection('pdfFiles')
           .doc(file.pdfName)
           .collection('emitedCdps')
-          .doc(cdpName)
+          .doc("${cdpData.numOfEmitionInsideTheFile + 1}. ${cdpData.cdpName}")
           .set(
         {
           'numOfEmitionInsideTheFile': file.issuedCDPs.round() + 1,
-          'cdpName': cdpData.cdpName,
+          'cdpName': "${cdpData.numOfEmitionInsideTheFile + 1}. ${cdpData.cdpName}",
           'nombreTitularCartaDePorte': cdpData.titularCartaDePorte.nombre,
           'timeWhenItWasIssued': cdpData.timeWhenItWasIssued,
           'cuitTitularCartaDePorte': cdpData.titularCartaDePorte.cuit,

@@ -17,7 +17,7 @@ class PdfFirebaseCloudApi {
           .collection(currentUser!.uid)
           .doc('pdfs')
           .collection('pdfFiles')
-          .doc(file.pdfName)
+          .doc("${file.pdfName} (${DateTime.now()})")
           .set(
         {
           'pdfUrl': "${currentUser!.uid}/${file.pdfName}",

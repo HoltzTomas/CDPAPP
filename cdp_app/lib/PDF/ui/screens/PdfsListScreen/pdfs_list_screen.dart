@@ -1,10 +1,9 @@
-import 'package:cdp_app/PDF/providers/pdf_cloud_providers.dart';
 import 'package:cdp_app/PDF/repository/pdf_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PdfsListScreen extends StatefulWidget {
   ///Here we have a list of the PdfFiles that the user uploaded to Firebase
@@ -37,7 +36,6 @@ class _PdfsListScreenState extends State<PdfsListScreen> {
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          print(currentUser);
           switch (snapshot.connectionState) {
             case ConnectionState.none:
               return const Center(child: Text("No hay coneccion a internet"));
@@ -51,13 +49,12 @@ class _PdfsListScreenState extends State<PdfsListScreen> {
                     const SizedBox(height: defaultPadding / 2),
                     Container(
                       alignment: Alignment.topCenter,
-                      margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: defaultPadding / 2),
                       child: const Text(
                         "¡No subiste ningun archivo con cartes de porte aun!",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16
-                        ),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ],

@@ -60,7 +60,7 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
       await showDialog(
           context: context,
           builder: (context) {
-            Future.delayed(const Duration(seconds: 3), () {
+            Future.delayed(const Duration(seconds: 2), () {
               Navigator.of(context).pop(true);
               setState(() {
                 homeWidget = const HomeScreen();
