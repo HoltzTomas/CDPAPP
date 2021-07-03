@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Company/ui/screens/HomeScreen/home_screen.dart';
 import 'package:cdp_app/Company/ui/screens/VerifyEmailScreen/verify_email_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

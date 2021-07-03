@@ -1,7 +1,5 @@
 import 'package:cdp_app/Form/providers/sworn_declaration_providers.dart';
-import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/widgets/signature_container.dart';
 import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/widgets/sworn_data_dropdown_menu.dart';
-import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

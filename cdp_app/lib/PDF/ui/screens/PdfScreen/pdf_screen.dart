@@ -39,7 +39,7 @@ class PdfScreen extends StatelessWidget {
                   const SizedBox(height: defaultPadding),
                   Container(
                     alignment: Alignment.center,
-                    child: Text(
+                    child: const Text(
                         "¡No emitiste ninguna carta de porte desde este archivo!"),
                   ),
                 ],
@@ -107,7 +107,7 @@ class PdfScreen extends StatelessWidget {
           title: Text(userFile.pdfName),
           actions: [
             IconButton(
-              icon: Icon(Icons.help),
+              icon: const Icon(Icons.help),
               onPressed: () {
                 showDialog(
                     context: context,

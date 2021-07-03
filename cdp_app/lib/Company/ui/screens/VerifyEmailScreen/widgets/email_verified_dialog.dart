@@ -9,12 +9,12 @@ class EmailVerifiedDialog extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
+      children: const [
+        Text(
           "¡Email verificado con éxito!",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
-        const SizedBox(height: defaultPadding),
+        SizedBox(height: defaultPadding),
       ],
     );
   }

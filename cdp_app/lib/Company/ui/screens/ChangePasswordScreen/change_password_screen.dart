@@ -2,7 +2,6 @@ import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordScreen extends StatefulWidget {

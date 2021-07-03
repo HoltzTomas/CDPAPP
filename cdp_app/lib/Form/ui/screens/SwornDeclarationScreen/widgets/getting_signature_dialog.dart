@@ -48,7 +48,7 @@ class GetSignatureDialog extends ConsumerWidget {
 
           if (kIsWeb) {
             final RenderSignaturePad renderSignaturePad =
-                _signaturePadKey.currentState!.context.findRenderObject()
+                _signaturePadKey.currentState!.context.findRenderObject()!
                     as RenderSignaturePad;
             data = await ImageConverter.toImage(
                 renderSignaturePad: renderSignaturePad);

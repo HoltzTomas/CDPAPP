@@ -3,7 +3,6 @@ import 'package:cdp_app/Form/ui/screens/TransportDataScreen/widgets/transport_da
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../widgets/form_text_field.dart';
 
 class TransportDataForm extends ConsumerWidget {
   const TransportDataForm({Key? key}) : super(key: key);

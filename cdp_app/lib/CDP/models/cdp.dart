@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:cdp_app/Form/model/destination.dart';
 import 'package:cdp_app/Form/model/grain_data.dart';
 import 'package:cdp_app/Form/model/procedencia_mercaderia.dart';

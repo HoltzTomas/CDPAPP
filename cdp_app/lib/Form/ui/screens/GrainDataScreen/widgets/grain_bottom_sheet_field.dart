@@ -83,13 +83,12 @@ class _GrainBottomSheetFieldState extends State<GrainBottomSheetField> {
       }
     }
 
-    return Container(
-      child: FormTextField(
-          dataWeWantReceive: "${widget.text} (Escriba aqui)",
-          controller: controller,
-          maxLength: selectMaxLenght(),
-          maxLines: widget.tipo == "observaciones" ? null : 1,
-          keyboardType: selectInputType()),
+    return FormTextField(
+      dataWeWantReceive: "${widget.text} (Escriba aqui)",
+      controller: controller,
+      maxLength: selectMaxLenght(),
+      maxLines: widget.tipo == "observaciones" ? null : 1,
+      keyboardType: selectInputType(),
     );
   }
 
