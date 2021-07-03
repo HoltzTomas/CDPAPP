@@ -1,8 +1,10 @@
 import 'package:cdp_app/Company/repository/auth_repository.dart';
+import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/account_configuration_screen.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({Key? key}) : super(key: key);
@@ -26,7 +28,14 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.account_box),
             title: const Text("Mi cuenta"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                    child: const AccountConfigurationScreen(),
+                    type: PageTransitionType.rightToLeft),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.help_center_outlined),
