@@ -15,16 +15,24 @@ class PdfFirebaseStorageAPI {
 
   Future<void> uploadFile(
       String fileName, File userFile, BuildContext context) async {
+
+    final pdfFilesUploaded = await FirebaseFirestore.instance
+      .collection(FirebaseAuth.instance.currentUser!.uid)
+      .doc('pdfs')
+      .get()
+      .then((value) => value['pdfFilesUploaded'] + 1 as int);
+
     final UploadTask uploadTask =
-        reference.child("${auth.currentUser!.uid}/$fileName (${DateTime.now()})").putFile(userFile);
+        reference.child("${auth.currentUser!.uid}/$pdfFilesUploaded. $fileName").putFile(userFile);
 
     final taskSnapshot = await uploadTask;
+
 
     final int fileNumOfPages =
         PdfDocument(inputBytes: userFile.readAsBytesSync()).pages.count;
 
     final PdfFile file = PdfFile(
-      pdfUrl: "${auth.currentUser!.uid}/$fileName (${DateTime.now()})",
+      pdfUrl: "${auth.currentUser!.uid}/$pdfFilesUploaded. $fileName)",
       pdfName: fileName,
       availableCDPs: fileNumOfPages / 4,
       issuedCDPs: 0,

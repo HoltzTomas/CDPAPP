@@ -13,15 +13,28 @@ class PdfFirebaseCloudApi {
     final connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
+      final pdfFilesUploaded = await FirebaseFirestore.instance
+          .collection(FirebaseAuth.instance.currentUser!.uid)
+          .doc('pdfs')
+          .get()
+          .then((value) => value['pdfFilesUploaded'] + 1 as int);
+
+      firebaseCloud
+          .collection(currentUser!.uid)
+          .doc('pdfs')
+          .set({
+            'pdfFilesUploaded': pdfFilesUploaded
+          });
+
       firebaseCloud
           .collection(currentUser!.uid)
           .doc('pdfs')
           .collection('pdfFiles')
-          .doc("${file.pdfName} (${DateTime.now()})")
+          .doc('$pdfFilesUploaded. ${file.pdfName}')
           .set(
         {
-          'pdfUrl': "${currentUser!.uid}/${file.pdfName}",
-          'pdfName': file.pdfName,
+          'pdfUrl': file.pdfUrl,
+          'pdfName': '$pdfFilesUploaded. ${file.pdfName}',
           'availableCDPs': file.availableCDPs,
           'issuedCDPs': file.issuedCDPs,
           'time': file.time,

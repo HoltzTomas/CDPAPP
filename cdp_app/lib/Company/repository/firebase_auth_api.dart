@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,10 @@ class FirebaseAuthAPI {
         userCredential.user!.updateDisplayName(name);
         //companyBloc.createdCompanyCollection(email: email, name: name);
         Navigator.pop(context);
+        FirebaseFirestore.instance
+            .collection(userCredential.user!.uid)
+            .doc('pdfs')
+            .set({'pdfFilesUploaded': 0});
         return userCredential.user;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
@@ -27,6 +32,9 @@ class FirebaseAuthAPI {
         } else if (e.code == 'email-already-in-use') {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Esta cuenta de E-Mail ya esta en uso')));
+        } else if (e.code == 'invalid-email') {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('La dirección de e-mail no es valida')));
         }
       } catch (e) {
         ScaffoldMessenger.of(context)
