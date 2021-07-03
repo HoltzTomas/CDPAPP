@@ -55,7 +55,6 @@ class CDP {
     required this.pagadorDelFlete,
     required this.aclarcion,
     required this.dni,
-    required this.signatureImage,
   });
 
   final String cdpName;
@@ -104,5 +103,4 @@ class CDP {
   //SwornDeclaration
   final String aclarcion;
   final String dni;
-  final Uint8List signatureImage;
 }

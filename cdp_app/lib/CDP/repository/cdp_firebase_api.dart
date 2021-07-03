@@ -54,7 +54,8 @@ class CdpFirebaseApi {
           .set(
         {
           'numOfEmitionInsideTheFile': file.issuedCDPs.round() + 1,
-          'cdpName': "${cdpData.numOfEmitionInsideTheFile + 1}. ${cdpData.cdpName}",
+          'cdpName':
+              "${cdpData.numOfEmitionInsideTheFile + 1}. ${cdpData.cdpName}",
           'nombreTitularCartaDePorte': cdpData.titularCartaDePorte.nombre,
           'timeWhenItWasIssued': cdpData.timeWhenItWasIssued,
           'cuitTitularCartaDePorte': cdpData.titularCartaDePorte.cuit,
@@ -136,87 +137,85 @@ class CdpFirebaseApi {
         IssuedCdpListItem(
           userFile: userFile,
           cdp: CDP(
-              numOfEmitionInsideTheFile:
-                  cdp.get('numOfEmitionInsideTheFile') as int,
-              cdpName: cdp.get('cdpName') as String,
-              timeWhenItWasIssued: cdp.get('timeWhenItWasIssued') as Timestamp,
-              titularCartaDePorte: TransferData(
-                  nombre: cdp.get('nombreTitularCartaDePorte') as String,
-                  cuit: cdp.get('cuitTitularCartaDePorte') as String),
-              intermediario: TransferData(
-                  nombre: cdp.get('nombreIntermediario') as String,
-                  cuit: cdp.get('cuitIntermediario') as String),
-              remitenteComercial: TransferData(
-                  nombre: cdp.get('nombreRemitenteComercial') as String,
-                  cuit: cdp.get('cuitRemitenteComercial') as String),
-              corredorComprador: TransferData(
-                  nombre: cdp.get('nombreCorredorComprador') as String,
-                  cuit: cdp.get('cuitCorredorComprador') as String),
-              mercadoATermino: TransferData(
-                  nombre: cdp.get('nombreMercadoATermino') as String,
-                  cuit: cdp.get('cuitMercadoATermino') as String),
-              corredorVendedor: TransferData(
-                  nombre: cdp.get('nombreCorredorVendedor') as String,
-                  cuit: cdp.get('cuitCorredorVendedor') as String),
-              representanteEntregador: TransferData(
-                  nombre: cdp.get('nombreRepresentanteEntregador') as String,
-                  cuit: cdp.get('cuitRepresentanteEntregador') as String),
-              destinatario: TransferData(
-                  nombre: cdp.get('nombreDestinatario') as String,
-                  cuit: cdp.get('cuitDestinatario') as String),
-              destino: TransferData(
-                  nombre: cdp.get('nombreDestino') as String,
-                  cuit: cdp.get('cuitDestino') as String),
-              intermediarioDelFlete: TransferData(
-                  nombre: cdp.get('nombreIntermediarioDelFlete') as String,
-                  cuit: cdp.get('cuitIntermediarioDelFlete') as String),
-              transportista: TransferData(
-                  nombre: cdp.get('nombreTransportista') as String,
-                  cuit: cdp.get('cuitTransportista') as String),
-              chofer: TransferData(
-                nombre: cdp.get('nombreChofer') as String,
-                cuit: cdp.get('cuitChofer') as String,
-                camion: cdp.get('camionChofer') as String,
-                acoplado: cdp.get('acopladoChofer') as String,
-              ),
-              granoEspecie: GrainData(text: cdp.get('granoEspecie') as String),
-              tipo: GrainData(text: cdp.get('tipo') as String),
-              cosecha: GrainData(text: cdp.get('cosecha') as String),
-              contratoNro: GrainData(text: cdp.get('contratoNro') as String),
-              seraPesada: cdp.get('seraPesada') as bool,
-              kgsEstimados: GrainData(text: cdp.get('kgsEstimados') as String),
-              declaracionDeCalidad:
-                  GrainData(text: cdp.get('declaracionDeCalidad') as String),
-              pesoBruto: GrainData(text: cdp.get('pesoBruto') as String),
-              pesoTara: GrainData(text: cdp.get('pesoTara') as String),
-              pesoNeto: GrainData(text: cdp.get('pesoNeto') as String),
-              observaciones:
-                  GrainData(text: cdp.get('observaciones') as String),
-              procedenciaMercaderia: ProcedenciaMercaderia(
-                direccion: cdp.get('direccionProcedenciaMercaderia') as String,
-                provincia: cdp.get('provinciaProcedenciaMercaderia') as String,
-                localidad: cdp.get('localidadProcedenciaMercaderia') as String,
-                establecimiento:
-                    cdp.get('establecimientoProcedenciaMercaderia') as String,
-                renspa: cdp.get('renspaProcedenciaMercaderia') as String,
-              ),
-              destination: Destination(
-                direccion: cdp.get('direccionDestino') as String,
-                localidad: cdp.get('provinciaDestino') as String,
-                provincia: cdp.get('localidadDestino') as String,
-              ),
-              camion: TransportData(text: cdp.get('camion') as String),
-              acoplado: TransportData(text: cdp.get('acoplado') as String),
-              kmARecorrer:
-                  TransportData(text: cdp.get('kmARecorrer') as String),
-              tarifaDeReferencia:
-                  TransportData(text: cdp.get('tarifaDeReferencia') as String),
-              tarifa: TransportData(text: cdp.get('tarifa') as String),
-              pagadorDelFlete:
-                  TransportData(text: cdp.get('pagadorDelFlete') as String),
-              aclarcion: cdp.get('aclaracion') as String,
-              dni: cdp.get('dni') as String,
-              signatureImage: Uint8List(0)),
+            numOfEmitionInsideTheFile:
+                cdp.get('numOfEmitionInsideTheFile') as int,
+            cdpName: cdp.get('cdpName') as String,
+            timeWhenItWasIssued: cdp.get('timeWhenItWasIssued') as Timestamp,
+            titularCartaDePorte: TransferData(
+                nombre: cdp.get('nombreTitularCartaDePorte') as String,
+                cuit: cdp.get('cuitTitularCartaDePorte') as String),
+            intermediario: TransferData(
+                nombre: cdp.get('nombreIntermediario') as String,
+                cuit: cdp.get('cuitIntermediario') as String),
+            remitenteComercial: TransferData(
+                nombre: cdp.get('nombreRemitenteComercial') as String,
+                cuit: cdp.get('cuitRemitenteComercial') as String),
+            corredorComprador: TransferData(
+                nombre: cdp.get('nombreCorredorComprador') as String,
+                cuit: cdp.get('cuitCorredorComprador') as String),
+            mercadoATermino: TransferData(
+                nombre: cdp.get('nombreMercadoATermino') as String,
+                cuit: cdp.get('cuitMercadoATermino') as String),
+            corredorVendedor: TransferData(
+                nombre: cdp.get('nombreCorredorVendedor') as String,
+                cuit: cdp.get('cuitCorredorVendedor') as String),
+            representanteEntregador: TransferData(
+                nombre: cdp.get('nombreRepresentanteEntregador') as String,
+                cuit: cdp.get('cuitRepresentanteEntregador') as String),
+            destinatario: TransferData(
+                nombre: cdp.get('nombreDestinatario') as String,
+                cuit: cdp.get('cuitDestinatario') as String),
+            destino: TransferData(
+                nombre: cdp.get('nombreDestino') as String,
+                cuit: cdp.get('cuitDestino') as String),
+            intermediarioDelFlete: TransferData(
+                nombre: cdp.get('nombreIntermediarioDelFlete') as String,
+                cuit: cdp.get('cuitIntermediarioDelFlete') as String),
+            transportista: TransferData(
+                nombre: cdp.get('nombreTransportista') as String,
+                cuit: cdp.get('cuitTransportista') as String),
+            chofer: TransferData(
+              nombre: cdp.get('nombreChofer') as String,
+              cuit: cdp.get('cuitChofer') as String,
+              camion: cdp.get('camionChofer') as String,
+              acoplado: cdp.get('acopladoChofer') as String,
+            ),
+            granoEspecie: GrainData(text: cdp.get('granoEspecie') as String),
+            tipo: GrainData(text: cdp.get('tipo') as String),
+            cosecha: GrainData(text: cdp.get('cosecha') as String),
+            contratoNro: GrainData(text: cdp.get('contratoNro') as String),
+            seraPesada: cdp.get('seraPesada') as bool,
+            kgsEstimados: GrainData(text: cdp.get('kgsEstimados') as String),
+            declaracionDeCalidad:
+                GrainData(text: cdp.get('declaracionDeCalidad') as String),
+            pesoBruto: GrainData(text: cdp.get('pesoBruto') as String),
+            pesoTara: GrainData(text: cdp.get('pesoTara') as String),
+            pesoNeto: GrainData(text: cdp.get('pesoNeto') as String),
+            observaciones: GrainData(text: cdp.get('observaciones') as String),
+            procedenciaMercaderia: ProcedenciaMercaderia(
+              direccion: cdp.get('direccionProcedenciaMercaderia') as String,
+              provincia: cdp.get('provinciaProcedenciaMercaderia') as String,
+              localidad: cdp.get('localidadProcedenciaMercaderia') as String,
+              establecimiento:
+                  cdp.get('establecimientoProcedenciaMercaderia') as String,
+              renspa: cdp.get('renspaProcedenciaMercaderia') as String,
+            ),
+            destination: Destination(
+              direccion: cdp.get('direccionDestino') as String,
+              localidad: cdp.get('provinciaDestino') as String,
+              provincia: cdp.get('localidadDestino') as String,
+            ),
+            camion: TransportData(text: cdp.get('camion') as String),
+            acoplado: TransportData(text: cdp.get('acoplado') as String),
+            kmARecorrer: TransportData(text: cdp.get('kmARecorrer') as String),
+            tarifaDeReferencia:
+                TransportData(text: cdp.get('tarifaDeReferencia') as String),
+            tarifa: TransportData(text: cdp.get('tarifa') as String),
+            pagadorDelFlete:
+                TransportData(text: cdp.get('pagadorDelFlete') as String),
+            aclarcion: cdp.get('aclaracion') as String,
+            dni: cdp.get('dni') as String,
+          ),
         ),
       );
     }

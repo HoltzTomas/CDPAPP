@@ -139,7 +139,6 @@ class CdpApi {
     ///Copying [SwornDeclarationProviders]
     context.read(aclaracionProvider).state = cdp.aclarcion;
     context.read(dniProvider).state = cdp.dni;
-    context.read(signatureImageProvider).state = cdp.signatureImage;
 
     Navigator.push(
       context,
@@ -170,7 +169,7 @@ class CdpApi {
     final List<int> bytes = document.save();
     document.dispose();
 
-    saveAndLaunchFile(bytes, 'CDP.pdf');
+    saveAndLaunchFile(bytes, "${cdp.cdpName}.pdf");
   }
 
   void _addString(
@@ -186,12 +185,6 @@ class CdpApi {
         bounds: Rect.fromLTWH(left, top, 440, 550), pen: PdfPens.black);
   }
 
-  void _addImage(PdfPage page, double left, double top, double width,
-      double height, List<int> bytes) {
-    page.graphics
-        .drawImage(PdfBitmap(bytes), Rect.fromLTWH(left, top, width, height));
-  }
-
   void addStringInAllPages(List<PdfPage> pages, String string, double left,
       double top, double textSize) {
     for (final PdfPage page in pages) {
@@ -203,13 +196,6 @@ class CdpApi {
       List<PdfPage> pages, double left, double top, double pointSize) {
     for (final PdfPage page in pages) {
       _addPoint(page, left, top, pointSize);
-    }
-  }
-
-  void addImageInAllPages(List<PdfPage> pages, double left, double top,
-      double width, double height, List<int> bytes) {
-    for (final PdfPage page in pages) {
-      _addImage(page, left, top, width, height, bytes);
     }
   }
 
@@ -419,9 +405,5 @@ class CdpApi {
 
     ///Adding D.N.I to [text] each page
     addStringInAllPages(cdpPages, cdpPdf.dni, 457, 817, 9);
-
-    ///Adding Signature to each page
-    /// TODO: addImageInAllPages(cdpPages, 320, 540, 100, 30, cdpPdf.signatureImage);
-    //addImageInAllPages(cdpPages, 110, 815, 50, 25, cdpPdf.signatureImage);
   }
 }

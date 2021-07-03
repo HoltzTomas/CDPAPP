@@ -33,9 +33,6 @@ class SwornDeclarationForm extends ConsumerWidget {
               text: "D.N.I",
               providerToChange: dniProvider
             ),
-
-            ///Signature (Third fact of [SwornDeclarationForm])
-            const SignatureContainer(),
           ],
         ),
       ),
