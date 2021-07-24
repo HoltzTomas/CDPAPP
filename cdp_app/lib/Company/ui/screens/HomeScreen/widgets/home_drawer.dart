@@ -1,5 +1,6 @@
 import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/account_configuration_screen.dart';
+import 'package:cdp_app/Subs/ui/screens/PaywallScreen/paywall_screen.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,17 +39,24 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.help_center_outlined),
-            title: const Text("¿Cómo usar CDP App?"),
-            onTap: () {},
-          ),
-          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text("Cerrar sesión"),
             onTap: () {
               authRepository.signOut(context);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.help_center_outlined),
+            title: const Text("CDP APP PRO"),
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                    child: PaywallScreen(),
+                    type: PageTransitionType.bottomToTop),
+              );
+            },
+          )
         ],
       ),
     );

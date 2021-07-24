@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +24,25 @@ Future<void> disableLandscapeMode() async {
   );
 }
 
-class CartAPPorte extends StatelessWidget {
+class CartAPPorte extends StatefulWidget {
   const CartAPPorte({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  State<CartAPPorte> createState() => _CartAPPorteState();
+}
+
+class _CartAPPorteState extends State<CartAPPorte> {
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    await Purchases.setDebugLogsEnabled(true);
+    await Purchases.setup("aNGNjQXyQJDEDWNUdhiMpQAeMcESCFlU");
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
