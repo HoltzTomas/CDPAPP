@@ -1,5 +1,7 @@
 import 'package:cdp_app/Subs/providers/purchases_providers.dart';
+import 'package:cdp_app/constants.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -18,7 +20,15 @@ class RevenueCatApi {
     } on PlatformException catch (e) {
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
       if (errorCode != PurchasesErrorCode.purchaseCancelledError) {
-        print(e);
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
+        ),
+      );
       }
     }
   }

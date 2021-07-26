@@ -1,5 +1,6 @@
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfsListScreen/widgets/uploaded_file_item.dart';
+import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,9 +23,7 @@ class PdfFirebaseCloudApi {
       firebaseCloud
           .collection(currentUser!.uid)
           .doc('pdfs')
-          .set({
-            'pdfFilesUploaded': pdfFilesUploaded
-          });
+          .set({'pdfFilesUploaded': pdfFilesUploaded});
 
       firebaseCloud
           .collection(currentUser!.uid)
@@ -42,12 +41,20 @@ class PdfFirebaseCloudApi {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No hay coneccion a internet')));
+        const SnackBar(
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
+        ),
+      );
     }
   }
 
   List<UploadedFileItem> buildUploadedFileItems(
-      {required List<DocumentSnapshot<Map<String, dynamic>>> list}) {
+      {required List<DocumentSnapshot<Map<String, dynamic>>> list,
+      required BuildContext context}) {
     final List<UploadedFileItem> files = [];
     for (final pdf in list) {
       files.add(

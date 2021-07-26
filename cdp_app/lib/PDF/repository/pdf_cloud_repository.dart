@@ -10,6 +10,6 @@ class PdfCloudRepository {
   void uploadPdfFile(PdfFile file, BuildContext context) => firebaseApi.uploadPdfFile(file, context);
 
   List<UploadedFileItem> buildUploadedFileItems(
-          {required List<DocumentSnapshot<Map<String, dynamic>>> list}) =>
-      firebaseApi.buildUploadedFileItems(list: list);
+          {required List<DocumentSnapshot<Map<String, dynamic>>> list, required BuildContext context}) =>
+      firebaseApi.buildUploadedFileItems(list: list, context: context);
 }

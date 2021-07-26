@@ -1,3 +1,4 @@
+import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,11 +15,9 @@ class FirebaseAuthAPI {
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       try {
-        //final CompanyBloc companyBloc = BlocProvider.of<CompanyBloc>(context);
         final UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
         userCredential.user!.updateDisplayName(name);
-        //companyBloc.createdCompanyCollection(email: email, name: name);
         Navigator.pop(context);
         FirebaseFirestore.instance
             .collection(userCredential.user!.uid)
@@ -42,7 +41,14 @@ class FirebaseAuthAPI {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No hay conexión a internet')));
+        const SnackBar(
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
+        ),
+      );
     }
   }
 
@@ -76,7 +82,14 @@ class FirebaseAuthAPI {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No hay conexión a internet')));
+        const SnackBar(
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
+        ),
+      );
     }
   }
 
@@ -87,8 +100,15 @@ class FirebaseAuthAPI {
         connectivityResult == ConnectivityResult.wifi) {
       await FirebaseAuth.instance.signOut();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No hay conexión a internet')));
+     ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
+        ),
+      );
     }
   }
 

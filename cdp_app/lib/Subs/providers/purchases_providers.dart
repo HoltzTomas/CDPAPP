@@ -15,4 +15,4 @@ final FutureProvider<Package?> subInformation = FutureProvider(
   },
 );
 
-final StateProvider isSubActive = StateProvider<bool>((ref) => false);
+final StateProvider<bool> isSubActive = StateProvider<bool>((ref) => false);

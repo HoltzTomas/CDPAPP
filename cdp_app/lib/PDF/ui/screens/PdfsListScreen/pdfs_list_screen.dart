@@ -1,8 +1,10 @@
+import 'package:cdp_app/PDF/providers/pdf_providers.dart';
 import 'package:cdp_app/PDF/repository/pdf_cloud_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PdfsListScreen extends StatefulWidget {
   ///Here we have a list of the PdfFiles that the user uploaded to Firebase
@@ -62,7 +64,9 @@ class _PdfsListScreenState extends State<PdfsListScreen> {
                 return ListView(
                   children: [
                     ...cloudRepository.buildUploadedFileItems(
-                        list: snapshot.data!.docs),
+                      list: snapshot.data!.docs,
+                      context: context
+                    ),
                     const SizedBox(height: defaultPadding * 2),
                   ],
                 );

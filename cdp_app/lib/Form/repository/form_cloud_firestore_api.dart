@@ -8,6 +8,7 @@ import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/grain_data_botto
 import 'package:cdp_app/Form/ui/screens/GrainDataScreen/widgets/procedencia_mercaderia_bottom_sheet_item.dart';
 import 'package:cdp_app/Form/ui/screens/TransferDataScreen/widgets/transfer_data_bottom_sheet_item.dart';
 import 'package:cdp_app/Form/ui/screens/TransportDataScreen/widgets/transport_data_bottom_sheet_item.dart';
+import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,7 +52,11 @@ class FormCloudFirestoreApi {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("No hay coneccion a internet"),
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
         ),
       );
     }
@@ -79,7 +84,11 @@ class FormCloudFirestoreApi {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("No hay coneccion a internet"),
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
         ),
       );
     }
@@ -110,7 +119,11 @@ class FormCloudFirestoreApi {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("No hay coneccion a internet"),
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
         ),
       );
     }
@@ -139,7 +152,11 @@ class FormCloudFirestoreApi {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("No hay coneccion a internet"),
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
         ),
       );
     }
@@ -167,7 +184,11 @@ class FormCloudFirestoreApi {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("No hay coneccion a internet"),
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            "No hay conexión a internet",
+          ),
         ),
       );
     }
