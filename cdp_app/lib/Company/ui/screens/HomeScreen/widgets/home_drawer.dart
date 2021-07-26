@@ -1,5 +1,6 @@
 import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/account_configuration_screen.dart';
+import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/close_session_dialog.dart';
 import 'package:cdp_app/Subs/providers/purchases_providers.dart';
 import 'package:cdp_app/Subs/ui/screens/PaywallScreen/paywall_screen.dart';
 import 'package:cdp_app/constants.dart';
@@ -44,9 +45,9 @@ class HomeDrawer extends StatelessWidget {
             builder: (context, watch, child) {
               return ListTile(
                 leading: const Icon(Icons.help_center_outlined),
-                title: Text(
-                  watch(isSubActive).state ? "CDP APP PRO (Active)" : "CDP APP PRO"
-                ),
+                title: Text(watch(isSubActive).state
+                    ? "CDP APP PRO (Active)"
+                    : "CDP APP PRO"),
                 onTap: () {
                   Navigator.push(
                     context,
@@ -62,7 +63,12 @@ class HomeDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text("Cerrar sesión"),
             onTap: () {
-              authRepository.signOut(context);
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return const CloseSesionDialog();
+                },
+              );
             },
           ),
         ],

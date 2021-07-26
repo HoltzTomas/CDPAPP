@@ -55,31 +55,34 @@ class ProSubscriptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          flex: 3,
-          child: IntroductionScreen(
-            showDoneButton: false,
-            showNextButton: false,
-            dotsDecorator: const DotsDecorator(
-              activeColor: primaryColor,
-              color: darkColor,
-            ),
-            globalHeader: Container(
-              alignment: Alignment.topCenter,
-              child: const Text(
-                "CDP APP PRO",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    return Container(
+      margin: const EdgeInsets.only(bottom: defaultPadding),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 3,
+            child: IntroductionScreen(
+              showDoneButton: false,
+              showNextButton: false,
+              dotsDecorator: const DotsDecorator(
+                activeColor: primaryColor,
+                color: darkColor,
               ),
+              globalHeader: Container(
+                alignment: Alignment.topCenter,
+                child: const Text(
+                  "CDP APP PRO",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              pages: [page1(context)],
             ),
-            pages: [page1(context), page2(context)],
           ),
-        ),
-        MakePurchaseButton(packageToPurchase: proSubPackage)
-      ],
+          MakePurchaseButton(packageToPurchase: proSubPackage)
+        ],
+      ),
     );
   }
 }

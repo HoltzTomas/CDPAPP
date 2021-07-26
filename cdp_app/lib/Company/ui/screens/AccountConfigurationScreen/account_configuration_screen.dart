@@ -1,6 +1,11 @@
+import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/widgets/change_name_dialog.dart';
+import 'package:cdp_app/Company/ui/screens/ChangePasswordScreen/change_password_screen.dart';
+import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
+import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AccountConfigurationScreen extends StatelessWidget {
   const AccountConfigurationScreen({Key? key}) : super(key: key);
@@ -15,18 +20,25 @@ class AccountConfigurationScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          changeCompanyNameTile(),
-          changeCompanyPasswordTile()
+          changeCompanyNameTile(context),
+          changeCompanyPasswordTile(context)
         ],
       ),
     );
   }
 
-  Widget changeCompanyNameTile() => ListTile(
+  Widget changeCompanyNameTile(BuildContext context) => ListTile(
         title: const Text("Nombre de la empresa"),
         subtitle: Text(FirebaseAuth.instance.currentUser!.displayName!),
         trailing: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return const ChangeNameDialog();
+              },
+            );
+          },
           child: Text(
             "Cambiar nombre",
             style: TextStyle(
@@ -36,10 +48,17 @@ class AccountConfigurationScreen extends StatelessWidget {
         ),
       );
 
-  Widget changeCompanyPasswordTile() => ListTile(
+  Widget changeCompanyPasswordTile(BuildContext context) => ListTile(
         title: const Text("Contraseña"),
         trailing: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageTransition(
+                  child: const ChangePasswordScreen(),
+                  type: PageTransitionType.bottomToTop),
+            );
+          },
           child: Text(
             "Cambiar contraseña",
             style: TextStyle(
@@ -49,3 +68,4 @@ class AccountConfigurationScreen extends StatelessWidget {
         ),
       );
 }
+

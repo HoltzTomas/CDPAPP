@@ -75,13 +75,13 @@ class UploadCdpsFAB extends ConsumerWidget {
             }
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    backgroundColor: primaryColor,
-                    content: Text(
-                      "No hay conexión a internet",
-                    ),
-                  ),
-                );
+              const SnackBar(
+                backgroundColor: primaryColor,
+                content: Text(
+                  "No hay conexión a internet",
+                ),
+              ),
+            );
           }
         },
         child: Text(
