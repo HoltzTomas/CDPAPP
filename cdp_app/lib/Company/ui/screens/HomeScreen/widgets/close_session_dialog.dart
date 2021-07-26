@@ -3,6 +3,7 @@ import 'package:cdp_app/Company/ui/widgets/rounded_button.dart';
 import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class CloseSesionDialog extends StatefulWidget {
   const CloseSesionDialog({
@@ -31,7 +32,10 @@ class _CloseSesionDialogDialogState extends State<CloseSesionDialog> {
           RoundedButton(
             text: "Cerrar Sesión",
             press: () {
-              authRepository.signOut(context).whenComplete(() => Navigator.pop(context));
+              Purchases.logOut();
+              authRepository
+                  .signOut(context)
+                  .whenComplete(() => Navigator.pop(context));
             },
           ),
         ],

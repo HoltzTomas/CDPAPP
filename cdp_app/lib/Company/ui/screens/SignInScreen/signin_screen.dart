@@ -6,7 +6,9 @@ import 'package:cdp_app/Company/ui/widgets/rounded_button.dart';
 import 'package:cdp_app/Company/ui/widgets/rounded_input_field.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'widgets/signin_screen_title.dart';
 
@@ -60,26 +62,34 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       );
                       await FirebaseFirestore.instance.terminate();
-                      await FirebaseFirestore.instance
-                          .clearPersistence()
-                          .then((value) => authRepository
-                                  .signInWithEmailAndPassword(
-                                context: context,
-                                email: emailController.text.trim(),
-                                password: passwordController.text.trim(),
-                              )
-                                  .whenComplete(
-                                () {
-                                  setState(
-                                    () {
-                                      isLoading = false;
-                                    },
-                                  );
-                                },
-                              ));
+                      await FirebaseFirestore.instance.clearPersistence().then(
+                            (value) => authRepository
+                                .signInWithEmailAndPassword(
+                              context: context,
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            )
+                                .whenComplete(
+                              () {
+                                Purchases.logIn(
+                                    FirebaseAuth.instance.currentUser!.uid);
+
+                                setState(
+                                  () {
+                                    isLoading = false;
+                                  },
+                                );
+                              },
+                            ),
+                          );
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('Completa todos los campos')));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: primaryColor,
+                          behavior: SnackBarBehavior.floating,
+                          content: Text('Completa todos los campos'),
+                        ),
+                      );
                     }
                   },
                 ),

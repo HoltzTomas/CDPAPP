@@ -21,15 +21,25 @@ class RevenueCatApi {
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
       if (errorCode != PurchasesErrorCode.purchaseCancelledError) {
         ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: primaryColor,
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "No hay conexión a internet",
+          const SnackBar(
+            backgroundColor: primaryColor,
+            behavior: SnackBarBehavior.floating,
+            content: Text(
+              "La transacción fue cancelada",
+            ),
           ),
-        ),
-      );
+        );
       }
+    }
+  }
+
+  ///Check Sub Status
+  Future<void> checkSubStatus(BuildContext context) async {
+    final PurchaserInfo purchaserInfo = await Purchases.getPurchaserInfo();
+    if (purchaserInfo.entitlements.all["CDP APP Pro"]!.isActive) {
+      context.read(isSubActive).state = true;
+    } else {
+      context.read(isSubActive).state = false;
     }
   }
 }

@@ -8,4 +8,7 @@ class PurchasesRepository {
   Future<void> makingSubPurchase(
           Package packageToPurchase, BuildContext context) async =>
       _revenueCatApi.makingSubPurchase(packageToPurchase, context);
+
+  Future<void> checkSubStatus(BuildContext context) async =>
+      _revenueCatApi.checkSubStatus(context);
 }

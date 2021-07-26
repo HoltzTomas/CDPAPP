@@ -46,7 +46,7 @@ class HomeDrawer extends StatelessWidget {
               return ListTile(
                 leading: const Icon(Icons.help_center_outlined),
                 title: Text(watch(isSubActive).state
-                    ? "CDP APP PRO (Active)"
+                    ? "CDP APP PRO (Activa)"
                     : "CDP APP PRO"),
                 onTap: () {
                   Navigator.push(
