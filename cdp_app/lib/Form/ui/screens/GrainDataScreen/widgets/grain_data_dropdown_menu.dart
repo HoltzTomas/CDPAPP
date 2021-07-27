@@ -36,6 +36,7 @@ class GrainDataDropdownMenu extends ConsumerWidget {
               onPressed: () {
                 showModalBottomSheet(
                   backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
                   context: context,
                   builder: (context) {
                     if (tipo == "procedenciaMercaderia") {
@@ -176,6 +177,7 @@ class GrainDataDropdownMenu extends ConsumerWidget {
             tipo != "procedenciaMercaderia") {
           showModalBottomSheet(
             backgroundColor: Colors.transparent,
+            isScrollControlled: true,
             context: context,
             builder: (context) {
               if (tipo == "contratoNro" ||
@@ -203,15 +205,17 @@ class GrainDataDropdownMenu extends ConsumerWidget {
                 .isEmpty &&
             tipo == "procedenciaMercaderia") {
           showModalBottomSheet(
-              backgroundColor: Colors.transparent,
-              context: context,
-              builder: (context) {
-                return ProcedenciaBottomSheet(
-                  text: text,
-                  tipo: tipo,
-                  providerToChange: procedenciaProviderToChange,
-                );
-              },);
+            backgroundColor: Colors.transparent,
+            isScrollControlled: true,
+            context: context,
+            builder: (context) {
+              return ProcedenciaBottomSheet(
+                text: text,
+                tipo: tipo,
+                providerToChange: procedenciaProviderToChange,
+              );
+            },
+          );
         }
       },
       child: Container(

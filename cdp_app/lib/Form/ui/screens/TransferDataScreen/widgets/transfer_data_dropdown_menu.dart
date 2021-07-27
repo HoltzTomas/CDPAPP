@@ -25,6 +25,7 @@ class TransferDataDropdownMenu extends ConsumerWidget {
             showModalBottomSheet(
               context: context,
               backgroundColor: Colors.transparent,
+              isScrollControlled: true,
               builder: (context) {
                 return TransferDataBottomSheet(
                   tipo: tipo,
@@ -113,6 +114,7 @@ class TransferDataDropdownMenu extends ConsumerWidget {
           showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
+            isScrollControlled: true,
             builder: (context) {
               return TransferDataBottomSheet(
                 tipo: tipo,

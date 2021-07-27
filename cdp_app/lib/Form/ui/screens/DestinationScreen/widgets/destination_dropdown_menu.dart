@@ -23,6 +23,7 @@ class DestinationDropdownMenu extends ConsumerWidget {
               onPressed: () {
                 showModalBottomSheet(
                   backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
                   context: context,
                   builder: (context) {
                     return DestinationBottomSheet(
@@ -101,6 +102,7 @@ class DestinationDropdownMenu extends ConsumerWidget {
         if (watch(providerToChange!).state!.direccion!.isEmpty) {
           showModalBottomSheet(
             backgroundColor: Colors.transparent,
+            isScrollControlled: true,
             context: context,
             builder: (context) {
               return DestinationBottomSheet(

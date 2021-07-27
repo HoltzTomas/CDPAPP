@@ -24,6 +24,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
               onPressed: () {
                 showModalBottomSheet(
                   backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
                   context: context,
                   builder: (context) {
                     if (tipo == "pagadorDelFlete") {
@@ -91,6 +92,7 @@ class TransportDataDropdownMenu extends ConsumerWidget {
         if (watch(providerToChange!).state.text!.isEmpty) {
           showModalBottomSheet(
           backgroundColor: Colors.transparent,
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             if (tipo == "pagadorDelFlete") {

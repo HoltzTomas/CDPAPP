@@ -22,6 +22,7 @@ class SwornDataDropdownMenu extends ConsumerWidget {
               onPressed: () {
                 showModalBottomSheet(
                   backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
                   context: context,
                   builder: (context) {
                     return SwornBottomSheetField(
@@ -82,6 +83,7 @@ class SwornDataDropdownMenu extends ConsumerWidget {
         if (watch(providerToChange!).state.isEmpty) {
           showModalBottomSheet(
             backgroundColor: Colors.transparent,
+            isScrollControlled: true,
             context: context,
             builder: (context) {
               return SwornBottomSheetField(
