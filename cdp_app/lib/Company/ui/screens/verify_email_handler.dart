@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cdp_app/Company/ui/screens/HomeScreen/home_screen.dart';
 import 'package:cdp_app/Company/ui/screens/VerifyEmailScreen/verify_email_screen.dart';
+import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,7 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
       await showDialog(
           context: context,
           builder: (context) {
-            Future.delayed(const Duration(seconds: 2), () {
+            Future.delayed(const Duration(seconds: 1), () {
               Navigator.of(context).pop(true);
               setState(() {
                 homeWidget = const HomeScreen();
@@ -69,6 +70,8 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
           });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
           content: Text('Email verificado con éxito'),
         ),
       );

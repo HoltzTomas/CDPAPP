@@ -32,7 +32,7 @@ class PdfFirebaseStorageAPI {
         PdfDocument(inputBytes: userFile.readAsBytesSync()).pages.count;
 
     final PdfFile file = PdfFile(
-      pdfUrl: "${auth.currentUser!.uid}/$pdfFilesUploaded. $fileName)",
+      pdfUrl: "${auth.currentUser!.uid}/$pdfFilesUploaded. $fileName",
       pdfName: fileName,
       availableCDPs: fileNumOfPages / 4,
       issuedCDPs: 0,

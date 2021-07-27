@@ -4,6 +4,7 @@ import 'package:cdp_app/CDP/repository/cdp_api.dart';
 import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/sworn_declaration_screen.dart';
 import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
+import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/copy_button.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,7 +50,12 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
             child: Row(
               children: [
                 Expanded(child: editCdpButton(context)),
-                Expanded(child: copyCdpButton(context)),
+                Expanded(
+                  child: CopyButton(
+                    selectedFile: widget.userFile,
+                    cdp: widget.cdp,
+                  ),
+                ),
                 Expanded(child: viewCdpButton()),
               ],
             ),
@@ -61,37 +67,21 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
 
   ///Let's the user edits this CDP's data
   Widget editCdpButton(BuildContext context) {
-    return 
-        IconButton(
-          onPressed: () {
-            context.read(isCdpBeingEdited).state = true;
-            context.read(cdpToEditsName).state = widget.cdp.cdpName;
-            Navigator.push(
-              context,
-              PageTransition(
-                type: PageTransitionType.rightToLeft,
-                child: FormScreen(
-                  pdfFile: widget.userFile,
-                ),
-              ),
-            );
-          },
-          icon: const Icon(Icons.edit),
-    );
-  }
-
-  ///Let's the user copy this CDP's data yo create a new one
-  Widget copyCdpButton(BuildContext context) {
-    return Column(
-      children: [
-        IconButton(
-          onPressed: () {
-            final CdpApi cdpApi = CdpApi();
-            cdpApi.copyCDP(context, pdfFile: widget.userFile, cdp: widget.cdp);
-          },
-          icon: const Icon(Icons.copy),
-        ),
-      ],
+    return IconButton(
+      onPressed: () {
+        context.read(isCdpBeingEdited).state = true;
+        context.read(cdpToEditsName).state = widget.cdp.cdpName;
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.rightToLeft,
+            child: FormScreen(
+              pdfFile: widget.userFile,
+            ),
+          ),
+        );
+      },
+      icon: const Icon(Icons.edit),
     );
   }
 

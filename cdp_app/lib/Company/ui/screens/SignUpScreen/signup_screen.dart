@@ -68,26 +68,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       );
                       FirebaseFirestore.instance.terminate();
-                      FirebaseFirestore.instance
-                          .clearPersistence()
-                          .then((value) => authRepository
-                                  .signUpWithEmailAndPassword(
-                                context: context,
-                                name: nameController.text,
-                                email: emailController.text.trim(),
-                                password: passwordController.text.trim(),
-                              )
-                                  .whenComplete(
-                                () {
-                                  Purchases.logIn(
-                                      FirebaseAuth.instance.currentUser!.uid);
-                                  setState(
-                                    () {
-                                      isLoading = false;
-                                    },
-                                  );
-                                },
-                              ));
+                      FirebaseFirestore.instance.clearPersistence().then(
+                            (value) => authRepository
+                                .signUpWithEmailAndPassword(
+                              context: context,
+                              name: nameController.text,
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            )
+                          );
+                      setState(
+                        () {
+                          isLoading = false;
+                        },
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('Complete todos los campos')));

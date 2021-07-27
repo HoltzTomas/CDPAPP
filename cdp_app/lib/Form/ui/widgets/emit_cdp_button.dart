@@ -80,15 +80,11 @@ class EmitCdpButton extends StatelessWidget {
                 dni: context.read(dniProvider).state,
               ),
             );
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('La carta de porte fue emitida con exito'),
-              ),
-            );
-            Navigator.pop(context);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
+                backgroundColor: primaryColor,
+                behavior: SnackBarBehavior.floating,
                 content: Text('Ponle un nombre a la Carta de Porte'),
               ),
             );

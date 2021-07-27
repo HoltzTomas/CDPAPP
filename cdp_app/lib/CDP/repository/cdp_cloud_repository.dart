@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 class CdpCloudRepository {
   final CdpFirebaseApi cdpFirebaseApi = CdpFirebaseApi();
 
-  void emitCDP(
+  Future<void> emitCDP(
           {required PdfFile file,
           required CDP cdpData,
           required String cdpName,

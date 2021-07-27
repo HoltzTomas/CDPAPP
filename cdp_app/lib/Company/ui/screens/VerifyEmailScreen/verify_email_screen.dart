@@ -11,15 +11,18 @@ class VerifyEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: const CancelVerificationButton(),
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.all(defaultPadding),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
                 "¡Verifica tu dirección de correo!",
@@ -28,14 +31,12 @@ class VerifyEmailScreen extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              const SizedBox(height: defaultPadding / 2),
+              const SizedBox(height: defaultPadding),
               Text(
                 "Presiona el link que te enviamos a ${auth.currentUser!.email!} para continuar.",
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: defaultPadding / 2),
-              const CircularProgressIndicator(),
-              const SizedBox(height: defaultPadding * 2),
+              const SizedBox(height: defaultPadding),
               const ResendEmailButton(),
             ],
           ),

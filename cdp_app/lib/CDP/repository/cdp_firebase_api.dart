@@ -7,6 +7,7 @@ import 'package:cdp_app/Form/model/transport_data.dart';
 import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/issued_cdp_list_item.dart';
+import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,10 +115,21 @@ class CdpFirebaseApi {
           'aclaracion': cdpData.aclarcion,
           'dni': cdpData.dni,
         },
-      );
+      ).whenComplete(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: primaryColor,
+            behavior: SnackBarBehavior.floating,
+            content: Text('La carta de porte fue emitida con exito'),
+          ),
+        );
+        Navigator.pop(context);
+      });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
+          backgroundColor: primaryColor,
+          behavior: SnackBarBehavior.floating,
           content: Text('No hay conexión a internet'),
         ),
       );

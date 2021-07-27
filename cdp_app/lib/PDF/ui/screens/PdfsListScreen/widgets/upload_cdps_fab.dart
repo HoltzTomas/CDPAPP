@@ -54,11 +54,13 @@ class UploadCdpsFAB extends ConsumerWidget {
                   .collection(FirebaseAuth.instance.currentUser!.uid)
                   .doc('pdfs')
                   .get()
-                  .then((value) {
-                context.read(buttonText).state =
-                    "Subir archivo con cartas de porte";
-                return value['pdfFilesUploaded'] + 1 as int;
-              });
+                  .then(
+                (value) {
+                  context.read(buttonText).state =
+                      "Subir archivo con cartas de porte";
+                  return value['pdfFilesUploaded'] + 1 as int;
+                },
+              );
 
               if (pdfFilesUploaded < 3) {
                 pickFile(context);

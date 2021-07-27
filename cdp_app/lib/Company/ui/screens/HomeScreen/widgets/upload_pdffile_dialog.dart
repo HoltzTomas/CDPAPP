@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cdp_app/PDF/providers/pdf_providers.dart';
 import 'package:cdp_app/PDF/repository/pdf_storage_repository.dart';
 import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
@@ -25,46 +24,50 @@ class _UploadPdfFileDialogState extends State<UploadPdfFileDialog> {
   final PdfStorageRepository _pdfStorageRepository = PdfStorageRepository();
 
   Widget uploadFileButton(BuildContext context) => Consumer(
-    builder: (context, watch, child) {
-      return TextButton(
-          onPressed: () {
-            if (fileName.isNotEmpty) {
-              setState(
-                () {
-                  isLoading = true;
-                  error = false;
-                },
-              );
-              _pdfStorageRepository
-                  .uploadFile(fileName, widget.userFile, context)
-                  .whenComplete(
-                () {
+        builder: (context, watch, child) {
+          return TextButton(
+            onPressed: () {
+              if (isLoading == false) {
+                if (fileName.isNotEmpty) {
                   setState(
                     () {
-                      isLoading = false;
+                      isLoading = true;
+                      error = false;
                     },
                   );
-                  Navigator.pop(context);
-                },
-              );
-            } else {
-              setState(() {
-                error = true;
-              });
-            }
-          },
-          child: isLoading
-              ? const Text(
-                  "Cargando, no cierre esta ventana...",
-                  style: TextStyle(color: darkColor),
-                )
-              : const Text(
-                  "Subir",
-                  style: TextStyle(color: darkColor),
-                ),
-        );
-    },
-  );
+                  _pdfStorageRepository
+                      .uploadFile(fileName, widget.userFile, context)
+                      .whenComplete(
+                    () {
+                      setState(
+                        () {
+                          isLoading = false;
+                        },
+                      );
+                      Navigator.pop(context);
+                    },
+                  );
+                } else {
+                  setState(
+                    () {
+                      error = true;
+                    },
+                  );
+                }
+              }
+            },
+            child: isLoading
+                ? const Text(
+                    "Cargando, no cierre esta ventana...",
+                    style: TextStyle(color: darkColor),
+                  )
+                : const Text(
+                    "Subir",
+                    style: TextStyle(color: darkColor),
+                  ),
+          );
+        },
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +94,10 @@ class _UploadPdfFileDialogState extends State<UploadPdfFileDialog> {
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
-          decoration: InputDecoration(hintText: "Nombre", errorText: error ? "Ingrese un nombre" : null),
+          decoration: InputDecoration(
+              hintText: "Nombre",
+              helperText: "Ej: 'Primer CDP 27/9'",
+              errorText: error ? "Ingrese un nombre" : null),
         ),
       ],
     );

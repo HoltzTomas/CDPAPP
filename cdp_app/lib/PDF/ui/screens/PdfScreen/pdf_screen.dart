@@ -40,7 +40,9 @@ class PdfScreen extends StatelessWidget {
                   Container(
                     alignment: Alignment.center,
                     child: const Text(
-                        "¡No emitiste ninguna carta de porte desde este archivo!"),
+                      "¡No emitiste ninguna carta de porte desde este archivo!",
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               );
@@ -48,16 +50,6 @@ class PdfScreen extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: defaultPadding,
-                        vertical: defaultPadding / 2,
-                      ),
-                      child: const Text(
-                        "Tip: Al copiar o editar una carta de porte debera volver a colocar su firma.",
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
                     ...cdpCloudRepository.buildCDPs(
                       list: snapshot.data!.docs,
                       userFile: userFile,
@@ -92,7 +84,10 @@ class PdfScreen extends StatelessWidget {
           case ConnectionState.done:
             return Text(
               "Disponibles: ${snapshot.data!.get('availableCDPs').toString()}",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             );
         }
       },
@@ -102,39 +97,40 @@ class PdfScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: primaryColor,
-          title: Text(userFile.pdfName),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.help),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => const IconReferencesDialog());
-              },
-            )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: defaultPadding),
-                  child: avaiblesText(),
-                ),
-                emitedCdpsList(),
-              ],
-            ),
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Text(userFile.pdfName),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => const IconReferencesDialog());
+            },
+          )
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: defaultPadding),
+                child: avaiblesText(),
+              ),
+              emitedCdpsList(),
+            ],
           ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: userFile.availableCDPs > 0
-            ? EmitirCdpFAB(
-                selectedFile: userFile,
-              )
-            : null);
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: userFile.availableCDPs > 0
+          ? EmitirCdpFAB(
+              selectedFile: userFile,
+            )
+          : null,
+    );
   }
 }

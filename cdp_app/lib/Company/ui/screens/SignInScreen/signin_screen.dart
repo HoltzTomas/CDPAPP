@@ -63,25 +63,18 @@ class _SignInScreenState extends State<SignInScreen> {
                       );
                       await FirebaseFirestore.instance.terminate();
                       await FirebaseFirestore.instance.clearPersistence().then(
-                            (value) => authRepository
-                                .signInWithEmailAndPassword(
+                            (value) =>
+                                authRepository.signInWithEmailAndPassword(
                               context: context,
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
-                            )
-                                .whenComplete(
-                              () {
-                                Purchases.logIn(
-                                    FirebaseAuth.instance.currentUser!.uid);
-
-                                setState(
-                                  () {
-                                    isLoading = false;
-                                  },
-                                );
-                              },
                             ),
-                          );
+                          ).whenComplete(() => null);
+                      setState(
+                        () {
+                          isLoading = false;
+                        },
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
