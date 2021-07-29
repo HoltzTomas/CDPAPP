@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/upload_pdffile_dialog.dart';
-import 'package:cdp_app/PDF/providers/pdf_providers.dart';
 import 'package:cdp_app/Subs/providers/purchases_providers.dart';
+import 'package:cdp_app/Subs/repository/pruchases_repository.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
@@ -46,8 +46,14 @@ class UploadCdpsFAB extends ConsumerWidget {
           final connectivityResult = await Connectivity().checkConnectivity();
           if (connectivityResult == ConnectivityResult.mobile ||
               connectivityResult == ConnectivityResult.wifi) {
+            final PurchasesRepository purchasesRepository =
+                PurchasesRepository();
+            context.read(buttonText).state = "Cargando...";
+            await purchasesRepository.checkSubStatus(context);
             if (watch(isSubActive).state == true) {
               pickFile(context);
+              context.read(buttonText).state =
+                  "Subir archivo con cartas de porte";
             } else {
               context.read(buttonText).state = "Cargando...";
               final pdfFilesUploaded = await FirebaseFirestore.instance

@@ -14,10 +14,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<void> initPlatformState() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final PurchasesRepository purchasesRepositor = PurchasesRepository();
+    await Purchases.setDebugLogsEnabled(true);
+    await Purchases.setup("aNGNjQXyQJDEDWNUdhiMpQAeMcESCFlU",
+        appUserId: currentUser!.uid,
+        userDefaultsSuiteName: currentUser.displayName);
+    await purchasesRepositor.checkSubStatus(context);
+  }
+
   @override
   void initState() {
-    final PurchasesRepository purchasesRepositor = PurchasesRepository();
-    purchasesRepositor.checkSubStatus(context);
+    initPlatformState();
     super.initState();
   }
 

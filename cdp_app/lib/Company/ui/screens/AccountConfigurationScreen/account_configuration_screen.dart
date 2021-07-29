@@ -1,7 +1,5 @@
 import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/widgets/change_name_dialog.dart';
 import 'package:cdp_app/Company/ui/screens/ChangePasswordScreen/change_password_screen.dart';
-import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
-import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

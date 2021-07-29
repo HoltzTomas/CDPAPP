@@ -43,6 +43,7 @@ class FormTextField extends StatelessWidget {
           decoration: InputDecoration(
             helperText: helperText,
             labelText: dataWeWantReceive,
+            errorBorder: InputBorder.none,
             labelStyle: const TextStyle(
               color: darkColor,
               fontWeight: FontWeight.w500,

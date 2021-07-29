@@ -35,12 +35,6 @@ class _CartAPPorteState extends State<CartAPPorte> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    await Purchases.setDebugLogsEnabled(true);
-    await Purchases.setup("aNGNjQXyQJDEDWNUdhiMpQAeMcESCFlU");
   }
 
   @override

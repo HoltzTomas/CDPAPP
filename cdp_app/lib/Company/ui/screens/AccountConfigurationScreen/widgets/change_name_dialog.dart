@@ -1,6 +1,7 @@
 import 'package:cdp_app/Form/ui/widgets/form_text_field.dart';
 import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/constants.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class ChangeNameDialog extends StatefulWidget {
 
 class _ChangeNameDialogState extends State<ChangeNameDialog> {
   String newName = "";
+  String? errorText;
   String buttonText = "cambiar nombre";
   @override
   Widget build(BuildContext context) {
@@ -29,14 +31,17 @@ class _ChangeNameDialogState extends State<ChangeNameDialog> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           const SizedBox(height: defaultPadding),
-          FormTextField(
-            dataWeWantReceive: "Nuevo nombre",
+          TextField(
+            decoration: InputDecoration(
+              hintText: "Nombre",
+              errorText: errorText,
+            ),
             onChanged: (value) {
               setState(() {
                 newName = value;
               });
             },
-          ),
+          )
         ],
       ),
       button: Container(
@@ -45,26 +50,41 @@ class _ChangeNameDialogState extends State<ChangeNameDialog> {
           borderRadius: BorderRadius.circular(12),
         ),
         child: TextButton(
-          onPressed: () {
-            setState(() {
-              buttonText = "Cargando...";
-            });
-            currentUser!.updateDisplayName(newName).whenComplete(
-              () {
+          onPressed: () async {
+            final connectivityResult = await Connectivity().checkConnectivity();
+            if (connectivityResult == ConnectivityResult.mobile ||
+                connectivityResult == ConnectivityResult.wifi) {
+              if (newName.isNotEmpty) {
                 setState(() {
-                  buttonText = "Cambiar nombre";
+                  buttonText = "Cargando...";
+                  errorText = null;
                 });
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    backgroundColor: primaryColor,
-                    content: Text(
-                      "Nombre cambiado con éxito",
-                    ),
-                  ),
+                currentUser!.updateDisplayName(newName).whenComplete(
+                  () {
+                    setState(() {
+                      buttonText = "Cambiar nombre";
+                    });
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: primaryColor,
+                        content: Text(
+                          "Nombre cambiado con éxito",
+                        ),
+                      ),
+                    );
+                  },
                 );
-              },
-            );
+              } else {
+                setState(() {
+                  errorText = "Ingresa un nombre";
+                });
+              }
+            } else {
+              setState(() {
+                  errorText = "No hay conexión a internet";
+                });
+            }
           },
           child: const Text(
             "Cambiar nombre",

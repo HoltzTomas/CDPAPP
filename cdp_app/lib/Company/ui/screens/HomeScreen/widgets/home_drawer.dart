@@ -1,7 +1,7 @@
-import 'package:cdp_app/Company/repository/auth_repository.dart';
 import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/account_configuration_screen.dart';
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/close_session_dialog.dart';
 import 'package:cdp_app/Subs/providers/purchases_providers.dart';
+import 'package:cdp_app/Subs/repository/pruchases_repository.dart';
 import 'package:cdp_app/Subs/ui/screens/PaywallScreen/paywall_screen.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +16,6 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
-    final AuthRepository authRepository = AuthRepository();
     return Drawer(
       child: ListView(
         children: [
@@ -48,7 +47,10 @@ class HomeDrawer extends StatelessWidget {
                 title: Text(watch(isSubActive).state
                     ? "CDP APP PRO (Activa)"
                     : "CDP APP PRO"),
-                onTap: () {
+                onTap: () async{
+                  final PurchasesRepository purchasesRepositor =
+                      PurchasesRepository();
+                  purchasesRepositor.checkSubStatus(context);
                   Navigator.push(
                     context,
                     PageTransition(

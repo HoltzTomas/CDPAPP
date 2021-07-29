@@ -22,6 +22,7 @@ class MakePurchaseButton extends ConsumerWidget {
           ? RoundedButton(
               text: "Acceder por USD\$3 por mes",
               press: () async {
+                purchasesRepository.checkSubStatus(context);
                 purchasesRepository.makingSubPurchase(
                     packageToPurchase, context);
               },

@@ -1,6 +1,7 @@
 import 'package:cdp_app/PDF/ui/widgets/custom_dialog.dart';
 import 'package:cdp_app/Subs/providers/purchases_providers.dart';
 import 'package:cdp_app/Subs/ui/screens/PaywallScreen/widgets/pro_subscription_screen.dart';
+import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,13 +21,27 @@ class PaywallScreen extends StatelessWidget {
             data: (subInfo) {
               if (subInfo == null) {
                 return CustomDialog(
-                  button: TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Volver"),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text(
+                        "Ocurrió un error, revisa tu conexión a internet.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                      SizedBox(height: defaultPadding / 2),
+                      Text(
+                        "De persistir el error, cierre y abra la app.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
                   ),
-                  child: const Text("SubInfo es null"),
                 );
               }
               return ProSubscriptionScreen(proSubPackage: subInfo);
