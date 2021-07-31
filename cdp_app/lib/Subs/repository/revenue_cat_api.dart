@@ -7,6 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class RevenueCatApi {
+  Future<void> setUp() async {
+    await Purchases.setDebugLogsEnabled(true);
+    await Purchases.setup("aNGNjQXyQJDEDWNUdhiMpQAeMcESCFlU");
+  }
+
   ///Let's user to make a purchase for PRO SUB
   Future<void> makingSubPurchase(
       Package packageToPurchase, BuildContext context) async {
@@ -36,7 +41,7 @@ class RevenueCatApi {
   ///Check Sub Status
   Future<void> checkSubStatus(BuildContext context) async {
     final PurchaserInfo purchaserInfo = await Purchases.getPurchaserInfo();
-    if (purchaserInfo.entitlements.all["CDP APP Pro"]!.isActive) {
+    if (purchaserInfo.entitlements.active.isNotEmpty) {
       context.read(isSubActive).state = true;
     } else {
       context.read(isSubActive).state = false;

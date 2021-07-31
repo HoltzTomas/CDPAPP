@@ -2,9 +2,7 @@ import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/home_drawer.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfsListScreen/pdfs_list_screen.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfsListScreen/widgets/upload_cdps_fab.dart';
 import 'package:cdp_app/Subs/repository/pruchases_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,13 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<void> initPlatformState() async {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    final PurchasesRepository purchasesRepositor = PurchasesRepository();
-    await Purchases.setDebugLogsEnabled(true);
-    await Purchases.setup("aNGNjQXyQJDEDWNUdhiMpQAeMcESCFlU",
-        appUserId: currentUser!.uid,
-        userDefaultsSuiteName: currentUser.displayName);
-    await purchasesRepositor.checkSubStatus(context);
+    final PurchasesRepository purchasesRepository = PurchasesRepository();
+    await purchasesRepository.checkSubStatus(context);
   }
 
   @override

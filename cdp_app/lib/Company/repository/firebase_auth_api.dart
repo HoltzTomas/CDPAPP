@@ -24,7 +24,7 @@ class FirebaseAuthAPI {
             .collection(userCredential.user!.uid)
             .doc('pdfs')
             .set({'pdfFilesUploaded': 0});
-        Purchases.logIn(FirebaseAuth.instance.currentUser!.uid);
+        Purchases.identify(userCredential.user!.uid);
         return userCredential.user;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
@@ -65,7 +65,7 @@ class FirebaseAuthAPI {
       try {
         final UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
-        Purchases.logIn(FirebaseAuth.instance.currentUser!.uid);
+        Purchases.identify(userCredential.user!.uid);
         Navigator.pop(context);
         return userCredential.user;
       } on FirebaseAuthException catch (e) {
@@ -101,7 +101,8 @@ class FirebaseAuthAPI {
     final connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      Purchases.logOut().whenComplete(() => FirebaseAuth.instance.signOut());
+      await FirebaseAuth.instance.signOut();
+      Purchases.reset();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

@@ -57,17 +57,11 @@ class _VerifyEmailHandlerState extends State<VerifyEmailHandler> {
     await user.reload();
     if (user.emailVerified) {
       timer.cancel();
-      await showDialog(
-          context: context,
-          builder: (context) {
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.of(context).pop(true);
-              setState(() {
-                homeWidget = const HomeScreen();
-              });
-            });
-            return const EmailVerifiedDialog();
-          });
+
+      setState(() {
+        homeWidget = const HomeScreen();
+      });
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: primaryColor,

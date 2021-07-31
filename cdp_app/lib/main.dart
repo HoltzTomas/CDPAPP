@@ -1,3 +1,4 @@
+import 'package:cdp_app/Subs/repository/pruchases_repository.dart';
 import 'package:cdp_app/splashscreen_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,8 @@ class _CartAPPorteState extends State<CartAPPorte> {
   @override
   void initState() {
     super.initState();
+    final PurchasesRepository purchasesRepository = PurchasesRepository();
+    purchasesRepository.setUp();
   }
 
   @override
