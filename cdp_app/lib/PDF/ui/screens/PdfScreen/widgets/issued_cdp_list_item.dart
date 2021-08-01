@@ -5,6 +5,7 @@ import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/sworn_declaration
 import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/copy_button.dart';
+import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/edit_button.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,7 +50,12 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
           Expanded(
             child: Row(
               children: [
-                Expanded(child: editCdpButton(context)),
+                Expanded(
+                  child: EditButton(
+                    selectedFile: widget.userFile,
+                    cdp: widget.cdp,
+                  ),
+                ),
                 Expanded(
                   child: CopyButton(
                     selectedFile: widget.userFile,
@@ -62,26 +68,6 @@ class _IssuedCdpListItemState extends State<IssuedCdpListItem> {
           ),
         ],
       ),
-    );
-  }
-
-  ///Let's the user edits this CDP's data
-  Widget editCdpButton(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        context.read(isCdpBeingEdited).state = true;
-        context.read(cdpToEditsName).state = widget.cdp.cdpName;
-        Navigator.push(
-          context,
-          PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: FormScreen(
-              pdfFile: widget.userFile,
-            ),
-          ),
-        );
-      },
-      icon: const Icon(Icons.edit),
     );
   }
 
