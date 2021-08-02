@@ -1,5 +1,6 @@
 import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/account_configuration_screen.dart';
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/close_session_dialog.dart';
+import 'package:cdp_app/Company/ui/screens/HowToUseScreen/how_to_use_screen.dart';
 import 'package:cdp_app/Subs/providers/purchases_providers.dart';
 import 'package:cdp_app/Subs/repository/pruchases_repository.dart';
 import 'package:cdp_app/Subs/ui/screens/PaywallScreen/paywall_screen.dart';
@@ -28,6 +29,19 @@ class HomeDrawer extends StatelessWidget {
             ),
             decoration: const BoxDecoration(color: primaryColor),
           ),
+          ListTile(
+            leading: const Icon(Icons.help),
+            title: const Text("¿Cómo  usar CDP APP?"),
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                    child: const HowToUseScreen(),
+                    type: PageTransitionType.rightToLeft),
+              );
+            },
+          ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.account_box),
             title: const Text("Mi cuenta"),
