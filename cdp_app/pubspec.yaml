@@ -26,6 +26,7 @@ dependencies:
   purchases_flutter: ^3.4.0
   lint: ^1.5.3
   open_file: ^3.2.1
+  overlay_support: ^1.2.1
   page_transition: ^2.0.2
   path_provider: ^2.0.2
   syncfusion_flutter_pdf: ^19.2.48-beta

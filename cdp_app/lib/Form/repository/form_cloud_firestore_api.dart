@@ -14,6 +14,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class FormCloudFirestoreApi {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -50,14 +51,14 @@ class FormCloudFirestoreApi {
         },
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: primaryColor,
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "No hay conexión a internet",
+      showSimpleNotification(
+        const Text(
+          "Error: No hay conexión a internet",
+          style: TextStyle(
+            color: whiteColor,
           ),
         ),
+        background: primaryColor,
       );
     }
   }
@@ -82,14 +83,14 @@ class FormCloudFirestoreApi {
         },
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: primaryColor,
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "No hay conexión a internet",
+      showSimpleNotification(
+        const Text(
+          "Error: No hay conexión a internet",
+          style: TextStyle(
+            color: whiteColor,
           ),
         ),
+        background: primaryColor,
       );
     }
   }
@@ -117,14 +118,14 @@ class FormCloudFirestoreApi {
         },
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: primaryColor,
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "No hay conexión a internet",
+      showSimpleNotification(
+        const Text(
+          "Error: No hay conexión a internet",
+          style: TextStyle(
+            color: whiteColor,
           ),
         ),
+        background: primaryColor,
       );
     }
   }
@@ -150,14 +151,14 @@ class FormCloudFirestoreApi {
         },
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: primaryColor,
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "No hay conexión a internet",
+      showSimpleNotification(
+        const Text(
+          "Error: No hay conexión a internet",
+          style: TextStyle(
+            color: whiteColor,
           ),
         ),
+        background: primaryColor,
       );
     }
   }
@@ -182,14 +183,14 @@ class FormCloudFirestoreApi {
         },
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: primaryColor,
-          behavior: SnackBarBehavior.floating,
-          content: Text(
-            "No hay conexión a internet",
+      showSimpleNotification(
+        const Text(
+          "Error: No hay conexión a internet",
+          style: TextStyle(
+            color: whiteColor,
           ),
         ),
+        background: primaryColor,
       );
     }
   }
