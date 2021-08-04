@@ -214,10 +214,18 @@ class CdpApi {
   }
 
   Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
-    final path = (await getExternalStorageDirectory())!.path;
+    if(Platform.isIOS){
+      final path = (await getLibraryDirectory()).path;
     final file = File('$path/$fileName');
     await file.writeAsBytes(bytes, flush: true);
     OpenFile.open('$path/$fileName');
+
+    } else{
+     final path = (await getExternalStorageDirectory())!.path;
+    final file = File('$path/$fileName');
+    await file.writeAsBytes(bytes, flush: true);
+    OpenFile.open('$path/$fileName'); 
+    }
   }
 
   ///We are adding the data the we got in [TransferDataForm] into the PDF
