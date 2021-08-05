@@ -52,7 +52,7 @@ class UploadFileExample extends StatelessWidget {
         pageModel(
           context: context,
           title: "Paso 4",
-          subtitle: "Seleccionar el archivo desde el que quearemos emitir una carta de porte.",
+          subtitle: "Seleccionar el archivo desde el que queremos emitir una carta de porte.",
           imagePath: "assets/images/how_to_use_four.jpg",
         ),
       ],
