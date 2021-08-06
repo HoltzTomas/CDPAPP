@@ -24,6 +24,7 @@ class GrainDataBottomSheetItem extends ConsumerWidget {
 
   Text dataName() => Text(
         data!.text!,
+        overflow: TextOverflow.ellipsis,
         style: const TextStyle(fontWeight: FontWeight.bold),
       );
 
@@ -43,9 +44,8 @@ class GrainDataBottomSheetItem extends ConsumerWidget {
         alignment: Alignment.center,
         child: Row(
           children: [
-            dataName(),
-            const Spacer(),
-            addDataButton(context),
+            Expanded(flex: 3, child:dataName()),
+            Expanded(child: addDataButton(context)),
           ],
         ),
       ),

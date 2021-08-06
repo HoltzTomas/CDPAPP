@@ -102,7 +102,7 @@ class PdfScreen extends StatelessWidget {
         title: Text(userFile.pdfName),
         actions: [
           IconButton(
-            icon: const Icon(Icons.help),
+            icon: const Icon(Icons.lightbulb_outline_sharp),
             onPressed: () {
               showDialog(
                   context: context,
