@@ -36,7 +36,7 @@ class ElectronicCDPScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding),
             alignment: Alignment.centerRight,
             child: const Text(
-              "Team CDP APP",
+              "Equipo CDP APP",
               style: TextStyle(
                 fontSize: 15,
                 fontStyle: FontStyle.italic,

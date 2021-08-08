@@ -32,7 +32,7 @@ class HomeDrawer extends StatelessWidget {
             decoration: const BoxDecoration(color: primaryColor),
           ),
           ListTile(
-            leading: const Icon(Icons.lightbulb),
+            leading: const Icon(Icons.lightbulb_outline),
             title: const Text("¿Cómo  usar CDP APP?"),
             onTap: () {
               Navigator.push(
@@ -45,7 +45,7 @@ class HomeDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.file_copy),
+            leading: const Icon(Icons.file_copy_outlined),
             title: const Text("Carta de porte electronica"),
             onTap: () {
               Navigator.push(
@@ -57,18 +57,6 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
-          ListTile(
-            leading: const Icon(Icons.account_box_outlined),
-            title: const Text("Mi cuenta"),
-            onTap: () {
-              Navigator.push(
-                context,
-                PageTransition(
-                    child: const AccountConfigurationScreen(),
-                    type: PageTransitionType.rightToLeft),
-              );
-            },
-          ),
           Consumer(
             builder: (context, watch, child) {
               return ListTile(
@@ -90,6 +78,20 @@ class HomeDrawer extends StatelessWidget {
               );
             },
           ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.account_box_outlined),
+            title: const Text("Mi cuenta"),
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                    child: const AccountConfigurationScreen(),
+                    type: PageTransitionType.rightToLeft),
+              );
+            },
+          ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.contact_page_outlined),
             title: const Text("Contacto"),
@@ -102,6 +104,7 @@ class HomeDrawer extends StatelessWidget {
                   );
             },
           ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text("Cerrar sesión"),
