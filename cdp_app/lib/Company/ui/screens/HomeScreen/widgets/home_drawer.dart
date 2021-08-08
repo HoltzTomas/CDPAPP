@@ -1,4 +1,5 @@
 import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/account_configuration_screen.dart';
+import 'package:cdp_app/Company/ui/screens/ContactScreen/contact_screen.dart';
 import 'package:cdp_app/Company/ui/screens/ElectronicCDP/electronic_cdp_screen.dart';
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/close_session_dialog.dart';
 import 'package:cdp_app/Company/ui/screens/HowToUseScreen/how_to_use_screen.dart';
@@ -57,7 +58,7 @@ class HomeDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.account_box),
+            leading: const Icon(Icons.account_box_outlined),
             title: const Text("Mi cuenta"),
             onTap: () {
               Navigator.push(
@@ -71,7 +72,7 @@ class HomeDrawer extends StatelessWidget {
           Consumer(
             builder: (context, watch, child) {
               return ListTile(
-                leading: const Icon(Icons.help_center_outlined),
+                leading: const Icon(Icons.star_border),
                 title: Text(watch(isSubActive).state
                     ? "CDP APP PRO (Activa)"
                     : "CDP APP PRO"),
@@ -87,6 +88,18 @@ class HomeDrawer extends StatelessWidget {
                   );
                 },
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.contact_page_outlined),
+            title: const Text("Contacto"),
+            onTap: () {
+              Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const ContactScreen(),
+                        type: PageTransitionType.rightToLeft),
+                  );
             },
           ),
           ListTile(
