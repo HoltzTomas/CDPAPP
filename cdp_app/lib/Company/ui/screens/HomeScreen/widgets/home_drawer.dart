@@ -1,4 +1,5 @@
 import 'package:cdp_app/Company/ui/screens/AccountConfigurationScreen/account_configuration_screen.dart';
+import 'package:cdp_app/Company/ui/screens/ElectronicCDP/electronic_cdp_screen.dart';
 import 'package:cdp_app/Company/ui/screens/HomeScreen/widgets/close_session_dialog.dart';
 import 'package:cdp_app/Company/ui/screens/HowToUseScreen/how_to_use_screen.dart';
 import 'package:cdp_app/Subs/providers/purchases_providers.dart';
@@ -30,13 +31,26 @@ class HomeDrawer extends StatelessWidget {
             decoration: const BoxDecoration(color: primaryColor),
           ),
           ListTile(
-            leading: const Icon(Icons.help),
+            leading: const Icon(Icons.lightbulb),
             title: const Text("¿Cómo  usar CDP APP?"),
             onTap: () {
               Navigator.push(
                 context,
                 PageTransition(
                     child: const HowToUseScreen(),
+                    type: PageTransitionType.rightToLeft),
+              );
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.file_copy),
+            title: const Text("Carta de porte electronica"),
+            onTap: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                    child: const ElectronicCDPScreen(),
                     type: PageTransitionType.rightToLeft),
               );
             },
