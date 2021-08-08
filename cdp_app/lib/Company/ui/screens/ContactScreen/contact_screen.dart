@@ -14,22 +14,25 @@ class ContactScreen extends StatelessWidget {
         centerTitle: true,
         title: const Text("Contacto"),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            const SizedBox(height: defaultPadding),
-            Container(
-              alignment: Alignment.center,
-              child: CircleAvatar(
-                radius: 45,
-                child: Image.asset("assets/icons/app_icon.png"),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              const SizedBox(height: defaultPadding),
+              Container(
+                alignment: Alignment.center,
+                child: CircleAvatar(
+                  radius: 45,
+                  child: Image.asset("assets/icons/app_icon.png"),
+                ),
               ),
-            ),
-            const SizedBox(height: defaultPadding),
-            const SocialMediaFABS(),
-            const SizedBox(height: defaultPadding * 2),
-            const FeedbackBox()
-          ],
+              const SizedBox(height: defaultPadding),
+              const SocialMediaFABS(),
+              const SizedBox(height: defaultPadding * 2),
+              const FeedbackBox()
+            ],
+          ),
         ),
       ),
     );

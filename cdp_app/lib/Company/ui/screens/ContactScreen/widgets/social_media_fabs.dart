@@ -15,6 +15,7 @@ class SocialMediaFABS extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        const Spacer(flex: 2),
         FloatingActionButton(
           onPressed: () {
             Navigator.push(
@@ -33,16 +34,7 @@ class SocialMediaFABS extends StatelessWidget {
           backgroundColor: whiteColor,
           child: const Icon(SocialMediaIcons.twitter),
         ),
-        FloatingActionButton(
-          onPressed: () {},
-          heroTag: "Email Button",
-          backgroundColor: primaryColor,
-          mini: true,
-          child: const Icon(
-            Icons.email,
-            color: darkColor,
-          ),
-        ),
+        const Spacer(),
         FloatingActionButton(
           onPressed: () {
             Navigator.push(
@@ -61,6 +53,7 @@ class SocialMediaFABS extends StatelessWidget {
           mini: true,
           child: const Icon(SocialMediaIcons.instagram),
         ),
+        const Spacer(flex: 2)
       ],
     );
   }
