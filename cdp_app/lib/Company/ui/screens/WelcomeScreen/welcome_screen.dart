@@ -16,7 +16,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void initState() {
     super.initState();
-    //checkVersion();
+    checkVersion();
   }
 
   Future<void> checkVersion() async {
