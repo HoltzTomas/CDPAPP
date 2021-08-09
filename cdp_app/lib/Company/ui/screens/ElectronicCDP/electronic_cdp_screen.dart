@@ -24,6 +24,7 @@ class ElectronicCDPScreen extends StatelessWidget {
             ),
           ),
           Container(
+            alignment: Alignment.centerLeft,
             margin: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: const Text(
               "Ante cualquier duda sobre este tema, no dude en contactarnos.",

@@ -18,6 +18,8 @@ class CDP {
   ///Then we are going to use the rest of the data to complete the document.
   CDP({
     required this.cdpName,
+    required this.ctg,
+    required this.fechaDeCarga,
     required this.numOfEmitionInsideTheFile,
     required this.timeWhenItWasIssued,
     required this.titularCartaDePorte,
@@ -56,6 +58,8 @@ class CDP {
   });
 
   final String cdpName;
+  final String? ctg;
+  final String fechaDeCarga;
   final int numOfEmitionInsideTheFile;
   final Timestamp timeWhenItWasIssued;
 

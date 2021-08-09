@@ -1,5 +1,12 @@
 import 'package:cdp_app/Form/model/transfer_data.dart';
+import 'package:cdp_app/Form/model/transport_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final StateProvider<TransportData> ctgProvider =
+    StateProvider((ref) => TransportData(tipo: "", text: ""));
+
+final StateProvider<DateTime?> fechaDeCargaProvider =
+    StateProvider((ref) => null);
 
 final StateProvider<TransferData> titularCartaDePorteProvider =
     StateProvider((ref) => TransferData(tipo: "", nombre: "", cuit: ""));

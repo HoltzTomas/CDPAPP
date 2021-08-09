@@ -30,6 +30,8 @@ class CdpApi {
   ///we use this [CDP]'s data to modify the providers and fill the form.
   void copyCDP(BuildContext context,
       {required PdfFile pdfFile, required CDP cdp}) {
+    context.read(ctgProvider).state = TransportData(text: cdp.ctg, tipo: 'ctg');
+    context.read(fechaDeCargaProvider).state = null;
     ///Copying [TransferDataProviders]
     context.read(titularCartaDePorteProvider).state = TransferData(
         nombre: cdp.titularCartaDePorte.nombre,
@@ -160,6 +162,7 @@ class CdpApi {
 
     deleteExtraPages(document: document, cdp: cdp);
 
+    fillCGTAndDate(document: document, cdpPdf: cdp);
     fillTransferDataForm(document: document, cdpPdf: cdp);
     fillGrainDataDataForm(document: document, cdpPdf: cdp);
     fillDestinationForm(document: document, cdpPdf: cdp);
@@ -214,18 +217,27 @@ class CdpApi {
   }
 
   Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       final path = (await getLibraryDirectory()).path;
-    final file = File('$path/$fileName');
-    await file.writeAsBytes(bytes, flush: true);
-    OpenFile.open('$path/$fileName');
-
-    } else{
-     final path = (await getExternalStorageDirectory())!.path;
-    final file = File('$path/$fileName');
-    await file.writeAsBytes(bytes, flush: true);
-    OpenFile.open('$path/$fileName'); 
+      final file = File('$path/$fileName');
+      await file.writeAsBytes(bytes, flush: true);
+      OpenFile.open('$path/$fileName');
+    } else {
+      final path = (await getExternalStorageDirectory())!.path;
+      final file = File('$path/$fileName');
+      await file.writeAsBytes(bytes, flush: true);
+      OpenFile.open('$path/$fileName');
     }
+  }
+
+  void fillCGTAndDate({required PdfDocument document, CDP? cdpPdf}) {
+    final page1 = document.pages[0];
+    final page2 = document.pages[1];
+    final page3 = document.pages[2];
+    final page4 = document.pages[3];
+    final List<PdfPage> cdpPages = [page1, page2, page3, page4];
+    addStringInAllPages(cdpPages, cdpPdf!.ctg!, 230, 85, 9);
+    addStringInAllPages(cdpPages, cdpPdf.fechaDeCarga, 492, 70, 12);
   }
 
   ///We are adding the data the we got in [TransferDataForm] into the PDF
@@ -343,7 +355,7 @@ class CdpApi {
     addStringInAllPages(cdpPages, cdpPdf.observaciones.text!, 410, 400, 9);
 
     ///Adding Procedencia Mercaderia [direccion], [establecimiento], [localidad]
-    ///& [provincia]
+    ///,[provincia] & [RENSPA]
     addStringInAllPages(
         cdpPages, cdpPdf.procedenciaMercaderia.direccion!, 110, 455, 15);
     addStringInAllPages(
@@ -352,6 +364,8 @@ class CdpApi {
         cdpPages, cdpPdf.procedenciaMercaderia.localidad!, 425, 452, 7.5);
     addStringInAllPages(
         cdpPages, cdpPdf.procedenciaMercaderia.provincia!, 425, 467, 7.5);
+    addStringInAllPages(
+        cdpPages, cdpPdf.procedenciaMercaderia.renspa!, 320, 85, 9);
   }
 
   ///We are adding the data the we got in [DestinationForm] into the PDF

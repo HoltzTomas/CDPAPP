@@ -35,6 +35,8 @@ class EditCdpButton extends StatelessWidget {
                 context: context,
                 file: selectedFile,
                 cdpData: CDP(
+                  ctg: context.read(ctgProvider).state.text,
+                  fechaDeCarga: context.read(fechaDeCargaProvider).state.toString().replaceAll(":", "").replaceAll("000000.000", ""),
                   numOfEmitionInsideTheFile: (selectedFile.issuedCDPs).round(),
                   cdpName: watch(cdpToEditsName).state,
                   timeWhenItWasIssued: Timestamp.now(),

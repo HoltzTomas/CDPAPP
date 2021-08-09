@@ -55,6 +55,8 @@ class CdpFirebaseApi {
           'numOfEmitionInsideTheFile': file.issuedCDPs.round() + 1,
           'cdpName':
               "${cdpData.numOfEmitionInsideTheFile + 1}. ${cdpData.cdpName}",
+          'ctg': cdpData.ctg,
+          'fechaDeCarga': cdpData.fechaDeCarga.toString().replaceAll(":", "").replaceAll("000000.000", ""),
           'nombreTitularCartaDePorte': cdpData.titularCartaDePorte.nombre,
           'timeWhenItWasIssued': cdpData.timeWhenItWasIssued,
           'cuitTitularCartaDePorte': cdpData.titularCartaDePorte.cuit,
@@ -150,6 +152,8 @@ class CdpFirebaseApi {
             numOfEmitionInsideTheFile:
                 cdp.get('numOfEmitionInsideTheFile') as int,
             cdpName: cdp.get('cdpName') as String,
+            ctg: cdp.get('ctg') as String,
+            fechaDeCarga: cdp.get('fechaDeCarga') as String,
             timeWhenItWasIssued: cdp.get('timeWhenItWasIssued') as Timestamp,
             titularCartaDePorte: TransferData(
                 nombre: cdp.get('nombreTitularCartaDePorte') as String,
@@ -247,6 +251,8 @@ class CdpFirebaseApi {
         .doc(cdpData.cdpName)
         .update(
       {
+        'ctg': cdpData.ctg,
+        'fechaDeCarga': cdpData.fechaDeCarga,
         'nombreTitularCartaDePorte': cdpData.titularCartaDePorte.nombre,
         'cuitTitularCartaDePorte': cdpData.titularCartaDePorte.cuit,
         'nombreIntermediario': cdpData.intermediario.nombre,

@@ -50,6 +50,13 @@ class PdfScreen extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding / 2),
+                      child: const Text(
+                        "Advertencia: al copiar o editar una carta de porte la fecha de carga debe ser ingresada nuevamente.",
+                        textAlign:TextAlign.center,
+                      ),
+                    ),
                     ...cdpCloudRepository.buildCDPs(
                       list: snapshot.data!.docs,
                       userFile: userFile,

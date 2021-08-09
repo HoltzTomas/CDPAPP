@@ -1,15 +1,10 @@
 import 'package:cdp_app/CDP/models/cdp.dart';
-import 'package:cdp_app/CDP/providers/cdp_providers.dart';
 import 'package:cdp_app/CDP/repository/cdp_api.dart';
-import 'package:cdp_app/Form/ui/screens/SwornDeclarationScreen/sworn_declaration_screen.dart';
-import 'package:cdp_app/Form/ui/screens/form_screen.dart';
 import 'package:cdp_app/PDF/models/pdf_file.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/copy_button.dart';
 import 'package:cdp_app/PDF/ui/screens/PdfScreen/widgets/edit_button.dart';
 import 'package:cdp_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:page_transition/page_transition.dart';
 
 class IssuedCdpListItem extends StatefulWidget {
   const IssuedCdpListItem({Key? key, required this.cdp, required this.userFile})

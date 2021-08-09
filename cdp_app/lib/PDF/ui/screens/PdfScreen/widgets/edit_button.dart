@@ -49,6 +49,8 @@ class EditButton extends StatelessWidget {
   }
 
   void formProvidersToThiCDPValue(BuildContext context) {
+    context.read(ctgProvider).state = TransportData(text: cdp.ctg, tipo: 'ctg');
+    context.read(fechaDeCargaProvider).state = null;
     context.read(titularCartaDePorteProvider).state = TransferData(
         nombre: cdp.titularCartaDePorte.nombre,
         cuit: cdp.titularCartaDePorte.cuit,

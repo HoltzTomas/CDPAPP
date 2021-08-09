@@ -37,6 +37,13 @@ class EmitCdpButton extends StatelessWidget {
               cdpData: CDP(
                 numOfEmitionInsideTheFile: (selectedFile.issuedCDPs).round(),
                 cdpName: cdpName,
+                ctg: context.read(ctgProvider).state.text,
+                fechaDeCarga: context
+                    .read(fechaDeCargaProvider)
+                    .state
+                    .toString()
+                    .replaceAll(":", "")
+                    .replaceAll("000000.000", ""),
                 timeWhenItWasIssued: Timestamp.now(),
                 titularCartaDePorte:
                     context.read(titularCartaDePorteProvider).state,
