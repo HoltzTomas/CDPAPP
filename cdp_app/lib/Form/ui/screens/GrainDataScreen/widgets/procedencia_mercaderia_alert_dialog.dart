@@ -119,11 +119,8 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.deny(RegExp(r'[/\\]')),
           ],
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: "RENSPA",
-            errorText: !isValidate && renspaToUpload.isEmpty
-                ? "Completa el campo"
-                : null,
           ),
         ),
         const SizedBox(height: defaultPadding / 2),
@@ -143,8 +140,7 @@ class _AddAlertDialogState extends State<ProcedenciaMercaderiaAlertDialog> {
           if (direccionToUpload.isNotEmpty &&
               localidadToUpload.isNotEmpty &&
               provinciaToUpload.isNotEmpty &&
-              establecimientoToUpload.isNotEmpty &&
-              renspaToUpload.isNotEmpty) {
+              establecimientoToUpload.isNotEmpty) {
             final FormCloudRepository cloudRepository = FormCloudRepository();
             cloudRepository.uploadProcedenciaMercaderia(
               context: context,

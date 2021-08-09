@@ -24,15 +24,16 @@ dependencies:
   flutter_riverpod: ^0.14.0+3
   flutter_svg: ^0.22.0
   flutter_webview_plugin: ^0.4.0
-  purchases_flutter: ^3.4.0
+  introduction_screen: ^2.1.0
   lint: ^1.5.3
+  purchases_flutter: ^3.4.0
+  new_version: ^0.2.2
   open_file: ^3.2.1
-  overlay_support: ^1.2.1
   page_transition: ^2.0.2
   path_provider: ^2.0.2
+  overlay_support: ^1.2.1
   syncfusion_flutter_pdf: ^19.2.48-beta
   syncfusion_flutter_signaturepad: ^19.1.67-beta
-  introduction_screen: ^2.1.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.9.0
