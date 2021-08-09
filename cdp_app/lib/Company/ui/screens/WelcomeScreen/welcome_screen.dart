@@ -2,6 +2,7 @@ import 'package:cdp_app/Company/ui/screens/WelcomeScreen/widgets/signin_and_sing
 import 'package:cdp_app/Company/ui/screens/WelcomeScreen/widgets/welcome_screent_title.dart';
 import 'package:cdp_app/Company/ui/widgets/app_logo.dart';
 import 'package:cdp_app/constants.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:new_version/new_version.dart';
 
@@ -20,18 +21,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Future<void> checkVersion() async {
-    final newVersion = NewVersion();
-    final status = await newVersion.getVersionStatus();
-    if (status!.localVersion != status.storeVersion) {
-      newVersion.showUpdateDialog(
-        context: context,
-        versionStatus: status,
-        allowDismissal: false,
-        dialogText: "Descarga la nueva version antes de continuar",
-        dialogTitle: "Actualizacion disponible",
-        dismissButtonText: "Despues",
-        updateButtonText: "Actualizar",
-      );
+    final connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      final newVersion = NewVersion();
+      final status = await newVersion.getVersionStatus();
+      if (status!.localVersion != status.storeVersion) {
+        newVersion.showUpdateDialog(
+          context: context,
+          versionStatus: status,
+          allowDismissal: false,
+          dialogText: "Descarga la nueva version antes de continuar",
+          dialogTitle: "Actualizacion disponible",
+          dismissButtonText: "Despues",
+          updateButtonText: "Actualizar",
+        );
+      }
     }
   }
 

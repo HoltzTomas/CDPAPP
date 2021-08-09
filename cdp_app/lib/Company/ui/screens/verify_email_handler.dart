@@ -6,8 +6,6 @@ import 'package:cdp_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'VerifyEmailScreen/widgets/email_verified_dialog.dart';
-
 class VerifyEmailHandler extends StatefulWidget {
   const VerifyEmailHandler({Key? key}) : super(key: key);
 
